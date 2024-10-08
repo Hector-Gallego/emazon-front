@@ -1,0 +1,11 @@
+<div class="button-container">
+  <div class="button-container__inner">
+    <button 
+      (click)="onClick()" 
+      [ngClass]="{'navigation-bar-button--active': isActive}" 
+      class="navigation-bar-button">
+      <fa-icon [icon]="icon"></fa-icon>
+      <span class="navigation-bar-button__label">{{ label }}</span>
+    </button>
+  </div>
+</div>

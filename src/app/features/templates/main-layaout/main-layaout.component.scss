@@ -1,0 +1,48 @@
+@import '/src/styles/colors';
+
+
+
+$nav-bar-width: 20rem; 
+$content-padding: 2rem; 
+$mobile-padding: 1rem; 
+
+
+.layout-container {
+    height: 100vh;
+
+    .body {
+        display: flex;
+
+        &__nav-bar {
+            width: $nav-bar-width; 
+        }
+
+        &__content {
+            flex: 1; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: $content-padding; 
+        }
+    }
+}
+
+
+@media (max-width: 768px) {
+    .layout-container {
+        flex-direction: row; 
+
+        .body {
+            flex-direction: column; 
+
+            &__nav-bar {
+                width: 100%; 
+            }
+
+            &__content {
+                display: block;
+                padding: $mobile-padding;
+            }
+        }
+    }
+}

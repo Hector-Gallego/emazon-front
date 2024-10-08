@@ -1,0 +1,40 @@
+@import '/src/styles/colors';
+
+.category-form {
+    position: relative;
+    padding: 1rem;
+    background-color: $white;
+    border: 1px solid $gray-scale-border; 
+    border-radius: 4px; 
+    width: 50rem;
+    display: flex;
+    flex-direction: column;
+    
+    
+    &__title {
+      
+        margin-bottom: 1rem; 
+    }
+
+    &__input-section {
+        
+        display: flex; 
+        flex-direction: column; 
+        gap: 0.5rem; 
+        margin-bottom: 3rem; 
+        margin-top: 5rem;
+    }
+
+    &__button-section {
+        display: flex; 
+        justify-content: flex-start; 
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+    .category-form{
+        width: 92%;
+        
+    }
+}

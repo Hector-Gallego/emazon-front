@@ -1,0 +1,36 @@
+@import '/src/styles/colors';
+
+.toast {
+    font-size: 1.2rem;
+    background-color: $white;
+    padding: 1.6rem;
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+
+    &--success {
+        color: $informing-approval;
+        border-left: 3px solid $informing-approval;
+    }
+
+    &--warnig {
+        color: $informing-warning;
+        border-left: 3px solid $informing-warning;
+
+    }
+
+    &--error {
+        color: $informing-error;
+        border-left: 3px solid $informing-error;
+    }
+
+}
+
+.toast-icon {
+    margin-right: 0.5rem;
+}

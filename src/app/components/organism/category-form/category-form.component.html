@@ -1,0 +1,37 @@
+
+<form [formGroup]="categoryForm">
+    <div class="category-form">
+
+        <div class="category-form__title">
+            <h3>Agregar Categoria</h3>
+        </div>
+    
+        <app-divisor></app-divisor>
+        
+        <div class="category-form__input-section">
+
+            <app-input 
+                placeholder="Nombre"  
+                formControlName="name"
+                [state]="categoryForm.get('name')?.invalid && categoryForm.get('name')?.touched ? 'error' : 'default'"
+                [errorMessage]="getErrorMessage('name')"></app-input>
+                
+
+            <app-input 
+                placeholder="Descripción" 
+                formControlName="description" 
+                [state]="'default'" [isTextarea]="true"
+                [state]="categoryForm.get('description')?.invalid && categoryForm.get('description')?.touched ? 'error' : 'default'"
+                [errorMessage]="getErrorMessage('description')"></app-input>
+        </div>
+    
+        <div class="category-form__button-section">
+            
+            <app-button [label]="'Guardar'" 
+            (buttonClick)="onSubmit()" 
+            [disabled]="!categoryForm.valid"></app-button>
+        </div>
+        <app-loader></app-loader>
+    </div>
+    
+</form>

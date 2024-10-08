@@ -1,0 +1,41 @@
+@import '/src/styles/colors';
+
+.button-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  &__inner {
+    width: 100%;
+  }
+}
+
+.navigation-bar-button {
+  height: 4rem;
+  width: 100%;
+  margin: 0.2rem;
+  padding: 10px 15px;
+  border: none; 
+  background-color: $white; 
+  color: $gray-scale-black;
+  cursor: pointer; 
+  box-sizing: border-box;
+
+  &--active {
+    background-color: $gray-scale-spacer; 
+    border-left: 3px solid $gray-scale-border;
+  }
+
+  &:hover {
+    background-color: $gray-scale-spacer; 
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &__label {
+    margin-left: 1rem;
+  }
+}
+
