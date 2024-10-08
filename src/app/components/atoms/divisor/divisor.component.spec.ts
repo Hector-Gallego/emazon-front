@@ -1,23 +1,34 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { DivisorComponent } from "./divisor.component";
+import { By } from "@angular/platform-browser";
 
-import { DivisorComponent } from './divisor.component';
 
 describe('DivisorComponent', () => {
-  let component: DivisorComponent;
-  let fixture: ComponentFixture<DivisorComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ DivisorComponent ]
-    })
-    .compileComponents();
+    let component: DivisorComponent;
+    let fixture: ComponentFixture<DivisorComponent>;
 
-    fixture = TestBed.createComponent(DivisorComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            declarations: [DivisorComponent]
+        }).compileComponents();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    beforeEach(() =>{
+        fixture = TestBed.createComponent(DivisorComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+
+    });
+
+    it('debería crear el componente', ()=>{
+        expect(component).toBeTruthy();
+    });
+
+    it('debería renderizar un div con la clase "divisor"',()=>{
+        const divElement = fixture.debugElement.query(By.css('.divisor'));
+        expect(divElement).toBeTruthy();
+
+    });
+
 });

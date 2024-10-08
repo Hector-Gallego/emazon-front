@@ -3,18 +3,18 @@ import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
-  selector: 'app-navigation-bar-buttom',
-  templateUrl: './navigation-bar-buttom.component.html',
-  styleUrls: ['./navigation-bar-buttom.component.scss']
+  selector: 'app-navigation-bar-button',
+  templateUrl: './navigation-bar-button.component.html',
+  styleUrls: ['./navigation-bar-button.component.scss']
 })
-export class NavigationBarButtomComponent implements OnInit {
+export class NavigationBarButtonComponent implements OnInit {
 
 
 
   @Input() label: string = 'Button';
   @Input() isActive: boolean = false; 
   @Output() buttonClick = new EventEmitter<void>(); 
-  @Input() icon!: IconDefinition;  // 
+  @Input() icon!: IconDefinition; 
 
   onClick(): void {
     this.buttonClick.emit(); 

@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { error } from 'console';
+import { Component, ViewChild } from '@angular/core';
 import { ToastComponent } from 'src/app/components/molecules/toast/toast.component';
 import { CategoryFormComponent } from 'src/app/components/organism/category-form/category-form.component';
-import { CategoryService } from 'src/app/core/services/category.service';
-import { LoaderService } from 'src/app/shared/services/loader.service';
+import { CategoryService } from 'src/app/core/services/category/category.service';
+import { LoaderService } from 'src/app/shared/services/loader/loader.service';
+import { ErrorMessages, StatesTypes } from 'src/app/shared/constants/commonConstants';
+
 
 @Component({
   selector: 'app-add-category-page',
@@ -27,19 +28,24 @@ export class AddCategoryPageComponent{
 
       
       next: (response) =>{
-        this.toastMessage = '¡Categoría agregada exitosamente!';
-        this.toastType = 'success';
-        console.log("formuario enviado: ", formData)
+        console.log(response);
+        this.toastMessage = response.message;
+        this.toastType = StatesTypes.SUCCESS;
         this.toast.show();
         this.categoryForm.resetForm();
         this.loaderService.hide();
       },
       error: (error) => {
-        this.toastMessage = 'Ha ocurrido un error, porfavor intentalo nuevamente.';
-        this.toastType = 'error';
+
+        if(error.error && error.error.message){
+          this.toastMessage = error.error.message;
+        }else{
+          this.toastMessage = ErrorMessages.GENERIC_ERROR_MESSAGE;
+        }
+        
+        this.toastType = StatesTypes.ERROR;
         this.toast.show();
         this.loaderService.hide();
-        console.log(error);
       },
       complete:() =>{
         this.loaderService.hide();

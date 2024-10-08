@@ -7,7 +7,7 @@ import { ButtonComponent } from './components/atoms/button/button.component';
 import { InputComponent } from './components/atoms/input/input.component';
 import { FormsModule } from '@angular/forms';
 import { LogoComponent } from './components/atoms/logo/logo.component';
-import { NavigationBarButtomComponent } from './components/atoms/navigation-bar-buttom/navigation-bar-buttom.component'; 
+import { NavigationBarButtonComponent } from './components/atoms/navigation-bar-buttom/navigation-bar-button.component'; 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NavBarComponent } from './components/organism/nav-bar/nav-bar.component';
 import { DivisorComponent } from './components/atoms/divisor/divisor.component';
@@ -21,13 +21,14 @@ import { IconComponent } from './components/atoms/icon/icon.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoaderComponent } from './components/atoms/loader/loader.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     ButtonComponent,
     InputComponent,
     LogoComponent,
-    NavigationBarButtomComponent,
+    NavigationBarButtonComponent,
     NavBarComponent,
     DivisorComponent,
     CategoryFormComponent,
@@ -36,10 +37,7 @@ import { LoaderComponent } from './components/atoms/loader/loader.component';
     HeaderComponent,
     ToastComponent,
     IconComponent,
-    LoaderComponent,
-    
-    
-    
+    LoaderComponent,   
   ],
   imports: [
     BrowserModule,

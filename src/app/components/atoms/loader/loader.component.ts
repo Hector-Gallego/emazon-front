@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { LoaderService } from 'src/app/shared/services/loader.service';
+import { LoaderService } from 'src/app/shared/services/loader/loader.service'; 
 
 @Component({
   selector: 'app-loader',

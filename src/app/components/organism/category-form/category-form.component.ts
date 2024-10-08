@@ -1,6 +1,9 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, NgModule, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ErrorMessages, FieldLimits} from 'src/app/shared/constants/categoryConstants';
+import { CategoryErrorMessages, FieldLimits} from 'src/app/shared/constants/categoryConstants';
+import { LoaderService } from 'src/app/shared/services/loader/loader.service';
+import { DivisorComponent } from '../../atoms/divisor/divisor.component';
+
 
 
 @Component({
@@ -39,10 +42,10 @@ export class CategoryFormComponent {
     const control = this.categoryForm.get(controlName);
     if (control?.touched && control?.invalid) {
       if (control.errors?.['required']) {
-        return ErrorMessages.REQUIERED_ERROR_MESSAGE;
+        return CategoryErrorMessages.REQUIERED_ERROR_MESSAGE;
       }
       if (control.errors?.['maxlength']) {
-        return ErrorMessages.MAX_LENGTH_ERROR_MESSAGE(control.errors['maxlength'].requiredLength);
+        return CategoryErrorMessages.MAX_LENGTH_ERROR_MESSAGE(control.errors['maxlength'].requiredLength);
       }
     }
     return ''; 
