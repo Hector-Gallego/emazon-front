@@ -1,6 +1,7 @@
 @import '/src/styles/colors';
 
 .category-form {
+    color: $gray-scale-black;
     position: relative;
     padding: 1rem;
     background-color: $white;
@@ -22,13 +23,22 @@
         flex-direction: column; 
         gap: 0.5rem; 
         margin-bottom: 3rem; 
-        margin-top: 5rem;
+        
+
+        &__label{
+            
+            font-size: 1.4rem;
+            margin-left: 0.5rem;
+            margin-top: 3rem;
+        }
     }
 
     &__button-section {
         display: flex; 
         justify-content: flex-start; 
     }
+
+    
 }
 
 

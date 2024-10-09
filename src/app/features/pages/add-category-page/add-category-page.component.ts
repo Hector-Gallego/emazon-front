@@ -4,6 +4,9 @@ import { CategoryFormComponent } from 'src/app/components/organism/category-form
 import { CategoryService } from 'src/app/core/services/category/category.service';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { ErrorMessages, StatesTypes } from 'src/app/shared/constants/commonConstants';
+import { Category } from 'src/app/core/models/category';
+import { ApiResponse } from 'src/app/core/models/apiResponse';
+
 
 
 @Component({
@@ -18,16 +21,16 @@ export class AddCategoryPageComponent{
   @ViewChild(CategoryFormComponent) categoryForm! : CategoryFormComponent;
 
   toastMessage: string = '';
-  toastType: any;
+  toastType: StatesTypes = StatesTypes.SUCCESS;
  
 
-  onFormSubmit(formData: any){
+  onFormSubmit(formData: Category){
     
     this.loaderService.show();
     this.categoryService.addCategory(formData).subscribe({
 
       
-      next: (response) =>{
+      next: (response : ApiResponse) =>{
         console.log(response);
         this.toastMessage = response.message;
         this.toastType = StatesTypes.SUCCESS;
@@ -37,6 +40,7 @@ export class AddCategoryPageComponent{
       },
       error: (error) => {
 
+        console.log(error)
         if(error.error && error.error.message){
           this.toastMessage = error.error.message;
         }else{

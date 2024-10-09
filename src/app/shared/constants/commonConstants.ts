@@ -4,10 +4,10 @@ export const ErrorMessages = {
 
 }
 
-export const StatesTypes = {
+export enum StatesTypes  {
 
-    SUCCESS: 'success',
-    ERROR : 'error',
-    WARNING :'warning'
+    SUCCESS = 'success',
+    ERROR = 'error',
+    WARNING ='warning'
 
 }

@@ -1,9 +1,6 @@
-import { Component, EventEmitter, NgModule, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CategoryErrorMessages, FieldLimits} from 'src/app/shared/constants/categoryConstants';
-import { LoaderService } from 'src/app/shared/services/loader/loader.service';
-import { DivisorComponent } from '../../atoms/divisor/divisor.component';
-
 
 
 @Component({
@@ -28,11 +25,7 @@ export class CategoryFormComponent {
 
   onSubmit() {
     if (this.categoryForm.valid) {
-    
-     
       this.submitForm.emit(this.categoryForm.value)
-      //this.categoryForm.reset();
-
     } else {
       this.categoryForm.markAllAsTouched();
     }
@@ -50,7 +43,6 @@ export class CategoryFormComponent {
     }
     return ''; 
   }
-  
   
   resetForm(){
     this.categoryForm.reset();

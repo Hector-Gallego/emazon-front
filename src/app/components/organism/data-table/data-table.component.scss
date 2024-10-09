@@ -1,0 +1,38 @@
+@import '/src/styles/colors';
+
+.data-table {
+    font-size: 1.3rem;
+    border-collapse: collapse;
+    width: 100%;
+  
+    &__header {
+      background-color: $white;
+  
+      &-cell {
+        padding: 0.8rem;
+        text-align: left;
+        border-top: 1px solid $gray-scale-spacer-light;
+        border-bottom: 1px solid $gray-scale-spacer-light;
+      }
+    }
+  
+    &__body {
+      &__row {
+        padding: 1.1rem;
+        &:nth-child(even) {
+          background-color: $white; 
+        }
+        
+        &:nth-child(odd) {
+          background-color: rgba($bg_light_gray, 0.4); 
+        }
+      }
+  
+      &__cell {
+        padding: 0.8rem;
+        border: none;
+      }
+    }
+  
+  }
+  

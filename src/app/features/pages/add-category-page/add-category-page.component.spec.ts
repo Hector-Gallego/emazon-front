@@ -9,6 +9,8 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { InputComponent } from 'src/app/components/atoms/input/input.component';
 import { ErrorMessages, StatesTypes } from 'src/app/shared/constants/commonConstants';
+import { Category } from 'src/app/core/models/category';
+import { ApiResponse } from 'src/app/core/models/apiResponse';
 
 describe('AddCategoryPageComponent', () => {
     let component: AddCategoryPageComponent;
@@ -16,9 +18,9 @@ describe('AddCategoryPageComponent', () => {
     let categoryService: CategoryService;
     let loaderService: LoaderService;
 
-    const formData = { name: 'Nueva Categoría' };
-    const mockResponse = { success: true, message: '¡Categoría agregada exitosamente!' };
-    const genericErrorMessage = 'Ha ocurrido un error, por favor intentalo nuevamente.';
+    const formData: Category = { name: 'Nueva Categoría', description: 'descripción' };  
+    const mockResponse : ApiResponse= { message: '¡Categoría agregada exitosamente!', status: 200, timestamp: '20024-12-12' };
+
     
     const setupMocks = () => {
         const categoryServiceMock = {

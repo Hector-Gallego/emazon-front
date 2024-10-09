@@ -3,13 +3,14 @@
     <div class="category-form">
 
         <div class="category-form__title">
-            <h3>Agregar Categoria</h3>
+            <h4>Agregar Categoria</h4>
         </div>
     
         <app-divisor></app-divisor>
         
         <div class="category-form__input-section">
 
+            <label class="category-form__input-section__label">Nombre</label>
             <app-input 
                 placeholder="Nombre"  
                 formControlName="name"
@@ -17,6 +18,7 @@
                 [errorMessage]="getErrorMessage('name')"></app-input>
                 
 
+            <label class="category-form__input-section__label">Descripción</label>
             <app-input 
                 placeholder="Descripción" 
                 formControlName="description" 
