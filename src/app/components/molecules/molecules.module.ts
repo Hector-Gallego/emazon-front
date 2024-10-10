@@ -3,15 +3,15 @@ import { ToastComponent } from "./toast/toast.component";
 import { AtomsModule } from "../atoms/atoms.module";
 import { CommonModule } from "@angular/common";
 
-
 @NgModule({
     declarations:[
-     ToastComponent,    
+     ToastComponent,
+        
     ],
     imports:[
         AtomsModule,
         CommonModule],
-    exports: [ToastComponent ]
+    exports: [ToastComponent]
 
 })
 

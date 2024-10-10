@@ -9,6 +9,7 @@ import { NavigationBarButtonComponent } from "./navigation-bar-buttom/navigation
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
+import { LabelComponent } from './label/label.component';
 @NgModule({
     declarations:[
         ButtonComponent,
@@ -17,7 +18,8 @@ import { FormsModule } from "@angular/forms";
         InputComponent,
         LoaderComponent,
         LogoComponent,
-        NavigationBarButtonComponent
+        NavigationBarButtonComponent,
+        LabelComponent
     ],
     imports:[
         FontAwesomeModule,
@@ -29,7 +31,8 @@ import { FormsModule } from "@angular/forms";
         InputComponent,
         LoaderComponent,
         LogoComponent,
-        NavigationBarButtonComponent]
+        NavigationBarButtonComponent,
+        LabelComponent]
 
 })
 

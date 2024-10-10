@@ -3,5 +3,11 @@
   [disabled]="disabled"
   (click)="onClick()">
   
-  {{ label }}
+  <ng-container *ngIf="icon; else labelContent">
+    <fa-icon [icon]="icon"></fa-icon>
+  </ng-container>
+
+  <ng-template #labelContent>
+    {{ label }}
+  </ng-template>
 </button>

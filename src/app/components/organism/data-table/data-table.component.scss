@@ -24,7 +24,7 @@
         }
         
         &:nth-child(odd) {
-          background-color: rgba($bg_light_gray, 0.4); 
+          background-color: $bg_light_gray; 
         }
       }
   

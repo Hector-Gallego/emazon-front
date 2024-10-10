@@ -4,6 +4,7 @@ import { IconComponent } from '../../atoms/icon/icon.component';
 import { By } from '@angular/platform-browser';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { StatesTypes } from 'src/app/shared/constants/commonConstants';
 
 describe('ToastComponent', () => {
     let component: ToastComponent;
@@ -21,13 +22,13 @@ describe('ToastComponent', () => {
     });
 
     it('debería mostrar el icono correcto según el tipo', () => {
-        component.type = 'error';
+        component.type = StatesTypes.ERROR;
         fixture.detectChanges();
     
         const icon = component.icon;
         expect(icon).toBe(component.icons['error']);
     
-        component.type = 'warning';
+        component.type = StatesTypes.WARNING;
         fixture.detectChanges();
     
         expect(component.icon).toBe(component.icons['warning']);

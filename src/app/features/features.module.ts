@@ -6,14 +6,14 @@ import { MainLayaoutComponent } from "./templates/main-layaout/main-layaout.comp
 import { OrganismModule } from "../components/organism/organism.module";
 import { AppRoutingModule } from "../app-routing.module";
 import { MoleculesModule } from "../components/molecules/molecules.module";
-import { ListCategoriesComponent } from './pages/list-categories/list-categories.component';
+import { ListCategoriesPageComponent } from './pages/list-categories-page/list-categories-page.component';
 import { AtomsModule } from "../components/atoms/atoms.module";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 @NgModule({
     declarations:[
      AddCategoryPageComponent,
      MainLayaoutComponent,
-     ListCategoriesComponent
+     ListCategoriesPageComponent
 
     ],
     imports: [
@@ -28,7 +28,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
     exports: [
         AddCategoryPageComponent,
         MainLayaoutComponent,
-        ListCategoriesComponent
+        ListCategoriesPageComponent
     ]
 
 })

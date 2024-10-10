@@ -1,19 +1,28 @@
-import { Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Category } from 'src/app/core/models/category';
 import { CategoryService } from 'src/app/core/services/category/category.service';
 import { Router } from '@angular/router';
 import { faArrowUpAZ, faArrowDownZA } from '@fortawesome/free-solid-svg-icons';
-import { ErrorMessages, StatesTypes } from 'src/app/shared/constants/commonConstants';
+import {
+  ErrorMessages,
+  StatesTypes,
+} from 'src/app/shared/constants/commonConstants';
 import { ToastComponent } from 'src/app/components/molecules/toast/toast.component';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-list-categories',
-  templateUrl: './list-categories.component.html',
-  styleUrls: ['./list-categories.component.scss']
+  templateUrl: './list-categories-page.component.html',
+  styleUrls: ['./list-categories-page.component.scss'],
 })
-export class ListCategoriesComponent implements OnInit, OnDestroy {
-
+export class ListCategoriesPageComponent implements OnInit, OnDestroy {
+  
   subscription = new Subscription();
 
   faArrowUpAZ = faArrowUpAZ;
@@ -33,7 +42,11 @@ export class ListCategoriesComponent implements OnInit, OnDestroy {
   sortDirection: string = 'asc';
 
   @ViewChild(ToastComponent) toast!: ToastComponent;
-  constructor(private categoryService: CategoryService, private router: Router, private loader: LoaderService) {
+  constructor(
+    private categoryService: CategoryService,
+    private router: Router,
+    private loader: LoaderService
+  ) {
     this.screenWidth = window.innerWidth;
   }
   ngOnDestroy(): void {
@@ -44,15 +57,19 @@ export class ListCategoriesComponent implements OnInit, OnDestroy {
     this.loadCategories();
   }
 
-
-
-
   loadCategories(): void {
     this.loader.show();
-    const getCategoriesSubscription = this.categoryService.getCategories(this.currentPage - 1, this.pageSize, this.sortBy, this.sortDirection)
+
+    const getCategoriesSubscription = this.categoryService
+      .getCategories(
+        this.currentPage - 1,
+        this.pageSize,
+        this.sortBy,
+        this.sortDirection
+      )
       .subscribe({
         next: (response) => {
-          console.log("Probando el metoso suscribe")
+          console.log('Probando el metoso suscribe');
           this.categories = response.data.content;
           this.totalPages = response.data.totalPages;
           this.loader.hide();
@@ -62,11 +79,12 @@ export class ListCategoriesComponent implements OnInit, OnDestroy {
           this.toastType = StatesTypes.ERROR;
           this.toast.show();
           this.loader.hide();
-        }, complete: () => {
+        },
+        complete: () => {
           this.loader.hide();
-        }
+        },
       });
-      this.subscription.add(getCategoriesSubscription)
+    this.subscription.add(getCategoriesSubscription);
   }
 
   navigateToCreateCategory(): void {
@@ -83,7 +101,6 @@ export class ListCategoriesComponent implements OnInit, OnDestroy {
     this.loadCategories();
   }
 
-
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.screenWidth = event.target.innerWidth;
@@ -92,7 +109,4 @@ export class ListCategoriesComponent implements OnInit, OnDestroy {
   isLargeScreen(): boolean {
     return this.screenWidth >= 768;
   }
-
-
-
 }

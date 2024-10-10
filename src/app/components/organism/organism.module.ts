@@ -8,6 +8,7 @@ import { NavBarComponent } from "./nav-bar/nav-bar.component";
 import { DataTableComponent } from './data-table/data-table.component';
 import { PaginatonComponent } from './paginaton/paginaton.component';
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { MoleculesModule } from "../molecules/molecules.module";
 
 
 @NgModule({
@@ -20,12 +21,14 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
         
    
     ],
-    imports:[
-        FormsModule,
-        ReactiveFormsModule,
-        AtomsModule,
-        CommonModule,
-        FontAwesomeModule],
+    imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    AtomsModule,
+    CommonModule,
+    FontAwesomeModule,
+    MoleculesModule
+],
     exports: [ 
         CategoryFormComponent,
         HeaderComponent,

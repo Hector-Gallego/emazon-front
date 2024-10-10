@@ -10,6 +10,12 @@ import { CategoryErrorMessages, FieldLimits} from 'src/app/shared/constants/cate
 })
 export class CategoryFormComponent {
 
+  fieldNameDescription : string = 'Descripción';
+  fieldNameName : string = 'Nombre';
+  formControlDescriptionName : string = 'description';
+  formControlNameName : string = 'name';
+
+
   
   @Output() submitForm = new EventEmitter<any>();
 
@@ -46,7 +52,7 @@ export class CategoryFormComponent {
   
   resetForm(){
     this.categoryForm.reset();
+     
   }
    
-  
 }

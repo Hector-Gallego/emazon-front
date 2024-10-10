@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ListCategoriesComponent } from './list-categories.component';
+import { ListCategoriesPageComponent } from './list-categories-page.component';
 import { CategoryService } from 'src/app/core/services/category/category.service';
 import { Router } from '@angular/router';
 import { of, throwError } from 'rxjs';
@@ -13,8 +13,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoaderComponent } from 'src/app/components/atoms/loader/loader.component';
 
 describe('ListCategoriesComponent', () => {
-  let component: ListCategoriesComponent;
-  let fixture: ComponentFixture<ListCategoriesComponent>;
+  let component: ListCategoriesPageComponent;
+  let fixture: ComponentFixture<ListCategoriesPageComponent>;
   let categoryService: jest.Mocked<CategoryService>;
   let router: jest.Mocked<Router>;
 
@@ -27,7 +27,7 @@ describe('ListCategoriesComponent', () => {
     };
 
     await TestBed.configureTestingModule({
-      declarations: [ListCategoriesComponent,
+      declarations: [ListCategoriesPageComponent,
         ToastComponent,
         PaginatonComponent,
         ButtonComponent,
@@ -41,7 +41,7 @@ describe('ListCategoriesComponent', () => {
       ]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ListCategoriesComponent);
+    fixture = TestBed.createComponent(ListCategoriesPageComponent);
     component = fixture.componentInstance;
     categoryService = TestBed.inject(CategoryService) as jest.Mocked<CategoryService>;
     router = TestBed.inject(Router) as jest.Mocked<Router>;

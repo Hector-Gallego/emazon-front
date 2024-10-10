@@ -1,36 +1,44 @@
-@import '/src/styles/colors';
+@import "/src/styles/colors";
 
 .toast {
-    font-size: 1.2rem;
-    background-color: $white;
-    padding: 1.6rem;
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    opacity: 0.9;
-    transition: opacity 0.3s ease;
+  font-size: 1.2rem;
+  background-color: $white;
+  padding: 1.6rem;
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+  padding-right: 5rem;
 
-    &--success {
-        color: $informing-approval;
-        border-left: 3px solid $informing-approval;
-    }
+  &__close {
+    
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    cursor: pointer;
 
-    &--warnig {
-        color: $informing-warning;
-        border-left: 3px solid $informing-warning;
+  }
 
-    }
+  &--success {
+    color: $informing-approval;
+    border-left: 3px solid $informing-approval;
+  }
 
-    &--error {
-        color: $informing-error;
-        border-left: 3px solid $informing-error;
-    }
+  &--warnig {
+    color: $informing-warning;
+    border-left: 3px solid $informing-warning;
+  }
 
+  &--error {
+    color: $informing-error;
+    border-left: 3px solid $informing-error;
+  }
 }
 
 .toast-icon {
-    margin-right: 0.5rem;
+  margin-right: 0.5rem;
 }

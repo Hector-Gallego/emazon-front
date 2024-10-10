@@ -1,39 +1,48 @@
-
 <form [formGroup]="categoryForm">
-    <div class="category-form">
-
-        <div class="category-form__title">
-            <h4>Agregar Categoria</h4>
-        </div>
-    
-        <app-divisor></app-divisor>
-        
-        <div class="category-form__input-section">
-
-            <label class="category-form__input-section__label">Nombre</label>
-            <app-input 
-                placeholder="Nombre"  
-                formControlName="name"
-                [state]="categoryForm.get('name')?.invalid && categoryForm.get('name')?.touched ? 'error' : 'default'"
-                [errorMessage]="getErrorMessage('name')"></app-input>
-                
-
-            <label class="category-form__input-section__label">Descripción</label>
-            <app-input 
-                placeholder="Descripción" 
-                formControlName="description" 
-                [state]="'default'" [isTextarea]="true"
-                [state]="categoryForm.get('description')?.invalid && categoryForm.get('description')?.touched ? 'error' : 'default'"
-                [errorMessage]="getErrorMessage('description')"></app-input>
-        </div>
-    
-        <div class="category-form__button-section">
-            
-            <app-button [label]="'Guardar'" 
-            (buttonClick)="onSubmit()" 
-            [disabled]="!categoryForm.valid"></app-button>
-        </div>
-        <app-loader></app-loader>
+  <div class="category-form">
+    <div class="category-form__title">
+      <h4>Agregar Categoria</h4>
     </div>
-    
+
+    <app-divisor></app-divisor>
+
+    <div class="category-form__input-section">
+      <app-label [label]="fieldNameName"></app-label>
+      <app-input
+        placeholder="{{ fieldNameName }}"
+        formControlName="{{ formControlNameName }}"
+        [state]="
+          categoryForm.get(formControlNameName)?.invalid &&
+          categoryForm.get(formControlNameName)?.touched
+            ? 'error'
+            : 'default'
+        "
+        [errorMessage]="getErrorMessage(formControlNameName)"
+      ></app-input>
+
+      <app-label [label]="fieldNameDescription"></app-label>
+      <app-input
+        placeholder="{{ fieldNameDescription }}"
+        formControlName="{{ formControlDescriptionName }}"
+        [state]="'default'"
+        [isTextarea]="true"
+        [state]="
+          categoryForm.get(formControlDescriptionName)?.invalid &&
+          categoryForm.get(formControlDescriptionName)?.touched
+            ? 'error'
+            : 'default'
+        "
+        [errorMessage]="getErrorMessage(formControlDescriptionName)"
+      ></app-input>
+    </div>
+
+    <div class="category-form__button-section">
+      <app-button
+        [label]="'Guardar'"
+        (buttonClick)="onSubmit()"
+        [disabled]="!categoryForm.valid"
+      ></app-button>
+    </div>
+    <app-loader></app-loader>
+  </div>
 </form>
