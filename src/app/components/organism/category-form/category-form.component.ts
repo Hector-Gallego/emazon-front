@@ -1,9 +1,6 @@
-import { Component, EventEmitter, NgModule, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CategoryErrorMessages, FieldLimits} from 'src/app/shared/constants/categoryConstants';
-import { LoaderService } from 'src/app/shared/services/loader/loader.service';
-import { DivisorComponent } from '../../atoms/divisor/divisor.component';
-
 
 
 @Component({
@@ -12,6 +9,12 @@ import { DivisorComponent } from '../../atoms/divisor/divisor.component';
   styleUrls: ['./category-form.component.scss'],
 })
 export class CategoryFormComponent {
+
+  fieldNameDescription : string = 'Descripción';
+  fieldNameName : string = 'Nombre';
+  formControlDescriptionName : string = 'description';
+  formControlNameName : string = 'name';
+
 
   
   @Output() submitForm = new EventEmitter<any>();
@@ -28,11 +31,7 @@ export class CategoryFormComponent {
 
   onSubmit() {
     if (this.categoryForm.valid) {
-    
-     
       this.submitForm.emit(this.categoryForm.value)
-      //this.categoryForm.reset();
-
     } else {
       this.categoryForm.markAllAsTouched();
     }
@@ -51,10 +50,9 @@ export class CategoryFormComponent {
     return ''; 
   }
   
-  
   resetForm(){
     this.categoryForm.reset();
+     
   }
    
-  
 }

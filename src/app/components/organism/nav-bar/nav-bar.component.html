@@ -1,8 +1,17 @@
 <div class="nav-bar-container">
-   
+  <div class="nav-bar-container__header">
     <h4>Menú</h4>
-     <ng-container *ngFor="let item of menuItems">
-        <app-navigation-bar-button [label]="item.label" [icon]="item.icon"></app-navigation-bar-button>
+  </div>
+  <div class="nav-bar-container__menu">
+    <ng-container *ngFor="let item of menuItems">
+      <div class="nav-bar-container__menu__item">
+        <app-navigation-bar-button
+          [label]="item.label"
+          [icon]="item.icon"
+          (click)="navigate(item.route)"
+          [isActive]="isActive(item.route)"
+        ></app-navigation-bar-button>
+      </div>
     </ng-container>
-
+  </div>
 </div>

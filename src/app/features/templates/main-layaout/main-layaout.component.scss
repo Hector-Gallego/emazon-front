@@ -1,48 +1,50 @@
-@import '/src/styles/colors';
+@import "/src/styles/colors";
+@import "/src/styles/variables";
 
-
-
-$nav-bar-width: 20rem; 
-$content-padding: 2rem; 
-$mobile-padding: 1rem; 
-
+$nav-bar-width: 20rem;
+$content-padding: 2rem;
+$mobile-padding: 1rem;
 
 .layout-container {
-    height: 100vh;
+  height: 100vh;
+  
 
-    .body {
-        display: flex;
+  &__body {
+    display: flex;
+    flex-direction: column;
+  }
+  &__nav-bar {
+    width: 100%;
+  }
 
-        &__nav-bar {
-            width: $nav-bar-width; 
-        }
-
-        &__content {
-            flex: 1; 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: $content-padding; 
-        }
-    }
+  &__content {
+    display: block;
+    padding: $mobile-padding;
+  }
 }
 
+@media (min-width: 768px) {
+  .layout-container {
+    flex-direction: row;
 
-@media (max-width: 768px) {
-    .layout-container {
-        flex-direction: row; 
-
-        .body {
-            flex-direction: column; 
-
-            &__nav-bar {
-                width: 100%; 
-            }
-
-            &__content {
-                display: block;
-                padding: $mobile-padding;
-            }
-        }
+   
+    &__body {
+    
+      flex-direction: row;
+      padding-left: $horizontal-padding;
+      padding-right: $horizontal-padding;
     }
+    &__nav-bar {
+        
+      width: $nav-bar-width;
+    }
+
+    &__content {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: $content-padding;
+    }
+  }
 }
