@@ -41,7 +41,7 @@ export class AddCategoryPageComponent implements OnDestroy {
       .addCategory(formData)
       .subscribe({
         next: (response: ApiResponse) => {
-          console.log(response);
+        
           this.toastMessage = response.message;
           this.toastType = StatesTypes.SUCCESS;
 
@@ -51,8 +51,7 @@ export class AddCategoryPageComponent implements OnDestroy {
           this.loaderService.hide();
         },
         error: (error) => {
-          console.log(error);
-
+        
           if (error.error && error.error.message) {
             this.toastMessage = error.error.message;
           } else {
