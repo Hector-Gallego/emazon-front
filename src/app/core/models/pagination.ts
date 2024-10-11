@@ -1,4 +1,4 @@
-interface Page<T> {
+interface Pagination<T> {
   content: T[];
   pageNumber: number;
   pageSize: number;

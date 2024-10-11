@@ -83,10 +83,10 @@ describe('ListBrandComponent', () => {
     expect(component).toBeTruthy();
   });
 
+
   it('debería cargar las marcas al inicializar', () => {
 
-    // se llama dos veces a getBrands
-    //component.ngOnInit();
+    
     const expectedPageRequest: PageRequest = {
       pageNumber: 0,
       pageSize: component.pageSize,
@@ -160,4 +160,5 @@ describe('ListBrandComponent', () => {
     expect(component.currentPage).toBe(newPage); 
     expect(component.loadBrands).toHaveBeenCalled(); 
   });
+ 
 });
