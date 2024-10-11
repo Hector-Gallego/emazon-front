@@ -1,6 +1,5 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
-import { FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-
+import { Component, forwardRef, Input } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-input',
@@ -27,19 +26,19 @@ export class InputComponent implements ControlValueAccessor  {
   value: string = '';
   disabled: boolean = false;
 
-  onChange: any = () => {};
-  onTouched: any = () => {};
+  onChange: (value: string) => void = () => undefined;
+  onTouched: () => void = () => undefined;
 
   writeValue(value: string): void {
     this.value = value || '';
   }
 
-  registerOnChange(fn: any): void {
+  registerOnChange(fn: (value: string) => void): void {
     this.onChange = fn;
     
   }
 
-  registerOnTouched(fn: any): void {
+  registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
     
   }
@@ -48,9 +47,8 @@ export class InputComponent implements ControlValueAccessor  {
     this.disabled = isDisabled;
   }
 
-  onInput(event: any) {
-  
-    const inputValue = event.target.value;
+  onInput(event: Event): void {
+    const inputValue = (event.target as HTMLInputElement).value;
     this.value = inputValue;
     this.onChange(this.value);
     this.onTouched();
