@@ -10,12 +10,14 @@ import { ListCategoriesPageComponent } from './pages/list-categories-page/list-c
 import { AtomsModule } from "../components/atoms/atoms.module";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { AddBrandPageComponent } from './pages/add-brand-page/add-brand-page.component';
+import { ListBrandsPageComponent } from "./pages/list-brands-page/list-brands-page.component";
 @NgModule({
     declarations:[
      AddCategoryPageComponent,
      MainLayaoutComponent,
      ListCategoriesPageComponent,
-     AddBrandPageComponent
+     AddBrandPageComponent,
+     ListBrandsPageComponent
 
     ],
     imports: [
@@ -31,7 +33,8 @@ import { AddBrandPageComponent } from './pages/add-brand-page/add-brand-page.com
         AddCategoryPageComponent,
         MainLayaoutComponent,
         ListCategoriesPageComponent,
-        AddBrandPageComponent
+        AddBrandPageComponent,
+        ListBrandsPageComponent
     ]
 
 })

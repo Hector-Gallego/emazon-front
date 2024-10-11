@@ -21,4 +21,8 @@ export class ToastService {
   showToast(toast: Toast) {
     this.toastSubject.next(toast);
   }
+
+  triggerToast(message: string, type: StatesTypes, duration: number) {
+    this.showToast({ message, duration, type });
+  }
 }

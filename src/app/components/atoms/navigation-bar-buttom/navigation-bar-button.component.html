@@ -4,8 +4,11 @@
       (click)="onClick()" 
       [ngClass]="{'navigation-bar-button--active': isActive}" 
       class="navigation-bar-button">
-      <fa-icon [icon]="icon"></fa-icon>
-      <span class="navigation-bar-button__label">{{ label }}</span>
+      
+      <div class="navigation-bar-button__content">
+        <fa-icon [icon]="icon" class="navigation-bar-button__icon"></fa-icon>
+        <span class="navigation-bar-button__label">{{ label }}</span>
+      </div>
     </button>
   </div>
 </div>

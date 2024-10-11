@@ -1,0 +1,48 @@
+@import '/src/styles/colors';
+.list-data-container{
+
+    display: flex;
+    flex-direction: column;
+
+    &__header{
+        margin-bottom: 3rem;
+    }
+
+    &__data{
+       max-height: 30rem;
+       overflow-y: auto;
+       position: relative;
+
+       &__button{
+        border: solid 1px rgba($primary-color, 0.4);
+        background-color: $white;
+        border-radius: 3px;
+        margin-bottom: 0.5rem;
+       }
+    }
+
+    &__pagination{
+
+        margin-top: 3rem;
+
+
+    }
+}
+
+@media (min-width: 768px) {
+    
+    .list-data-container {
+        width: 60rem;
+        
+      &__header{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+      &__data{
+        height: 50rem;
+      }
+    }
+
+  }

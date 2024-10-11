@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { BrandFormComponent } from 'src/app/components/organism/brand-form/brand-form.component';
 import { ApiResponse } from 'src/app/core/models/apiResponse';
 import { Brand } from 'src/app/core/models/brand';
+import { Category } from 'src/app/core/models/category';
 import { BrandService } from 'src/app/core/services/brand/brand.service';
 import {
   ErrorMessages,
