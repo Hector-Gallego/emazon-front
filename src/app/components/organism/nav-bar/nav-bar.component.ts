@@ -17,7 +17,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
   private subscription = new Subscription();
   menuItems = [
     { label: 'Categorias', icon: this.faList, route: '/categorias' },
-    { label: 'Marcas', icon: this.faTags, route: '/marcas' },
+    { label: 'Marcas', icon: this.faTags, route: '/crear-marca' },
     { label: 'Productos', icon: this.faBox, route: '/productos' },
   ];
 

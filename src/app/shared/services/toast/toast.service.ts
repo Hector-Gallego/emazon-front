@@ -9,17 +9,16 @@ export interface Toast {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ToastService {
-
-  constructor() { }
+  constructor() {}
 
   private toastSubject = new Subject<Toast>();
 
   toastState = this.toastSubject.asObservable();
 
-  showToast(toast: Toast){
+  showToast(toast: Toast) {
     this.toastSubject.next(toast);
   }
 }

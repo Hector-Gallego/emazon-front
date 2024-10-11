@@ -1,24 +1,24 @@
-import { Component, OnDestroy, ViewChild } from '@angular/core';
-import { CategoryFormComponent } from 'src/app/components/organism/category-form/category-form.component';
-import { CategoryService } from 'src/app/core/services/category/category.service';
-import { LoaderService } from 'src/app/shared/services/loader/loader.service';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { BrandFormComponent } from 'src/app/components/organism/brand-form/brand-form.component';
+import { ApiResponse } from 'src/app/core/models/apiResponse';
+import { Brand } from 'src/app/core/models/brand';
+import { BrandService } from 'src/app/core/services/brand/brand.service';
 import {
   ErrorMessages,
   StatesTypes,
 } from 'src/app/shared/constants/commonConstants';
-import { Category } from 'src/app/core/models/category';
-import { ApiResponse } from 'src/app/core/models/apiResponse';
+import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
-import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-add-category-page',
-  templateUrl: './add-category-page.component.html',
-  styleUrls: ['./add-category-page.component.scss'],
+  selector: 'app-add-brand-page',
+  templateUrl: './add-brand-page.component.html',
+  styleUrls: ['./add-brand-page.component.scss'],
 })
-export class AddCategoryPageComponent implements OnDestroy {
+export class AddBrandPageComponent implements OnInit, OnDestroy {
   constructor(
-    private categoryService: CategoryService,
+    private brandService: BrandService,
     private loaderService: LoaderService,
     private toastService: ToastService
   ) {}
@@ -26,31 +26,29 @@ export class AddCategoryPageComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+  ngOnInit(): void {}
 
-  private subscription = new Subscription();
-  @ViewChild(CategoryFormComponent) categoryForm!: CategoryFormComponent;
+  @ViewChild(BrandFormComponent) brandForm!: BrandFormComponent;
 
   toastMessage: string = '';
   toastType: StatesTypes = StatesTypes.SUCCESS;
+  private subscription = new Subscription();
 
-  onFormSubmit(formData: Category) {
-
+  onFormSubmit(brand: Brand) {
     this.loaderService.show();
-    const addCategorySubscription = this.categoryService
-      .addCategory(formData)
+    const addBrandSubscription = this.brandService
+      .addBrand(brand)
       .subscribe({
         next: (response: ApiResponse) => {
-        
           this.toastMessage = response.message;
           this.toastType = StatesTypes.SUCCESS;
 
           this.triggerToast(this.toastMessage, this.toastType, 10000);
 
-          this.categoryForm.resetForm();
+          this.brandForm.resetForm();
           this.loaderService.hide();
         },
         error: (error) => {
-        
           if (error.error && error.error.message) {
             this.toastMessage = error.error.message;
           } else {
@@ -66,7 +64,7 @@ export class AddCategoryPageComponent implements OnDestroy {
         },
       });
 
-      this.subscription.add(addCategorySubscription);
+    this.subscription.add(addBrandSubscription);
   }
 
   triggerToast(message: string, type: StatesTypes, duration: number) {

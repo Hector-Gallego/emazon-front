@@ -36,10 +36,12 @@ export class InputComponent implements ControlValueAccessor  {
 
   registerOnChange(fn: any): void {
     this.onChange = fn;
+    
   }
 
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
+    
   }
 
   setDisabledState(isDisabled: boolean): void {

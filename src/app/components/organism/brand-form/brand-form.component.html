@@ -1,0 +1,48 @@
+<form [formGroup]="brandForm">
+    <div class="brand-form">
+      <div class="brand-form__title">
+        <h4>Agregar Marca</h4>
+      </div>
+  
+      <app-divisor></app-divisor>
+  
+      <div class="brand-form__input-section">
+        <app-label [label]="fieldNameName"></app-label>
+        <app-input
+          placeholder="{{ fieldNameName }}"
+          formControlName="{{ formControlNameName }}"
+          [state]="
+            brandForm.get(formControlNameName)?.invalid &&
+            brandForm.get(formControlNameName)?.touched
+              ? 'error'
+              : 'default'
+          "
+          [errorMessage]="getErrorMessage(formControlNameName)"
+        ></app-input>
+  
+        <app-label [label]="fieldNameDescription"></app-label>
+        <app-input
+          placeholder="{{ fieldNameDescription }}"
+          formControlName="{{ formControlDescriptionName }}"
+          [state]="'default'"
+          [isTextarea]="true"
+          [state]="
+            brandForm.get(formControlDescriptionName)?.invalid &&
+            brandForm.get(formControlDescriptionName)?.touched
+              ? 'error'
+              : 'default'
+          "
+          [errorMessage]="getErrorMessage(formControlDescriptionName)"
+        ></app-input>
+      </div>
+  
+      <div class="brand-form__button-section">
+        <app-button
+          [label]="'Guardar'"
+          (buttonClick)="onSubmit()"
+          [disabled]="!brandForm.valid"
+        ></app-button>
+      </div>
+      <app-loader></app-loader>
+    </div>
+  </form>
