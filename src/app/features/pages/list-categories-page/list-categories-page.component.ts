@@ -69,7 +69,6 @@ export class ListCategoriesPageComponent implements OnInit, OnDestroy {
       )
       .subscribe({
         next: (response) => {
-          console.log('Probando el metoso suscribe');
           this.categories = response.data.content;
           this.totalPages = response.data.totalPages;
           this.loader.hide();
