@@ -1,0 +1,17 @@
+<div class="nav-bar-container">
+  <div class="nav-bar-container__header">
+    <h4>{{ menuTittle }}</h4>
+  </div>
+  <div class="nav-bar-container__menu">
+    <ng-container *ngFor="let item of menuItems">
+      <div class="nav-bar-container__menu__item">
+        <app-navigation-bar-button
+          [label]="item.label"
+          [icon]="item.icon"
+          (click)="navigate(item.route)"
+          [isActive]="isActive(item.route)"
+        ></app-navigation-bar-button>
+      </div>
+    </ng-container>
+  </div>
+</div>

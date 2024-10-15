@@ -1,0 +1,33 @@
+<div class="list-data-container">
+  <section class="list-data-container__header">
+    <h4>{{ tableTittleLabel }}</h4>
+    <app-button
+      [size]="isLargeScreen() ? buttonSizeM : buttonSizeS"
+      [label]="buttonLabelAddBrand"
+      (buttonClick)="navigateToCreateBrand()"
+    ></app-button>
+  </section>
+
+  <section class="list-data-container__data">
+    <app-button
+      [size]="buttonSizeS"
+      (buttonClick)="toggleSortDirection()"
+      [type]="buttonTypeSecundari"
+      [icon]="sortDirection === 'asc' ? faArrowDownZA : faArrowUpAZ"
+    ></app-button>
+    <app-data-table
+      [data]="brandsDataTable"
+      [headers]="headers"
+      (headerClick)="toggleSortDirection()"
+    ></app-data-table>
+    <app-loader></app-loader>
+  </section>
+
+  <section class="list-data-container__pagination">
+    <app-pagination
+      [totalPages]="totalPages"
+      [currentPage]="currentPage"
+      (pageChange)="onPageChange($event)"
+    ></app-pagination>
+  </section>
+</div>

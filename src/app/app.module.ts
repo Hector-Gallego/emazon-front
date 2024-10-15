@@ -1,36 +1,32 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { AtomsModule } from './components/atoms/atoms.module';
-import { MoleculesModule } from './components/molecules/molecules.module';
-import { OrganismModule } from './components/organism/organism.module';
-import { FeaturesModule } from './features/features.module';
-
+import { AppRoutingModule } from './app-routing.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DesignSystemModule } from './design-system/design-system.module';
+import { PageModule } from './pages/pages.module';
+import { BrandModule } from './modules/brand/brand.module';
+import { CategoryModule } from './modules/category/category.module';
+import { TemplatesModule } from './templates/templates.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
-    AtomsModule,
-    MoleculesModule,
-    OrganismModule,
-    FeaturesModule,
-    BrowserModule,
-    AppRoutingModule,
+    TemplatesModule,
+    CategoryModule,
+    BrandModule,
+    PageModule,
+    DesignSystemModule,
     FormsModule,
-    FontAwesomeModule,
     ReactiveFormsModule,
-    HttpClientModule
-
+    HttpClientModule,
+    AppRoutingModule,
+    BrowserModule,
+    FontAwesomeModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

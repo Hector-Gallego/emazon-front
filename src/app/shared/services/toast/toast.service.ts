@@ -1,12 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { StatesTypes } from '../../constants/commonConstants';
-
-export interface Toast {
-  message: string;
-  duration?: number;
-  type?: StatesTypes;
-}
+import { ToastData } from '../../interfaces/toast-data.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -14,11 +9,11 @@ export interface Toast {
 export class ToastService {
   constructor() {}
 
-  private toastSubject = new Subject<Toast>();
+  private toastSubject = new Subject<ToastData>();
 
   toastState = this.toastSubject.asObservable();
 
-  showToast(toast: Toast) {
+  showToast(toast: ToastData) {
     this.toastSubject.next(toast);
   }
 

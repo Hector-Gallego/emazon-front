@@ -1,0 +1,26 @@
+<nav class="pagination">
+  <app-button
+    [size]="isLargeScreen() ? buttonSizeM : buttonSizeS"
+    [type]="buttonTypeSeCundary"
+    [label]="buttonLabelPrev"
+    [disabled]="currentPage === 1"
+    (buttonClick)="prevPage()"
+  ></app-button>
+
+  <button
+    class="pagination__button"
+    *ngFor="let page of pages"
+    [class.pagination__button--active]="currentPage === page"
+    (click)="changePage(page)"
+  >
+    {{ page }}
+  </button>
+
+  <app-button
+    [size]="isLargeScreen() ? buttonSizeM : buttonSizeS"
+    [label]="buttonLabelNext"
+    [type]="buttonTypeSeCundary"
+    (buttonClick)="nextPage()"
+    [disabled]="currentPage === totalPages"
+  ></app-button>
+</nav>

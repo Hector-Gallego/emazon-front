@@ -27,7 +27,7 @@ describe('LoaderService', () => {
   });
 
   it('debería emitir falso cuando se llama a hide()', () => {
-    service.show(); 
+    service.show();
     service.hide();
     service.loading$.subscribe((loading) => {
       expect(loading).toBe(false);
