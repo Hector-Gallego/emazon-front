@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MainLayaoutComponent } from './main-layaout.component';
 import { PageModule } from 'src/app/pages/pages.module';
 import { DesignSystemModule } from 'src/app/design-system/design-system.module';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { RouterModule } from '@angular/router';
 
 describe('MainLayaoutComponent', () => {
   let component: MainLayaoutComponent;
@@ -10,7 +12,7 @@ describe('MainLayaoutComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [MainLayaoutComponent],
-      imports: [PageModule, DesignSystemModule],
+      imports: [PageModule, DesignSystemModule, RouterModule ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MainLayaoutComponent);
