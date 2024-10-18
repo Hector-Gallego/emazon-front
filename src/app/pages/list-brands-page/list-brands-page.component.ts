@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { faArrowDownZA, faArrowUpAZ } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
 import { PaginationRequest } from 'src/app/shared/interfaces/pagination-request.interface';
-import { BrandPersistenceService } from 'src/app/modules/brand/services/brand-persistence/brand-persistence.service';
+import { BrandPersistenceService } from 'src/app/shared/services/brand-persistence/brand-persistence.service';
 import {
   ErrorMessages,
   StatesTypes,
@@ -12,12 +12,11 @@ import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { ButtonSize } from 'src/app/shared/enums/button-size.enum';
 import { ButtonType } from 'src/app/shared/enums/button-type.enum';
-import { BrandDataTable } from 'src/app/modules/brand/interfaces/brand-data-table.interface';
 import { TableHeader } from 'src/app/shared/interfaces/table-header.interface';
 import { ScreenSizeService } from 'src/app/shared/services/screen-size/screen-size.service';
 import { SortBy } from 'src/app/shared/enums/sort-by.enum';
 import { SortDirection } from 'src/app/shared/enums/sort-direction.enum';
-import { Brand } from 'src/app/modules/brand/interfaces/brand.interface';
+import { Brand } from 'src/app/shared/interfaces/brand.interface';
 
 @Component({
   selector: 'app-list-brands-page',
@@ -30,7 +29,7 @@ export class ListBrandsPageComponent implements OnInit, OnDestroy {
   faArrowUpAZ = faArrowUpAZ;
   faArrowDownZA = faArrowDownZA;
   screenWidth: number;
-  brandsDataTable: BrandDataTable[] = [];
+  brandsDataTable: Brand[] = [];
   brands: Brand[] = [];
   toastMessage: string = '';
   toastType: StatesTypes = StatesTypes.SUCCESS;

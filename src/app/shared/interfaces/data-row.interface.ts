@@ -1,3 +1,3 @@
 export interface DataRow{
-    [key : string] : string | number | boolean;
+    [key : string] : string | number | boolean | undefined;
 }

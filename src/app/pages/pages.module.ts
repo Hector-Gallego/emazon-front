@@ -4,10 +4,10 @@ import { AddCategoryPageComponent } from './add-category-page/add-category-page.
 import { ListBrandsPageComponent } from './list-brands-page/list-brands-page.component';
 import { ListCategoriesPageComponent } from './list-categories-page/list-categories-page.component';
 import { SharedModule } from '../shared/shared.module';
-import { DesignSystemModule } from '../design-system/design-system.module';
-import { CategoryModule } from '../modules/category/category.module';
-import { BrandModule } from '../modules/brand/brand.module';
 import { PagesRoutingModule } from './pages-routing.module';
+import { OrganismModule } from '../components/organism/organism.module';
+import { AtomsModule } from '../components/atoms/atoms.module';
+import { MoleculesModule } from '../components/molecules/molecules.module';
 
 @NgModule({
   declarations: [
@@ -18,10 +18,10 @@ import { PagesRoutingModule } from './pages-routing.module';
   ],
   imports: [
     SharedModule,
-    DesignSystemModule,
-    CategoryModule,
-    BrandModule,
     PagesRoutingModule,
+    AtomsModule,
+    MoleculesModule,
+    OrganismModule
   ],
   exports: [
     AddBrandPageComponent,

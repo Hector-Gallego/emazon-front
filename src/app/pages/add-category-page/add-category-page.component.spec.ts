@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
 import { AddCategoryPageComponent } from './add-category-page.component';
-import { CategoryPersistenceService } from 'src/app/modules/category/services/category-persistence/category-persistence.service';
+import { CategoryPersistenceService } from 'src/app/shared/services/category-persistence/category-persistence.service';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 
@@ -13,7 +13,7 @@ import {
 import { ApiResponse } from 'src/app/shared/interfaces/api-response.interface';
 import { DesignSystemModule } from 'src/app/design-system/design-system.module';
 import { CategoryModule } from 'src/app/modules/category/category.module';
-import { CategoryDataForm } from 'src/app/modules/category/interfaces/category-data-form.interface';
+import { CategoryDataForm } from 'src/app/shared/interfaces/category-data-form.interface';
 
 describe('AddCategoryPageComponent', () => {
   let component: AddCategoryPageComponent;

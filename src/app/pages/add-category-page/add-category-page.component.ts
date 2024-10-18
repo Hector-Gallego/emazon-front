@@ -1,6 +1,6 @@
 import { Component, OnDestroy, ViewChild } from '@angular/core';
-import { CategoryFormComponent } from 'src/app/modules/category/components/organism/category-form/category-form.component';
-import { CategoryPersistenceService } from 'src/app/modules/category/services/category-persistence/category-persistence.service';
+import { FormComponent } from 'src/app/components/organism/form/form.component';
+import { CategoryPersistenceService } from 'src/app/shared/services/category-persistence/category-persistence.service';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import {
   ErrorMessages,
@@ -9,7 +9,9 @@ import {
 import { ApiResponse } from 'src/app/shared/interfaces/api-response.interface';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { Subscription } from 'rxjs';
-import { CategoryDataForm } from 'src/app/modules/category/interfaces/category-data-form.interface';
+import { FormField } from 'src/app/shared/interfaces/form-field.interface';
+import { Validators } from '@angular/forms';
+import { Category } from 'src/app/shared/interfaces/category.interface';
 
 @Component({
   selector: 'app-add-category-page',
@@ -27,14 +29,33 @@ export class AddCategoryPageComponent implements OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  categoryFields: FormField[] = [
+    { 
+      label: 'Nombre', 
+      formControlName: 'name', 
+      type: 'input', 
+      placeholder: 'Ingresa el nombre', 
+      validators: [Validators.required, Validators.maxLength(50)] 
+    },
+    { 
+      label: 'Descripción', 
+      formControlName: 'description', 
+      type: 'textarea', 
+      placeholder: 'Ingresa la descripción', 
+      validators: [Validators.required, Validators.maxLength(60)] 
+    }
+    
+  ];
+  
+
   private subscription = new Subscription();
-  @ViewChild(CategoryFormComponent) categoryForm!: CategoryFormComponent;
+  @ViewChild(FormComponent) categoryForm!: FormComponent;
 
   toastMessage: string = '';
   toastType: StatesTypes = StatesTypes.SUCCESS;
   toastDuration: number = 10000;
 
-  onFormSubmit(formData: CategoryDataForm) {
+  onFormSubmit(formData: Category) {
     this.loaderService.show();
     const addCategorySubscription = this.categoryService
       .addCategory(formData)

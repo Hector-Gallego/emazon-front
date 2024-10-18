@@ -1,15 +1,17 @@
 import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { BrandFormComponent } from 'src/app/modules/brand/components/organism/brand-form/brand-form.component';
 import { ApiResponse } from 'src/app/shared/interfaces/api-response.interface';
-import { BrandPersistenceService } from 'src/app/modules/brand/services/brand-persistence/brand-persistence.service';
+import { BrandPersistenceService } from 'src/app/shared/services/brand-persistence/brand-persistence.service';
 import {
   ErrorMessages,
   StatesTypes,
 } from 'src/app/shared/constants/commonConstants';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
-import { BrandDataForm } from 'src/app/modules/brand/interfaces/brand-data-form.interface';
+import { Validators } from '@angular/forms';
+import { FormField } from 'src/app/shared/interfaces/form-field.interface';
+import { FormComponent } from 'src/app/components/organism/form/form.component';
+import { Brand } from 'src/app/shared/interfaces/brand.interface';
 
 @Component({
   selector: 'app-add-brand-page',
@@ -27,7 +29,26 @@ export class AddBrandPageComponent implements OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  @ViewChild(BrandFormComponent) brandForm!: BrandFormComponent;
+  @ViewChild(FormComponent) brandForm!: FormComponent;
+
+
+  categoryFields: FormField[] = [
+    { 
+      label: 'Nombre', 
+      formControlName: 'name', 
+      type: 'input', 
+      placeholder: 'Ingresa el nombre', 
+      validators: [Validators.required, Validators.maxLength(50)] 
+    },
+    { 
+      label: 'Descripción', 
+      formControlName: 'description', 
+      type: 'textarea', 
+      placeholder: 'Ingresa la descripción', 
+      validators: [Validators.required, Validators.maxLength(90)] 
+    }
+    
+  ];
 
   toastMessage: string = '';
   toastType: StatesTypes = StatesTypes.SUCCESS;
@@ -35,7 +56,7 @@ export class AddBrandPageComponent implements OnDestroy {
 
   private subscription = new Subscription();
 
-  onFormSubmit(brandDataForm: BrandDataForm) {
+  onFormSubmit(brandDataForm: Brand) {
     this.loaderService.show();
     const addBrandSubscription = this.brandService
       .addBrand(brandDataForm)

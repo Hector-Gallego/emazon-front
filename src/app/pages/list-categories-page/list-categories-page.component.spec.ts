@@ -1,25 +1,25 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ListCategoriesPageComponent } from './list-categories-page.component';
-import { CategoryPersistenceService } from 'src/app/modules/category/services/category-persistence/category-persistence.service';
+import { CategoryPersistenceService } from 'src/app/shared/services/category-persistence/category-persistence.service';
 import { Router } from '@angular/router';
 import { of, throwError } from 'rxjs';
 import {
   ErrorMessages,
   StatesTypes,
 } from 'src/app/shared/constants/commonConstants';
-import { ToastComponent } from 'src/app/design-system/molecules/toast/toast.component';
-import { PaginationComponent } from 'src/app/design-system/organism/pagination/pagination.component';
-import { ButtonComponent } from 'src/app/design-system/atoms/button/button.component';
-import { DataTableComponent } from 'src/app/design-system/organism/data-table/data-table.component';
-import { IconComponent } from 'src/app/design-system/atoms/icon/icon.component';
+import { ToastComponent } from 'src/app/components/molecules/toast/toast.component';
+import { PaginationComponent } from 'src/app/components/organism/pagination/pagination.component';
+import { ButtonComponent } from 'src/app/components/atoms/button/button.component';
+import { DataTableComponent } from 'src/app/components/organism/data-table/data-table.component';
+import { IconComponent } from 'src/app/components/atoms/icon/icon.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { LoaderComponent } from 'src/app/design-system/atoms/loader/loader.component';
+import { LoaderComponent } from 'src/app/components/atoms/loader/loader.component';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { DesignSystemModule } from 'src/app/design-system/design-system.module';
 import { SortDirection } from 'src/app/shared/enums/sort-direction.enum';
-import { DataPagination } from 'src/app/shared/interfaces/data-pagination-interface';
-import { Category } from 'src/app/modules/category/interfaces/category.interface';
+import { PaginationResponse } from 'src/app/shared/interfaces/pagination-response.interface';
+import { Category } from 'src/app/shared/interfaces/category.interface';
 import { PaginationRequest } from 'src/app/shared/interfaces/pagination-request.interface';
 
 describe('ListCategoriesComponent', () => {
@@ -66,7 +66,7 @@ describe('ListCategoriesComponent', () => {
     toastService = TestBed.inject(ToastService) as jest.Mocked<ToastService>;
     loaderService = TestBed.inject(LoaderService) as jest.Mocked<LoaderService>;
 
-    const mockResponse: DataPagination<Category> = {
+    const mockResponse: PaginationResponse<Category> = {
       data: {
         content: [
           {

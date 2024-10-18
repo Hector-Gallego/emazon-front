@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
 import { AddBrandPageComponent } from './add-brand-page.component';
-import { BrandPersistenceService } from 'src/app/modules/brand/services/brand-persistence/brand-persistence.service';
+import { BrandPersistenceService } from 'src/app/shared/services/brand-persistence/brand-persistence.service';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
-import { BrandFormComponent } from 'src/app/modules/brand/components/organism/brand-form/brand-form.component';
+import { BrandFormComponent } from 'src/app/components/organism/brand-form/brand-form.component';
 import {
   StatesTypes,
   ErrorMessages,
 } from 'src/app/shared/constants/commonConstants';
 import { ApiResponse } from 'src/app/shared/interfaces/api-response.interface';
-import { Brand } from 'src/app/modules/brand/interfaces/brand.interface';
+import { Brand } from 'src/app/shared/interfaces/brand.interface';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DesignSystemModule } from 'src/app/design-system/design-system.module';
 import { BrandModule } from 'src/app/modules/brand/brand.module';
-import { BrandDataForm } from 'src/app/modules/brand/interfaces/brand-data-form.interface';
+import { BrandDataForm } from 'src/app/shared/interfaces/brand-data-form.interface';
 
 describe('AddBrandPageComponent', () => {
   let component: AddBrandPageComponent;

@@ -1,0 +1,22 @@
+@import '/src/styles/colors';
+.input-container {
+    width: 100%;
+    height: auto;
+    margin-bottom: 2rem;
+
+    select {
+        padding: 10px;
+        border: 1px solid $gray-scale-spacer-light;
+        border-radius: 4px;
+        width: 95%;
+        color: $gray-scale-black;
+
+        &:focus{
+            color: $gray-scale-black;
+            border-color: $primary-color; 
+            outline: none; 
+        }
+    
+    }
+
+}

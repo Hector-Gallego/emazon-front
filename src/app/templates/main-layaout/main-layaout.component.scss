@@ -18,32 +18,36 @@ $mobile-padding: 1rem;
   }
 
   &__content {
-    display: block;
+
+    box-sizing: border-box;
+    width: 100%;
     padding: $mobile-padding;
+    
+
   }
 }
 
 @media (min-width: 768px) {
   .layout-container {
-    flex-direction: row;
-
+   
+   
    
     &__body {
+      
     
       flex-direction: row;
       padding-left: $horizontal-padding;
       padding-right: $horizontal-padding;
     }
-    &__nav-bar {
-        
+    &__nav-bar {  
       width: $nav-bar-width;
     }
 
     &__content {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    
+    
+      margin: 0 auto;
+      width: 60%;
       padding: $content-padding;
     }
   }

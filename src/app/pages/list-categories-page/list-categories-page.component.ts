@@ -5,26 +5,24 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { CategoryPersistenceService } from 'src/app/modules/category/services/category-persistence/category-persistence.service';
+import { CategoryPersistenceService } from 'src/app/shared/services/category-persistence/category-persistence.service';
 import { Router } from '@angular/router';
 import { faArrowUpAZ, faArrowDownZA } from '@fortawesome/free-solid-svg-icons';
 import {
   ErrorMessages,
   StatesTypes,
 } from 'src/app/shared/constants/commonConstants';
-import { ToastComponent } from 'src/app/design-system/molecules/toast/toast.component';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { Subscription } from 'rxjs';
 import { ButtonType } from 'src/app/shared/enums/button-type.enum';
 import { ButtonSize } from 'src/app/shared/enums/button-size.enum';
-import { CategoryDataTable } from 'src/app/modules/category/interfaces/category-data-table.interface';
 import { TableHeader } from 'src/app/shared/interfaces/table-header.interface';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { ScreenSizeService } from 'src/app/shared/services/screen-size/screen-size.service';
 import { SortBy } from 'src/app/shared/enums/sort-by.enum';
 import { SortDirection } from 'src/app/shared/enums/sort-direction.enum';
 import { PaginationRequest } from 'src/app/shared/interfaces/pagination-request.interface';
-import { Category } from 'src/app/modules/category/interfaces/category.interface';
+import { Category } from 'src/app/shared/interfaces/category.interface';
 @Component({
   selector: 'app-list-categories',
   templateUrl: './list-categories-page.component.html',
@@ -60,7 +58,7 @@ export class ListCategoriesPageComponent implements OnInit, OnDestroy {
   faArrowUpAZ = faArrowUpAZ;
   faArrowDownZA = faArrowDownZA;
   screenWidth: number;
-  categoriesDatatable: CategoryDataTable[] = [];
+  categoriesDatatable: Category[] = [];
   categories: Category[] = [];
 
   toastMessage: string = '';

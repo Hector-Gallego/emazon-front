@@ -1,0 +1,49 @@
+<form [formGroup]="formGroup">
+  <div class="form">
+
+    <div class="form__title">
+      <h4>{{ formTitle }}</h4>
+    </div>
+
+    <app-divisor></app-divisor>
+
+    <div class="form__input-section" *ngFor="let field of fields">
+      <app-label [label]="field.label"></app-label>
+
+      <ng-container *ngIf="field.type === 'input' || field.type === 'textarea'">
+        <app-input
+          placeholder="{{ field.placeholder }}"
+          formControlName="{{ field.formControlName }}"
+          [state]="
+            formGroup.get(field.formControlName)?.invalid &&
+            formGroup.get(field.formControlName)?.touched
+              ? inputStateError
+              : inputStateDefault
+          "
+          [isTextarea]="field.type === 'textarea'"
+          [errorMessage]="getErrorMessage(field.formControlName)"
+        ></app-input>
+      </ng-container>
+
+     
+      <ng-container *ngIf="field.type === 'select'">
+        <app-input-select
+          [placeholder]="field.placeholder || 'Seleccione una opción'"
+          [options]="field.options || []"
+          [selectionLimit]="field.selectionLimit || 1"
+          (selectionChange)="onSelectionChange($event, field.formControlName)"
+        ></app-input-select>
+      </ng-container>
+    </div>
+
+    <div class="form__button-section">
+      <app-button
+        [label]="buttonLabelText"
+        (buttonClick)="onSubmit()"
+        [disabled]="!formGroup.valid"
+      ></app-button>
+    </div>
+
+    <app-loader></app-loader>
+  </div>
+</form>

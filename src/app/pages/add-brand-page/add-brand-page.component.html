@@ -1,1 +1,4 @@
-<app-brand-form (submitForm)="onFormSubmit($event)"></app-brand-form>
+<app-form [formTitle]="'Agregar Marca'"
+[buttonLabelText]="'Guardar'"
+[fields]="categoryFields"
+(submitForm)="onFormSubmit($event)"></app-form>

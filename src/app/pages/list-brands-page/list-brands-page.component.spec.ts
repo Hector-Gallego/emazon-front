@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
 import { ListBrandsPageComponent } from './list-brands-page.component';
-import { PaginationComponent } from 'src/app/design-system/organism/pagination/pagination.component';
-import { ToastComponent } from 'src/app/design-system/molecules/toast/toast.component';
-import { ButtonComponent } from 'src/app/design-system/atoms/button/button.component';
-import { DataTableComponent } from 'src/app/design-system/organism/data-table/data-table.component';
-import { IconComponent } from 'src/app/design-system/atoms/icon/icon.component';
-import { LoaderComponent } from 'src/app/design-system/atoms/loader/loader.component';
+import { PaginationComponent } from 'src/app/components/organism/pagination/pagination.component';
+import { ToastComponent } from 'src/app/components/molecules/toast/toast.component';
+import { ButtonComponent } from 'src/app/components/atoms/button/button.component';
+import { DataTableComponent } from 'src/app/components/organism/data-table/data-table.component';
+import { IconComponent } from 'src/app/components/atoms/icon/icon.component';
+import { LoaderComponent } from 'src/app/components/atoms/loader/loader.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { BrandPersistenceService } from 'src/app/modules/brand/services/brand-persistence/brand-persistence.service';
+import { BrandPersistenceService } from 'src/app/shared/services/brand-persistence/brand-persistence.service';
 import { Router } from '@angular/router';
 import { PaginationRequest } from 'src/app/shared/interfaces/pagination-request.interface';
 import {
@@ -19,8 +19,8 @@ import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { SortDirection } from 'src/app/shared/enums/sort-direction.enum';
 import { DesignSystemModule } from 'src/app/design-system/design-system.module';
-import { DataPagination } from 'src/app/shared/interfaces/data-pagination-interface';
-import { Brand } from 'src/app/modules/brand/interfaces/brand.interface';
+import { PaginationResponse } from 'src/app/shared/interfaces/pagination-response.interface';
+import { Brand } from 'src/app/shared/interfaces/brand.interface';
 
 describe('ListBrandComponent', () => {
   let component: ListBrandsPageComponent;
@@ -65,7 +65,7 @@ describe('ListBrandComponent', () => {
     toastService = TestBed.inject(ToastService) as jest.Mocked<ToastService>;
     loaderService = TestBed.inject(LoaderService) as jest.Mocked<LoaderService>;
 
-    const mockResponse: DataPagination<Brand> = {
+    const mockResponse: PaginationResponse<Brand> = {
       status: 200,
       message: 'categorias listadas con exito',
       data: {

@@ -1,3 +1,9 @@
-<app-category-form (submitForm)="onFormSubmit($event)"></app-category-form>
+<div class="page-div">
+    <app-form [formTitle]="'Agregar Categoría'"
+    [buttonLabelText]="'Guardar'"
+    [fields]="categoryFields"
+    (submitForm)="onFormSubmit($event)"></app-form>
+</div>
+
 
 
