@@ -12,6 +12,7 @@
 
       <ng-container *ngIf="field.type === inputTypeInput || field.type === inputTypeTextarea">
         <app-input
+          [typeContentInput]="field.contentType"
           placeholder="{{ field.placeholder }}"
           formControlName="{{ field.formControlName }}"
           [state]="

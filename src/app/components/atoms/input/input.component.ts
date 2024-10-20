@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { StatesTypes } from 'src/app/shared/constants/commonConstants';
+import { InputContentType } from 'src/app/shared/enums/input-content-type.enum';
 import { InputState } from 'src/app/shared/enums/input-state.enum';
 
 @Component({
@@ -22,6 +22,7 @@ export class InputComponent implements ControlValueAccessor {
   @Input() inputClass!: string;
   @Input() isTextarea: boolean = false;
   @Input() errorMessage: string = '';
+  @Input() typeContentInput: InputContentType = InputContentType.TEXT;
 
   value: string = '';
   disabled: boolean = false;

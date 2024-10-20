@@ -14,6 +14,7 @@ import { FormComponent } from 'src/app/components/organism/form/form.component';
 import { Brand } from 'src/app/shared/interfaces/brand.interface';
 import { BrandFieldLimits } from 'src/app/shared/constants/brand.constant';
 import { InputType } from 'src/app/shared/enums/inputs-type.enum';
+import { InputContentType } from 'src/app/shared/enums/input-content-type.enum';
 
 @Component({
   selector: 'app-add-brand-page',
@@ -37,6 +38,7 @@ export class AddBrandPageComponent implements OnDestroy {
     {
       label: 'Nombre',
       formControlName: 'name',
+      contentType: InputContentType.TEXT,
       type: InputType.INPUT,
       placeholder: 'Ingresa el nombre',
       validators: [
@@ -47,6 +49,7 @@ export class AddBrandPageComponent implements OnDestroy {
     {
       label: 'Descripción',
       formControlName: 'description',
+      contentType: InputContentType.TEXT,
       type: InputType.TEXTAREA,
       placeholder: 'Ingresa la descripción',
       validators: [

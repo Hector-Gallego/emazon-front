@@ -13,6 +13,7 @@ import { FormField } from 'src/app/shared/interfaces/form-field.interface';
 import { Validators } from '@angular/forms';
 import { Category } from 'src/app/shared/interfaces/category.interface';
 import { InputType } from 'src/app/shared/enums/inputs-type.enum';
+import { InputContentType } from 'src/app/shared/enums/input-content-type.enum';
 
 @Component({
   selector: 'app-add-category-page',
@@ -35,12 +36,14 @@ export class AddCategoryPageComponent implements OnDestroy {
       label: 'Nombre',
       formControlName: 'name',
       type: InputType.INPUT,
+      contentType: InputContentType.TEXT,
       placeholder: 'Ingresa el nombre',
       validators: [Validators.required, Validators.maxLength(50)],
     },
     {
       label: 'Descripción',
       formControlName: 'description',
+      contentType: InputContentType.TEXT,
       type: InputType.TEXTAREA,
       placeholder: 'Ingresa la descripción',
       validators: [Validators.required, Validators.maxLength(60)],

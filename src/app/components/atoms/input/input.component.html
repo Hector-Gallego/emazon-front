@@ -10,6 +10,7 @@
   </ng-container>
   <ng-template #inputTemplate>
     <input
+      [type]="typeContentInput"
       [(ngModel)]="value"
       [placeholder]="placeholder"
       [required]="required"
