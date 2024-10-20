@@ -10,7 +10,7 @@
     <div class="form__input-section" *ngFor="let field of fields">
       <app-label [label]="field.label"></app-label>
 
-      <ng-container *ngIf="field.type === 'input' || field.type === 'textarea'">
+      <ng-container *ngIf="field.type === 'input' || field.type === inputTypeTextarea">
         <app-input
           placeholder="{{ field.placeholder }}"
           formControlName="{{ field.formControlName }}"
@@ -20,19 +20,19 @@
               ? inputStateError
               : inputStateDefault
           "
-          [isTextarea]="field.type === 'textarea'"
+          [isTextarea]="field.type === inputTypeTextarea"
           [errorMessage]="getErrorMessage(field.formControlName)"
         ></app-input>
       </ng-container>
 
      
-      <ng-container *ngIf="field.type === 'select'">
-        <app-input-select
+      <ng-container *ngIf="field.type === inputTypeSelect">
+        <app-multiple-input-select
           [placeholder]="field.placeholder || 'Seleccione una opción'"
           [options]="field.options || []"
           [selectionLimit]="field.selectionLimit || 1"
           (selectionChange)="onSelectionChange($event, field.formControlName)"
-        ></app-input-select>
+        ></app-multiple-input-select>
       </ng-container>
     </div>
 

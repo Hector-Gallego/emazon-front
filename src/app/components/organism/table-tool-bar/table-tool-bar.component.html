@@ -1,0 +1,12 @@
+<div class="table-tool-bar">
+    
+  <div class="table-tool-bar__show-by">
+    <app-label [label]="'Mostrar:'"></app-label>
+    <app-input-select (selectionChange)="onShowByChange($event)" [options]="showByoptions"></app-input-select>
+  </div>
+
+  <div class="table-tool-bar__sort-by">
+    <app-label [label]="'Ordenar por:'"></app-label>
+    <app-input-select (selectionChange)="onSortByChange($event)" [options]="sortByoptions"></app-input-select>
+  </div>
+</div>

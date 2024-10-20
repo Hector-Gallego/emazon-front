@@ -12,7 +12,6 @@ export class ButtonComponent {
   @Input() label: string = 'Button';
   @Input() type: ButtonType = ButtonType.PRIMARY;
   @Input() disabled: boolean = false;
-  @Input() size: ButtonSize = ButtonSize.M;
   @Input() icon?: IconDefinition;
 
   @Output() buttonClick = new EventEmitter<void>();

@@ -4,7 +4,7 @@ export const CategoryErrorMessages = {
     `Máximo ${maxLength} caracteres permitidos.`,
 };
 
-export const FieldLimits = {
+export const CategoryFieldLimits = {
   MAX_LENGTH_CATEGORY_NAME_FIELD: 50,
   MAX_LENGTH_CATEGORY_DESCRIPTION_FIELD: 90,
 };

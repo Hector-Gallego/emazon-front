@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { faArrowDownZA, faArrowUpAZ } from '@fortawesome/free-solid-svg-icons';
-import { Subscription } from 'rxjs';
+import { finalize, Subscription } from 'rxjs';
 import { PaginationRequest } from 'src/app/shared/interfaces/pagination-request.interface';
 import { BrandPersistenceService } from 'src/app/shared/services/brand-persistence/brand-persistence.service';
 import {
@@ -13,10 +12,11 @@ import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { ButtonSize } from 'src/app/shared/enums/button-size.enum';
 import { ButtonType } from 'src/app/shared/enums/button-type.enum';
 import { TableHeader } from 'src/app/shared/interfaces/table-header.interface';
-import { ScreenSizeService } from 'src/app/shared/services/screen-size/screen-size.service';
 import { SortBy } from 'src/app/shared/enums/sort-by.enum';
 import { SortDirection } from 'src/app/shared/enums/sort-direction.enum';
 import { Brand } from 'src/app/shared/interfaces/brand.interface';
+import { TableToolBarService } from 'src/app/shared/services/table-tool-bar/table-tool-bar.service';
+import { SortMapper } from 'src/app/shared/mappers/sort.mapper';
 
 @Component({
   selector: 'app-list-brands-page',
@@ -26,10 +26,6 @@ import { Brand } from 'src/app/shared/interfaces/brand.interface';
 export class ListBrandsPageComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
 
-  faArrowUpAZ = faArrowUpAZ;
-  faArrowDownZA = faArrowDownZA;
-  screenWidth: number;
-  brandsDataTable: Brand[] = [];
   brands: Brand[] = [];
   toastMessage: string = '';
   toastType: StatesTypes = StatesTypes.SUCCESS;
@@ -40,9 +36,20 @@ export class ListBrandsPageComponent implements OnInit, OnDestroy {
     { displayName: 'Descripción', key: 'description' },
   ];
 
+  showByOptions = [
+    { value: '5', label: '5' },
+    { value: '10', label: '10' },
+    { value: '15', label: '15' }
+  ];
+
+  sortByOptions = [
+    { value: 'name:asc', label: 'nombre ASC' },
+    { value: 'name:desc', label: 'nombre DESC' }
+  ];
+
   currentPage: number = 1;
   totalPages: number = 0;
-  pageSize: number = 7;
+  pageSize: number = 5;
   sortBy: SortBy = SortBy.NAME;
   sortDirection: SortDirection = SortDirection.ASC;
 
@@ -55,17 +62,14 @@ export class ListBrandsPageComponent implements OnInit, OnDestroy {
   buttonTypePrimary = ButtonType.PRIMARY;
   buttonTypeSecundari = ButtonType.SECUNDARY;
 
-  sortDirectionAsc: SortDirection = SortDirection.ASC;
-  sortDirectionDesc: SortDirection = SortDirection.DESC;
-
   constructor(
     private brandService: BrandPersistenceService,
     private router: Router,
     private loader: LoaderService,
     private toastService: ToastService,
-    private screenSizeService: ScreenSizeService
+    private tableToolBarService: TableToolBarService
   ) {
-    this.screenWidth = window.innerWidth;
+    
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
@@ -74,12 +78,24 @@ export class ListBrandsPageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadBrands();
 
-    const screenSubscription = this.screenSizeService.screenWidth$.subscribe(
-      (width) => {
-        this.screenWidth = width;
+    const showBySubscription = this.tableToolBarService.showBy$.subscribe(
+      (value) => {
+        this.pageSize = Number(value);
+        this.loadBrands();
       }
     );
-    this.subscription.add(screenSubscription);
+
+    const sortBySubscription = this.tableToolBarService.sortBy$.subscribe(
+      (value) => {
+        const [sortByField, sortDirection] = value.split(':');
+        this.sortBy = SortMapper.mapSortBy(sortByField);
+        this.sortDirection = SortMapper.mapSortDirection(sortDirection);
+        this.loadBrands();
+      }
+    );
+
+    this.subscription.add(showBySubscription);
+    this.subscription.add(sortBySubscription);
   }
 
   loadBrands(): void {
@@ -94,16 +110,12 @@ export class ListBrandsPageComponent implements OnInit, OnDestroy {
 
     const getBrandsSubscription = this.brandService
       .getBrands(pageRequest)
+      .pipe(finalize(() => this.loader.hide()))
       .subscribe({
         next: (response) => {
           this.brands = response.data.content;
-
-          this.brandsDataTable = this.brands.map((brand) => ({
-            ...brand,
-          }));
-
           this.totalPages = response.data.totalPages;
-          this.loader.hide();
+        
         },
         error: (error) => {
           if (error && error.error) {
@@ -118,11 +130,8 @@ export class ListBrandsPageComponent implements OnInit, OnDestroy {
             this.toastType,
             this.toastDuration
           );
-          this.loader.hide();
-        },
-        complete: () => {
-          this.loader.hide();
-        },
+          
+        }
       });
     this.subscription.add(getBrandsSubscription);
   }
@@ -136,15 +145,4 @@ export class ListBrandsPageComponent implements OnInit, OnDestroy {
     this.loadBrands();
   }
 
-  toggleSortDirection(): void {
-    this.sortDirection =
-      this.sortDirection === this.sortDirectionAsc
-        ? this.sortDirectionDesc
-        : this.sortDirectionAsc;
-    this.loadBrands();
-  }
-
-  isLargeScreen(): boolean {
-    return this.screenSizeService.isLargeScreen(this.screenWidth);
-  }
 }

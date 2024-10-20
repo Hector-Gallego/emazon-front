@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormComponent } from './form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
-    FieldLimits,
+    CategoryFieldLimits,
     CategoryErrorMessages,
 } from 'src/app/shared/constants/category.constants';
 import { FormsModule } from '@angular/forms';
@@ -55,10 +55,10 @@ describe('CategoryFormComponent', () => {
     const descriptionControl = component.formGroup.get('description');
 
     const longNameString = 'a'.repeat(
-      FieldLimits.MAX_LENGTH_CATEGORY_NAME_FIELD + 1
+      CategoryFieldLimits.MAX_LENGTH_CATEGORY_NAME_FIELD + 1
     );
     const longDescriptionString = 'a'.repeat(
-      FieldLimits.MAX_LENGTH_CATEGORY_DESCRIPTION_FIELD + 1
+      CategoryFieldLimits.MAX_LENGTH_CATEGORY_DESCRIPTION_FIELD + 1
     );
 
     nameControl?.setValue(longNameString);
@@ -91,7 +91,7 @@ describe('CategoryFormComponent', () => {
 
   it('debería mostrar mensaje de error de longitud para el campo "name"', () => {
     const longString = 'a'.repeat(
-      FieldLimits.MAX_LENGTH_CATEGORY_NAME_FIELD + 1
+      CategoryFieldLimits.MAX_LENGTH_CATEGORY_NAME_FIELD + 1
     );
     component.formGroup.get('name')?.setValue(longString);
     component.formGroup.get('name')?.markAsTouched();
@@ -99,14 +99,14 @@ describe('CategoryFormComponent', () => {
     const errorMessage = component.getErrorMessage('name');
     expect(errorMessage).toBe(
       CategoryErrorMessages.MAX_LENGTH_ERROR_MESSAGE(
-        FieldLimits.MAX_LENGTH_CATEGORY_NAME_FIELD
+        CategoryFieldLimits.MAX_LENGTH_CATEGORY_NAME_FIELD
       )
     );
   });
 
   it('debería mostrar mensaje de error de longitud para el campo "description"', () => {
     const longString = 'a'.repeat(
-      FieldLimits.MAX_LENGTH_CATEGORY_DESCRIPTION_FIELD + 1
+      CategoryFieldLimits.MAX_LENGTH_CATEGORY_DESCRIPTION_FIELD + 1
     );
     component.formGroup.get('description')?.setValue(longString);
     component.formGroup.get('description')?.markAsTouched();
@@ -114,7 +114,7 @@ describe('CategoryFormComponent', () => {
     const errorMessage = component.getErrorMessage('description');
     expect(errorMessage).toBe(
       CategoryErrorMessages.MAX_LENGTH_ERROR_MESSAGE(
-        FieldLimits.MAX_LENGTH_CATEGORY_DESCRIPTION_FIELD
+        CategoryFieldLimits.MAX_LENGTH_CATEGORY_DESCRIPTION_FIELD
       )
     );
   });

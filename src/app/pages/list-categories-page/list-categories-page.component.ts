@@ -1,64 +1,29 @@
-import {
-  Component,
-  HostListener,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CategoryPersistenceService } from 'src/app/shared/services/category-persistence/category-persistence.service';
 import { Router } from '@angular/router';
-import { faArrowUpAZ, faArrowDownZA } from '@fortawesome/free-solid-svg-icons';
 import {
   ErrorMessages,
   StatesTypes,
 } from 'src/app/shared/constants/commonConstants';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
-import { Subscription } from 'rxjs';
+import { finalize, Subscription } from 'rxjs';
 import { ButtonType } from 'src/app/shared/enums/button-type.enum';
-import { ButtonSize } from 'src/app/shared/enums/button-size.enum';
 import { TableHeader } from 'src/app/shared/interfaces/table-header.interface';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
-import { ScreenSizeService } from 'src/app/shared/services/screen-size/screen-size.service';
 import { SortBy } from 'src/app/shared/enums/sort-by.enum';
 import { SortDirection } from 'src/app/shared/enums/sort-direction.enum';
 import { PaginationRequest } from 'src/app/shared/interfaces/pagination-request.interface';
 import { Category } from 'src/app/shared/interfaces/category.interface';
+import { TableToolBarService } from 'src/app/shared/services/table-tool-bar/table-tool-bar.service';
+import { SortMapper } from 'src/app/shared/mappers/sort.mapper';
 @Component({
   selector: 'app-list-categories',
   templateUrl: './list-categories-page.component.html',
   styleUrls: ['./list-categories-page.component.scss'],
 })
 export class ListCategoriesPageComponent implements OnInit, OnDestroy {
-  constructor(
-    private categoryService: CategoryPersistenceService,
-    private router: Router,
-    private loader: LoaderService,
-    private toastService: ToastService,
-    private screenSizeService: ScreenSizeService
-  ) {
-    this.screenWidth = window.innerWidth;
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
-
-  ngOnInit(): void {
-    this.loadCategories();
-    const screenSubscription = this.screenSizeService.screenWidth$.subscribe(
-      (width) => {
-        this.screenWidth = width;
-      }
-    );
-    this.subscription.add(screenSubscription);
-  }
-
   subscription = new Subscription();
 
-  faArrowUpAZ = faArrowUpAZ;
-  faArrowDownZA = faArrowDownZA;
-  screenWidth: number;
-  categoriesDatatable: Category[] = [];
   categories: Category[] = [];
 
   toastMessage: string = '';
@@ -69,23 +34,65 @@ export class ListCategoriesPageComponent implements OnInit, OnDestroy {
     { displayName: 'Nombre', key: 'name' },
     { displayName: 'Descripción', key: 'description' },
   ];
+
+  showByOptions = [
+    { value: '5', label: '5' },
+    { value: '10', label: '10' },
+    { value: '15', label: '15' }
+  ];
+
+  sortByOptions = [
+    { value: 'name:asc', label: 'nombre ASC' },
+    { value: 'name:desc', label: 'nombre DESC' }
+  ];
+
   currentPage: number = 1;
   totalPages: number = 0;
-  pageSize: number = 7;
+  pageSize: number = 5;
 
   sortBy: string = SortBy.NAME;
-  sortDirection: string = SortDirection.ASC;
-
-  sortDirectionAsc: SortDirection = SortDirection.ASC;
-  sordirectionDesc: SortDirection = SortDirection.DESC;
+  sortDirection: SortDirection = SortDirection.ASC;
 
   buttonLabelAddCategory: string = 'Agregar';
   tableTittleLabel: string = 'Listado de Categorías';
 
-  buttonSizeS = ButtonSize.S;
-  buttonSizeM = ButtonSize.M;
   buttonTypePrimary = ButtonType.PRIMARY;
   buttonTypeSecundary = ButtonType.SECUNDARY;
+
+  constructor(
+    private categoryService: CategoryPersistenceService,
+    private router: Router,
+    private loader: LoaderService,
+    private toastService: ToastService,
+    private tableToolBarService: TableToolBarService
+  ) {}
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  ngOnInit(): void {
+    this.loadCategories();
+
+    const showBySubscription = this.tableToolBarService.showBy$.subscribe(
+      (value) => {
+        this.pageSize = Number(value);
+        this.loadCategories();
+      }
+    );
+
+    const sortBySubscription = this.tableToolBarService.sortBy$.subscribe(
+      (value) => {
+        const [sortByField, sortDirection] = value.split(':');
+        this.sortBy = SortMapper.mapSortBy(sortByField);
+        this.sortDirection = SortMapper.mapSortDirection(sortDirection);
+        this.loadCategories();
+      }
+    );
+
+    this.subscription.add(showBySubscription);
+    this.subscription.add(sortBySubscription);
+  }
 
   loadCategories(): void {
     this.loader.show();
@@ -99,15 +106,11 @@ export class ListCategoriesPageComponent implements OnInit, OnDestroy {
 
     const getCategoriesSubscription = this.categoryService
       .getCategories(pageRequest)
+      .pipe(finalize(() => this.loader.hide()))
       .subscribe({
         next: (response) => {
           this.categories = response.data.content;
-
-          this.categoriesDatatable = this.categories.map((category) => ({
-            ...category,
-          }));
           this.totalPages = response.data.totalPages;
-          this.loader.hide();
         },
         error: (error) => {
           if (error && error.error) {
@@ -121,10 +124,6 @@ export class ListCategoriesPageComponent implements OnInit, OnDestroy {
             this.toastType,
             this.toastDuration
           );
-          this.loader.hide();
-        },
-        complete: () => {
-          this.loader.hide();
         },
       });
     this.subscription.add(getCategoriesSubscription);
@@ -137,17 +136,5 @@ export class ListCategoriesPageComponent implements OnInit, OnDestroy {
   onPageChange(newPage: number): void {
     this.currentPage = newPage;
     this.loadCategories();
-  }
-
-  toggleSortDirection(): void {
-    this.sortDirection =
-      this.sortDirection === this.sortDirectionAsc
-        ? this.sordirectionDesc
-        : this.sortDirectionAsc;
-    this.loadCategories();
-  }
-
-  isLargeScreen(): boolean {
-    return this.screenSizeService.isLargeScreen(this.screenWidth);
   }
 }

@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import {
-  CategoryErrorMessages,
-} from 'src/app/shared/constants/category.constants';
+import { FormBuilder, FormGroup, Validator, ValidatorFn } from '@angular/forms';
+import { CategoryErrorMessages } from 'src/app/shared/constants/category.constants';
 import { InputState } from 'src/app/shared/enums/input-state.enum';
+import { InputType } from 'src/app/shared/enums/inputs-type.enum';
+import { Brand } from 'src/app/shared/interfaces/brand.interface';
+import { Category } from 'src/app/shared/interfaces/category.interface';
 
 import { FormField } from 'src/app/shared/interfaces/form-field.interface';
 
@@ -13,41 +14,35 @@ import { FormField } from 'src/app/shared/interfaces/form-field.interface';
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
-
-
   @Input() formTitle: string = 'Formulario';
   @Input() buttonLabelText: string = 'Guardar';
-  @Input() fields: FormField[] = []; 
-  @Output() submitForm = new EventEmitter<any>();
+  @Input() fields: FormField[] = [];
+  @Output() submitForm = new EventEmitter<Category | Brand>();
 
   inputStateError = InputState.ERROR;
   inputStateDefault = InputState.DEFAULT;
 
-
+  inputTypeInput: InputType = InputType.INPUT;
+  inputTypeTextarea: InputType = InputType.TEXTAREA;
+  inputTypeSelect: InputType = InputType.SELECT;
 
   formGroup: FormGroup;
-
 
   constructor(private fb: FormBuilder) {
     this.formGroup = this.fb.group({});
   }
 
   ngOnInit(): void {
-    this.buildForm(); 
+    this.buildForm();
   }
 
   private buildForm(): void {
-    const formControls :{ [key: string]: any } = {}; 
+    const formControls: { [key: string]: [string, ValidatorFn[]] } = {};
     this.fields.forEach((field) => {
-      formControls[field.formControlName] = [
-        '',
-        field.validators,
-      ];
+      formControls[field.formControlName] = ['', field.validators || []];
     });
     this.formGroup = this.fb.group(formControls);
   }
-
-
 
   onSubmit() {
     if (this.formGroup.valid) {
@@ -76,8 +71,7 @@ export class FormComponent implements OnInit {
     this.formGroup.reset();
   }
 
-  onSelectionChange(selectedValues: any[], formControlName: string): void {
+  onSelectionChange(selectedValues: string[], formControlName: string): void {
     this.formGroup.get(formControlName)?.setValue(selectedValues);
   }
-  
 }

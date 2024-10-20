@@ -1,8 +1,9 @@
 <div class="nav-bar-container">
   <div class="nav-bar-container__header">
     <h4>{{ menuTittle }}</h4>
+    <fa-icon class="nav-bar-container__menu-button" (click)="toggleSidebar()" [size]="'2x'" [icon]="faBars"></fa-icon>
   </div>
-  <div class="nav-bar-container__menu">
+  <div class="nav-bar-container__menu" [ngClass]="{'open': isSidebarOpen}">
     <ng-container *ngFor="let item of menuItems">
       <div class="nav-bar-container__menu__item">
         <app-navigation-bar-button

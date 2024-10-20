@@ -12,6 +12,8 @@ import { Validators } from '@angular/forms';
 import { FormField } from 'src/app/shared/interfaces/form-field.interface';
 import { FormComponent } from 'src/app/components/organism/form/form.component';
 import { Brand } from 'src/app/shared/interfaces/brand.interface';
+import { BrandFieldLimits } from 'src/app/shared/constants/brand.constant';
+import { InputType } from 'src/app/shared/enums/inputs-type.enum';
 
 @Component({
   selector: 'app-add-brand-page',
@@ -31,23 +33,29 @@ export class AddBrandPageComponent implements OnDestroy {
 
   @ViewChild(FormComponent) brandForm!: FormComponent;
 
-
-  categoryFields: FormField[] = [
-    { 
-      label: 'Nombre', 
-      formControlName: 'name', 
-      type: 'input', 
-      placeholder: 'Ingresa el nombre', 
-      validators: [Validators.required, Validators.maxLength(50)] 
+  brandFields: FormField[] = [
+    {
+      label: 'Nombre',
+      formControlName: 'name',
+      type: InputType.INPUT,
+      placeholder: 'Ingresa el nombre',
+      validators: [
+        Validators.required,
+        Validators.maxLength(BrandFieldLimits.MAX_LENGTH_BRAND_NAME_FIELD),
+      ],
     },
-    { 
-      label: 'Descripción', 
-      formControlName: 'description', 
-      type: 'textarea', 
-      placeholder: 'Ingresa la descripción', 
-      validators: [Validators.required, Validators.maxLength(90)] 
-    }
-    
+    {
+      label: 'Descripción',
+      formControlName: 'description',
+      type: InputType.TEXTAREA,
+      placeholder: 'Ingresa la descripción',
+      validators: [
+        Validators.required,
+        Validators.maxLength(
+          BrandFieldLimits.MAX_LENGTH_BRAND_DESCRIPTION_FIELD
+        ),
+      ],
+    },
   ];
 
   toastMessage: string = '';

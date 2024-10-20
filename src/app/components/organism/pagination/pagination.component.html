@@ -1,6 +1,6 @@
 <nav class="pagination">
   <app-button
-    [size]="isLargeScreen() ? buttonSizeM : buttonSizeS"
+    
     [type]="buttonTypeSeCundary"
     [label]="buttonLabelPrev"
     [disabled]="currentPage === 1"
@@ -17,7 +17,7 @@
   </button>
 
   <app-button
-    [size]="isLargeScreen() ? buttonSizeM : buttonSizeS"
+   
     [label]="buttonLabelNext"
     [type]="buttonTypeSeCundary"
     (buttonClick)="nextPage()"

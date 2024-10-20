@@ -4,7 +4,7 @@ export const BrandErrorMessages = {
     `Máximo ${maxLength} caracteres permitidos.`,
 } as const;
 
-export const FieldLimits = {
+export const BrandFieldLimits = {
   MAX_LENGTH_BRAND_NAME_FIELD: 50,
   MAX_LENGTH_BRAND_DESCRIPTION_FIELD: 120,
 };

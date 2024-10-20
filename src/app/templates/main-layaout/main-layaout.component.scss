@@ -12,6 +12,10 @@ $mobile-padding: 1rem;
   &__body {
     display: flex;
     flex-direction: column;
+    padding-left: $mobile-padding;
+    padding-right: $mobile-padding;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
   }
   &__nav-bar {
     width: 100%;
@@ -47,7 +51,7 @@ $mobile-padding: 1rem;
     
     
       margin: 0 auto;
-      width: 60%;
+      width: 50%;
       padding: $content-padding;
     }
   }

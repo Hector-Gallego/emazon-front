@@ -10,4 +10,6 @@ import { TableHeader } from 'src/app/shared/interfaces/table-header.interface';
 export class DataTableComponent<T extends DataRow> {
   @Input() headers: TableHeader[] = [];
   @Input() data: T[] = [];
+  @Input() showByoptions: { value: string; label: string }[] = [];
+  @Input() sortByoptions: { value: string; label: string }[] = [];
 }

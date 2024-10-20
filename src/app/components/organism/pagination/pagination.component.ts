@@ -24,8 +24,6 @@ export class PaginationComponent implements OnInit, OnDestroy {
   @Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
 
   subscription: Subscription = new Subscription();
-  buttonSizeM = ButtonSize.M;
-  buttonSizeS = ButtonSize.S;
 
   butonTypePrimary = ButtonType.PRIMARY;
   buttonTypeSeCundary = ButtonType.SECUNDARY;
@@ -33,22 +31,12 @@ export class PaginationComponent implements OnInit, OnDestroy {
   buttonLabelNext: string = 'Siguiente';
   buttonLabelPrev: string = 'Anterior';
 
-  screenWidth: number;
-  constructor(private screenSizeService: ScreenSizeService) {
-    this.screenWidth = window.innerWidth;
-  }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
   ngOnInit(): void {
     this.validatePage();
-
-    const screenSizeSubscription =
-      this.screenSizeService.screenWidth$.subscribe((width) => {
-        this.screenWidth = width;
-      });
-    this.subscription.add(screenSizeSubscription);
   }
 
   get startPage(): number {
@@ -87,9 +75,5 @@ export class PaginationComponent implements OnInit, OnDestroy {
     if (this.currentPage < this.totalPages) {
       this.changePage(this.currentPage + 1);
     }
-  }
-
-  isLargeScreen(): boolean {
-    return this.screenSizeService.isLargeScreen(this.screenWidth);
   }
 }

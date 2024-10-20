@@ -7,6 +7,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { AtomsModule } from '../atoms/atoms.module';
 import { MoleculesModule } from '../molecules/molecules.module';
 import { FormComponent } from './form/form.component';
+import { TableToolBarComponent } from './table-tool-bar/table-tool-bar.component';
 
 
 @NgModule({
@@ -16,6 +17,8 @@ import { FormComponent } from './form/form.component';
     NavBarComponent,
     PaginationComponent,
     FormComponent,
+    TableToolBarComponent,
+    TableToolBarComponent
   ],
   imports: [SharedModule, AtomsModule, MoleculesModule],
   exports: [
@@ -24,6 +27,7 @@ import { FormComponent } from './form/form.component';
     NavBarComponent,
     PaginationComponent,
     FormComponent,
+    TableToolBarComponent
   ],
 })
 export class OrganismModule {}

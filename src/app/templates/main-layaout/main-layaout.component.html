@@ -1,8 +1,14 @@
 <div class="layout-container">
-  <app-header class="layout-container__header"></app-header>
+  <div lass="layout-container__header">
+    <app-header> </app-header>
+  </div>
+ 
 
   <div class="layout-container__body">
-    <app-nav-bar class="layout-container__nav-bar"></app-nav-bar>
+    <div class="layout-container__nav-bar">
+      <app-nav-bar ></app-nav-bar>
+    </div>
+    
     <div class="layout-container__content">
       <router-outlet></router-outlet>
     </div>

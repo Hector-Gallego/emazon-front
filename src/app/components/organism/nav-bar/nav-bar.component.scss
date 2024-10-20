@@ -1,20 +1,47 @@
-@import '/src/styles/_colors.scss';
-.nav-bar-container{
-    background-color: $white ;
-    padding: 0.5rem;
-    height: auto;
+@import '/src/styles/colors';
+.nav-bar-container {
     width: 100%;
-    align-items: center; 
-    padding: 1rem; 
-    display: flex;
-    flex-direction: column;
-    
-    
-}
-
-@media (max-width: 768px) {
-    .nav-bar-container{
-        width: 95%;
-        display: block;
+    display: block;
+   
+  
+    &__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+      color: $primary-color;
     }
-}
+  
+    &__menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-in-out;
+    }
+  
+    &__menu.open {
+      max-height: 500px; 
+    }
+  
+   
+  }
+
+  @media (min-width: 768px) {
+    .nav-bar-container {
+      background-color: $white;
+      padding: 0.5rem;
+      width: 100%;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      
+
+      &__menu-button{
+        display: none;
+      }
+
+      &__menu {
+        max-height: 50rem;
+      }
+    }
+
+  }

@@ -37,6 +37,7 @@ h4{
     font-size: 1.8rem;
     font-family: $font-primary;
     font-weight: $font-bold;
+    margin: 0;
 }
 
 p {
@@ -57,6 +58,11 @@ button {
 
 input,
 textarea {
+    font-family: $font-primary;
+    font-weight: $font-regular;
+}
+
+select, option {
     font-family: $font-primary;
     font-weight: $font-regular;
 }

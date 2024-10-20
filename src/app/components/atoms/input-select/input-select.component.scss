@@ -2,21 +2,25 @@
 .input-container {
     width: 100%;
     height: auto;
-    margin-bottom: 2rem;
-
-    select {
-        padding: 10px;
-        border: 1px solid $gray-scale-spacer-light;
-        border-radius: 4px;
-        width: 95%;
-        color: $gray-scale-black;
-
-        &:focus{
-            color: $gray-scale-black;
-            border-color: $primary-color; 
-            outline: none; 
-        }
     
+  
+    &__select {
+      padding: 1rem;
+      border: none;
+      color: $primary-color;
+      padding: 0.5rem;
+      margin-left: 1rem;
+     
+      &:focus {
+        color: $primary-color;
+        border-color: $primary-color;
+        outline: none;
+      }
+  
     }
+
+  }
+select, option{
+  color: $primary-color;
 
 }
