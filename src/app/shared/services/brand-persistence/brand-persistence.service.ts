@@ -13,7 +13,7 @@ import { PaginationResponse } from 'src/app/shared/interfaces/pagination-respons
   providedIn: 'root',
 })
 export class BrandPersistenceService {
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
   addBrand(brandData: Brand): Observable<ApiResponse> {
     const headers = { Authorization: environment.mockTokenAdmin };

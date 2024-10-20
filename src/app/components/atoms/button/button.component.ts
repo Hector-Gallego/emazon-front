@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { ButtonSize } from 'src/app/shared/enums/button-size.enum';
 import { ButtonType } from 'src/app/shared/enums/button-type.enum';
 
 @Component({

@@ -38,12 +38,12 @@ export class ListCategoriesPageComponent implements OnInit, OnDestroy {
   showByOptions = [
     { value: '5', label: '5' },
     { value: '10', label: '10' },
-    { value: '15', label: '15' }
+    { value: '15', label: '15' },
   ];
 
   sortByOptions = [
     { value: 'name:asc', label: 'nombre ASC' },
-    { value: 'name:desc', label: 'nombre DESC' }
+    { value: 'name:desc', label: 'nombre DESC' },
   ];
 
   currentPage: number = 1;
@@ -60,11 +60,11 @@ export class ListCategoriesPageComponent implements OnInit, OnDestroy {
   buttonTypeSecundary = ButtonType.SECUNDARY;
 
   constructor(
-    private categoryService: CategoryPersistenceService,
-    private router: Router,
-    private loader: LoaderService,
-    private toastService: ToastService,
-    private tableToolBarService: TableToolBarService
+    private readonly categoryService: CategoryPersistenceService,
+    private readonly router: Router,
+    private readonly loader: LoaderService,
+    private readonly toastService: ToastService,
+    private readonly tableToolBarService: TableToolBarService
   ) {}
 
   ngOnDestroy(): void {
@@ -113,11 +113,9 @@ export class ListCategoriesPageComponent implements OnInit, OnDestroy {
           this.totalPages = response.data.totalPages;
         },
         error: (error) => {
-          if (error && error.error) {
-            this.toastMessage = error.message;
-          } else {
-            this.toastMessage = ErrorMessages.GENERIC_ERROR_MESSAGE;
-          }
+          this.toastMessage =
+            error?.error?.message || ErrorMessages.GENERIC_ERROR_MESSAGE;
+
           this.toastType = StatesTypes.ERROR;
           this.toastService.triggerToast(
             this.toastMessage,

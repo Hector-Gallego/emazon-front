@@ -63,11 +63,11 @@ export class ListBrandsPageComponent implements OnInit, OnDestroy {
   buttonTypeSecundari = ButtonType.SECUNDARY;
 
   constructor(
-    private brandService: BrandPersistenceService,
-    private router: Router,
-    private loader: LoaderService,
-    private toastService: ToastService,
-    private tableToolBarService: TableToolBarService
+    private readonly brandService: BrandPersistenceService,
+    private readonly router: Router,
+    private readonly loader: LoaderService,
+    private readonly toastService: ToastService,
+    private readonly tableToolBarService: TableToolBarService
   ) {
     
   }
@@ -118,12 +118,9 @@ export class ListBrandsPageComponent implements OnInit, OnDestroy {
         
         },
         error: (error) => {
-          if (error && error.error) {
-            this.toastMessage = error.message;
-          } else {
-            this.toastMessage = ErrorMessages.GENERIC_ERROR_MESSAGE;
-          }
-
+          
+          this.toastMessage = error?.error?.message || ErrorMessages.GENERIC_ERROR_MESSAGE;
+          
           this.toastType = StatesTypes.ERROR;
           this.toastService.triggerToast(
             this.toastMessage,

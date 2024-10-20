@@ -8,8 +8,8 @@ export class TableToolBarService {
 
   constructor() { }
 
-  private showBySubject = new BehaviorSubject<string>('5');
-  private sortBySubject = new BehaviorSubject<string>('name:asc');
+  private readonly showBySubject = new BehaviorSubject<string>('5');
+  private readonly sortBySubject = new BehaviorSubject<string>('name:asc');
 
   showBy$ = this.showBySubject.asObservable();
   sortBy$ = this.sortBySubject.asObservable();

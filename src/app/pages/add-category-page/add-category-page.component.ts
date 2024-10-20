@@ -21,9 +21,9 @@ import { InputType } from 'src/app/shared/enums/inputs-type.enum';
 })
 export class AddCategoryPageComponent implements OnDestroy {
   constructor(
-    private categoryService: CategoryPersistenceService,
-    private loaderService: LoaderService,
-    private toastService: ToastService
+    private readonly categoryService: CategoryPersistenceService,
+    private readonly loaderService: LoaderService,
+    private readonly toastService: ToastService
   ) {}
 
   ngOnDestroy(): void {
@@ -31,25 +31,23 @@ export class AddCategoryPageComponent implements OnDestroy {
   }
 
   categoryFields: FormField[] = [
-    { 
-      label: 'Nombre', 
-      formControlName: 'name', 
-      type: InputType.INPUT, 
-      placeholder: 'Ingresa el nombre', 
-      validators: [Validators.required, Validators.maxLength(50)] 
+    {
+      label: 'Nombre',
+      formControlName: 'name',
+      type: InputType.INPUT,
+      placeholder: 'Ingresa el nombre',
+      validators: [Validators.required, Validators.maxLength(50)],
     },
-    { 
-      label: 'Descripción', 
-      formControlName: 'description', 
-      type: InputType.TEXTAREA, 
-      placeholder: 'Ingresa la descripción', 
-      validators: [Validators.required, Validators.maxLength(60)] 
-    }
-    
+    {
+      label: 'Descripción',
+      formControlName: 'description',
+      type: InputType.TEXTAREA,
+      placeholder: 'Ingresa la descripción',
+      validators: [Validators.required, Validators.maxLength(60)],
+    },
   ];
-  
 
-  private subscription = new Subscription();
+  private readonly subscription = new Subscription();
   @ViewChild(FormComponent) categoryForm!: FormComponent;
 
   toastMessage: string = '';
@@ -75,11 +73,8 @@ export class AddCategoryPageComponent implements OnDestroy {
           this.loaderService.hide();
         },
         error: (error) => {
-          if (error.error && error.error.message) {
-            this.toastMessage = error.error.message;
-          } else {
-            this.toastMessage = ErrorMessages.GENERIC_ERROR_MESSAGE;
-          }
+          this.toastMessage =
+            error?.error?.message || ErrorMessages.GENERIC_ERROR_MESSAGE;
 
           this.toastType = StatesTypes.ERROR;
           this.toastService.triggerToast(

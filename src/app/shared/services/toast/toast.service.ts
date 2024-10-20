@@ -9,7 +9,7 @@ import { ToastData } from '../../interfaces/toast-data.interface';
 export class ToastService {
   constructor() {}
 
-  private toastSubject = new Subject<ToastData>();
+  private readonly toastSubject = new Subject<ToastData>();
 
   toastState = this.toastSubject.asObservable();
 

@@ -1,16 +1,14 @@
 import {
   Component,
-  HostListener,
   Input,
   OnDestroy,
   OnInit,
   Output,
+  EventEmitter
 } from '@angular/core';
-import { EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ButtonSize } from 'src/app/shared/enums/button-size.enum';
 import { ButtonType } from 'src/app/shared/enums/button-type.enum';
-import { ScreenSizeService } from 'src/app/shared/services/screen-size/screen-size.service';
+
 
 @Component({
   selector: 'app-pagination',

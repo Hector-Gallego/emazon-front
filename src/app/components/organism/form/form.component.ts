@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validator, ValidatorFn } from '@angular/forms';
+import { FormBuilder, FormGroup, ValidatorFn } from '@angular/forms';
 import { CategoryErrorMessages } from 'src/app/shared/constants/category.constants';
 import { InputState } from 'src/app/shared/enums/input-state.enum';
 import { InputType } from 'src/app/shared/enums/inputs-type.enum';
@@ -28,7 +28,7 @@ export class FormComponent implements OnInit {
 
   formGroup: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private readonly fb: FormBuilder) {
     this.formGroup = this.fb.group({});
   }
 

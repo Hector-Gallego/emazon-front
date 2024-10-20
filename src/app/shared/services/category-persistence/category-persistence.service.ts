@@ -12,7 +12,7 @@ import { PaginationResponse } from 'src/app/shared/interfaces/pagination-respons
   providedIn: 'root',
 })
 export class CategoryPersistenceService {
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
   addCategory(categoryData: Category): Observable<ApiResponse> {
     const headers = { Authorization: environment.mockTokenAdmin };

@@ -22,9 +22,9 @@ import { InputType } from 'src/app/shared/enums/inputs-type.enum';
 })
 export class AddBrandPageComponent implements OnDestroy {
   constructor(
-    private brandService: BrandPersistenceService,
-    private loaderService: LoaderService,
-    private toastService: ToastService
+    private readonly brandService: BrandPersistenceService,
+    private readonly loaderService: LoaderService,
+    private readonly toastService: ToastService
   ) {}
 
   ngOnDestroy(): void {
@@ -62,7 +62,7 @@ export class AddBrandPageComponent implements OnDestroy {
   toastType: StatesTypes = StatesTypes.SUCCESS;
   toastDuration: number = 10000;
 
-  private subscription = new Subscription();
+  private readonly subscription = new Subscription();
 
   onFormSubmit(brandDataForm: Brand) {
     this.loaderService.show();
@@ -83,11 +83,8 @@ export class AddBrandPageComponent implements OnDestroy {
           this.loaderService.hide();
         },
         error: (error) => {
-          if (error.error && error.error.message) {
-            this.toastMessage = error.error.message;
-          } else {
-            this.toastMessage = ErrorMessages.GENERIC_ERROR_MESSAGE;
-          }
+          this.toastMessage =
+            error?.error?.message || ErrorMessages.GENERIC_ERROR_MESSAGE;
 
           this.toastType = StatesTypes.ERROR;
           this.toastService.triggerToast(
