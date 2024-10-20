@@ -37,8 +37,9 @@
     color: $primary-color;
 
     &:hover {
-      color: $hover-color;
+      color: $white;
       border: 1px solid $hover-color;
+      background-color: $primary-color;
     }
 
     &:active {

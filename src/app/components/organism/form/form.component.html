@@ -10,7 +10,7 @@
     <div class="form__input-section" *ngFor="let field of fields">
       <app-label [label]="field.label"></app-label>
 
-      <ng-container *ngIf="field.type === 'input' || field.type === inputTypeTextarea">
+      <ng-container *ngIf="field.type === inputTypeInput || field.type === inputTypeTextarea">
         <app-input
           placeholder="{{ field.placeholder }}"
           formControlName="{{ field.formControlName }}"
