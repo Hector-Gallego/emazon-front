@@ -84,4 +84,16 @@ describe('NavBarComponent', () => {
 
     expect(routerMock.navigate).toHaveBeenCalledWith([testRoute]);
   });
+
+  it('debería cambiar el valor de isSidebarOpen de false a true cuando toggleSidebar() es llamado', () => {
+    component.isSidebarOpen = false;
+    component.toggleSidebar();
+    expect(component.isSidebarOpen).toBe(true);
+  });
+
+  it('debería cambiar el valor de isSidebarOpen de true a false cuando toggleSidebar() es llamado', () => {
+    component.isSidebarOpen = true;
+    component.toggleSidebar();
+    expect(component.isSidebarOpen).toBe(false);
+  });
 });

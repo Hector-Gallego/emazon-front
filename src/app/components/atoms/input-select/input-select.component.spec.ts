@@ -17,7 +17,19 @@ describe('PageSizeSelectComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('debería ser creado', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('debe emitir el valor seleccionado cuando se llame a onSelectionChange', () => {
+   
+    jest.spyOn(component.selectionChange, 'emit');
+
+    const event = {
+      target: { value: 'testValue' },
+    } as unknown as Event;
+
+    component.onSelectionChange(event);
+    expect(component.selectionChange.emit).toHaveBeenCalledWith('testValue');
   });
 });

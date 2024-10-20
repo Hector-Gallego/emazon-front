@@ -1,5 +1,5 @@
 import { Component, OnDestroy, ViewChild } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { finalize, Subscription } from 'rxjs';
 import { ApiResponse } from 'src/app/shared/interfaces/api-response.interface';
 import { BrandPersistenceService } from 'src/app/shared/services/brand-persistence/brand-persistence.service';
 import {
@@ -71,6 +71,7 @@ export class AddBrandPageComponent implements OnDestroy {
     this.loaderService.show();
     const addBrandSubscription = this.brandService
       .addBrand(brandDataForm)
+      .pipe(finalize(() => this.loaderService.hide()))
       .subscribe({
         next: (response: ApiResponse) => {
           this.toastMessage = response.message;
@@ -83,7 +84,6 @@ export class AddBrandPageComponent implements OnDestroy {
           );
 
           this.brandForm.resetForm();
-          this.loaderService.hide();
         },
         error: (error) => {
           this.toastMessage =
@@ -95,10 +95,6 @@ export class AddBrandPageComponent implements OnDestroy {
             this.toastType,
             this.toastDuration
           );
-          this.loaderService.hide();
-        },
-        complete: () => {
-          this.loaderService.hide();
         },
       });
 

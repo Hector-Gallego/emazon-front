@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn } from '@angular/forms';
-import { CategoryErrorMessages } from 'src/app/shared/constants/category.constants';
+import { ErrorMessages } from 'src/app/shared/constants/commonConstants';
 import { InputState } from 'src/app/shared/enums/input-state.enum';
 import { InputType } from 'src/app/shared/enums/inputs-type.enum';
 import { Brand } from 'src/app/shared/interfaces/brand.interface';
@@ -56,10 +56,10 @@ export class FormComponent implements OnInit {
     const control = this.formGroup.get(controlName);
     if (control?.touched && control?.invalid) {
       if (control.errors?.['required']) {
-        return CategoryErrorMessages.REQUIERED_ERROR_MESSAGE;
+        return ErrorMessages.REQUIERED_ERROR_MESSAGE;
       }
       if (control.errors?.['maxlength']) {
-        return CategoryErrorMessages.MAX_LENGTH_ERROR_MESSAGE(
+        return ErrorMessages.MAX_LENGTH_ERROR_MESSAGE(
           control.errors['maxlength'].requiredLength
         );
       }

@@ -8,7 +8,7 @@ import {
 } from 'src/app/shared/constants/commonConstants';
 import { ApiResponse } from 'src/app/shared/interfaces/api-response.interface';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
-import { Subscription } from 'rxjs';
+import { finalize, Subscription } from 'rxjs';
 import { FormField } from 'src/app/shared/interfaces/form-field.interface';
 import { Validators } from '@angular/forms';
 import { Category } from 'src/app/shared/interfaces/category.interface';
@@ -61,6 +61,7 @@ export class AddCategoryPageComponent implements OnDestroy {
     this.loaderService.show();
     const addCategorySubscription = this.categoryService
       .addCategory(formData)
+      .pipe(finalize(() => this.loaderService.hide()))
       .subscribe({
         next: (response: ApiResponse) => {
           this.toastMessage = response.message;
@@ -73,7 +74,6 @@ export class AddCategoryPageComponent implements OnDestroy {
           );
 
           this.categoryForm.resetForm();
-          this.loaderService.hide();
         },
         error: (error) => {
           this.toastMessage =
@@ -85,10 +85,6 @@ export class AddCategoryPageComponent implements OnDestroy {
             this.toastType,
             this.toastDuration
           );
-          this.loaderService.hide();
-        },
-        complete: () => {
-          this.loaderService.hide();
         },
       });
 

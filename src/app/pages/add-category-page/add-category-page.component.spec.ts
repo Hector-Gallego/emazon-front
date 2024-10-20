@@ -94,7 +94,7 @@ describe('AddCategoryPageComponent', () => {
       StatesTypes.SUCCESS,
       component.toastDuration
     );
-    expect(loaderServiceSpy.hide).toHaveBeenCalledTimes(2);
+    expect(loaderServiceSpy.hide).toHaveBeenCalledTimes(1);
   });
 
   it('debería manejar errores en onFormSubmit()', () => {

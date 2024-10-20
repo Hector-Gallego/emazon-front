@@ -1,13 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormComponent } from './form.component';
-import { ReactiveFormsModule, FormsModule, Validators } from '@angular/forms';
-import {
-  CategoryFieldLimits,
-  CategoryErrorMessages,
-} from 'src/app/shared/constants/category.constants';
+import { ReactiveFormsModule, FormsModule, Validators, FormControl } from '@angular/forms';
+import { CategoryFieldLimits } from 'src/app/shared/constants/category.constants';
 import { AtomsModule } from '../../atoms/atoms.module';
 import { InputType } from 'src/app/shared/enums/inputs-type.enum';
 import { InputContentType } from 'src/app/shared/enums/input-content-type.enum';
+import { ErrorMessages } from 'src/app/shared/constants/commonConstants';
 
 describe('CategoryFormComponent', () => {
   let component: FormComponent;
@@ -68,9 +66,7 @@ describe('CategoryFormComponent', () => {
     component.formGroup.get('name')?.setValue('');
     component.formGroup.get('name')?.markAsTouched();
     const errorNameMessage = component.getErrorMessage('name');
-    expect(errorNameMessage).toBe(
-      CategoryErrorMessages.REQUIERED_ERROR_MESSAGE
-    );
+    expect(errorNameMessage).toBe(ErrorMessages.REQUIERED_ERROR_MESSAGE);
   });
 
   it('debería mostrar mensaje de error de longitud para el campo "name"', () => {
@@ -82,7 +78,7 @@ describe('CategoryFormComponent', () => {
 
     const errorMessage = component.getErrorMessage('name');
     expect(errorMessage).toBe(
-      CategoryErrorMessages.MAX_LENGTH_ERROR_MESSAGE(
+      ErrorMessages.MAX_LENGTH_ERROR_MESSAGE(
         CategoryFieldLimits.MAX_LENGTH_CATEGORY_NAME_FIELD
       )
     );
@@ -108,5 +104,15 @@ describe('CategoryFormComponent', () => {
     component.formGroup.get('name')?.setValue('Categoria 1');
     component.resetForm();
     expect(component.formGroup.get('name')?.value).toBeNull();
+  });
+
+  it('debe actualizar el valor del FormControl con los valores seleccionados', () => {
+    const selectedValues = ['value1', 'value2'];
+    const formControlName = 'options';
+
+    component.formGroup.addControl(formControlName, new FormControl([]));
+    component.onSelectionChange(selectedValues, formControlName);
+
+    expect(component.formGroup.get(formControlName)?.value).toEqual(selectedValues);
   });
 });
