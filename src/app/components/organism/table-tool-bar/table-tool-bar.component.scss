@@ -17,4 +17,11 @@
 
 }
 
+@media (min-width: 768px){
+    .table-tool-bar{
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
     
