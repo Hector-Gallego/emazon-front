@@ -7,10 +7,9 @@
     ></app-button>
   </section>
 
+  <app-table-tool-bar [showByoptions]="showByOptions" [sortByoptions]="sortByOptions"></app-table-tool-bar>
   <section class="list-data-container__data">
     <app-data-table
-      [sortByoptions]="sortByOptions"
-      [showByoptions]="showByOptions"
       [data]="categories"
       [headers]="headers"
     ></app-data-table>
