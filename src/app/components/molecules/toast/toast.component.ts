@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import {
+  IconDefinition,
   faCheckCircle,
   faExclamationTriangle,
   faTimesCircle,
@@ -17,8 +17,8 @@ import { ToastService } from 'src/app/shared/services/toast/toast.service';
   styleUrls: ['./toast.component.scss'],
 })
 export class ToastComponent implements OnInit, OnDestroy {
-  private subscription = new Subscription();
-  constructor(private toastService: ToastService) {}
+  private readonly subscription = new Subscription();
+  constructor(private readonly toastService: ToastService) {}
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

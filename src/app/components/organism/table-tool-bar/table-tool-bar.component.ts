@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { TableToolBarService } from 'src/app/shared/services/table-tool-bar/table-tool-bar.service';
 
 @Component({
@@ -7,7 +7,7 @@ import { TableToolBarService } from 'src/app/shared/services/table-tool-bar/tabl
   styleUrls: ['./table-tool-bar.component.scss'],
 })
 export class TableToolBarComponent {
-  constructor(private tableToolBarService: TableToolBarService) {}
+  constructor(private readonly tableToolBarService: TableToolBarService) {}
   @Input() showByoptions: { value: string; label: string }[] = [];
   @Input() sortByoptions: { value: string; label: string }[] = [];
 
