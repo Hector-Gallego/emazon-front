@@ -1,16 +1,15 @@
 import {
   ComponentFixture,
-  fakeAsync,
   TestBed,
-  tick,
+
 } from '@angular/core/testing';
 import { ToastComponent } from './toast.component';
 import { By } from '@angular/platform-browser';
 import { StatesTypes } from 'src/app/shared/constants/commonConstants';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { ToastData } from 'src/app/shared/interfaces/toast-data.interface';
-import { DesignSystemModule } from '../../../design-system/design-system.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { AtomsModule } from '../../atoms/atoms.module';
 
 describe('ToastComponent', () => {
   let component: ToastComponent;
@@ -22,7 +21,7 @@ describe('ToastComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ToastComponent],
       providers: [ToastService],
-      imports: [DesignSystemModule, SharedModule],
+      imports: [SharedModule, AtomsModule ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ToastComponent);

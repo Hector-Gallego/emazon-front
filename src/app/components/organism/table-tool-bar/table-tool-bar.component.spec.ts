@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TableToolBarComponent } from './table-tool-bar.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { AtomsModule } from '../../atoms/atoms.module';
 
 describe('TableToolBarComponent', () => {
   let component: TableToolBarComponent;
@@ -8,7 +10,8 @@ describe('TableToolBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TableToolBarComponent ]
+      declarations: [ TableToolBarComponent ],
+      imports: [SharedModule, AtomsModule]
     })
     .compileComponents();
 

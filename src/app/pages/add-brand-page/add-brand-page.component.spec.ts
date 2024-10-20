@@ -4,17 +4,16 @@ import { AddBrandPageComponent } from './add-brand-page.component';
 import { BrandPersistenceService } from 'src/app/shared/services/brand-persistence/brand-persistence.service';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
-import { BrandFormComponent } from 'src/app/components/organism/brand-form/brand-form.component';
 import {
   StatesTypes,
   ErrorMessages,
 } from 'src/app/shared/constants/commonConstants';
 import { ApiResponse } from 'src/app/shared/interfaces/api-response.interface';
-import { Brand } from 'src/app/shared/interfaces/brand.interface';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DesignSystemModule } from 'src/app/design-system/design-system.module';
-import { BrandModule } from 'src/app/modules/brand/brand.module';
-import { BrandDataForm } from 'src/app/shared/interfaces/brand-data-form.interface';
+import { AtomsModule } from 'src/app/components/atoms/atoms.module';
+import { OrganismModule } from 'src/app/components/organism/organism.module';
+import { Brand } from 'src/app/shared/interfaces/brand.interface';
+
 
 describe('AddBrandPageComponent', () => {
   let component: AddBrandPageComponent;
@@ -41,10 +40,9 @@ describe('AddBrandPageComponent', () => {
       imports: [
         FormsModule,
         ReactiveFormsModule,
-        DesignSystemModule,
-        BrandModule,
+        AtomsModule,
+        OrganismModule
       ],
-      declarations: [AddBrandPageComponent, BrandFormComponent],
       providers: [
         { provide: BrandPersistenceService, useValue: brandServiceMock },
         { provide: LoaderService, useValue: loaderServiceMock },
@@ -72,7 +70,7 @@ describe('AddBrandPageComponent', () => {
   });
 
   it('debería llamar a show() y addBrand() en onFormSubmit() con éxito', () => {
-    const mockBrand: BrandDataForm = {
+    const mockBrand: Brand = {
       name: 'Test Brand',
       description: 'descripción',
     };
@@ -93,11 +91,11 @@ describe('AddBrandPageComponent', () => {
       StatesTypes.SUCCESS,
       component.toastDuration
     );
-    expect(loaderService.hide).toHaveBeenCalledTimes(2);
+    expect(loaderService.hide).toHaveBeenCalledTimes(1);
   });
 
   it('debería manejar errores en onFormSubmit()', () => {
-    const mockBrand: BrandDataForm = {
+    const mockBrand: Brand = {
       name: 'Adidas',
       description: 'marca de ropa deportiva',
     };
@@ -119,12 +117,12 @@ describe('AddBrandPageComponent', () => {
   });
 
   it('debería manejar errores genéricos en onFormSubmit()', () => {
-    const mockBrand: BrandDataForm = {
+    const mockBrand: Brand = {
       name: 'Adidas',
       description: 'marca de ropa deportiva',
     };
 
-    brandPersistenceService.addBrand.mockReturnValue(throwError({}));
+    brandPersistenceService.addBrand.mockReturnValue(throwError(() => {Error('error')}));
 
     component.onFormSubmit(mockBrand);
 

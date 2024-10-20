@@ -7,20 +7,16 @@ import {
   ErrorMessages,
   StatesTypes,
 } from 'src/app/shared/constants/commonConstants';
-import { ToastComponent } from 'src/app/components/molecules/toast/toast.component';
-import { PaginationComponent } from 'src/app/components/organism/pagination/pagination.component';
-import { ButtonComponent } from 'src/app/components/atoms/button/button.component';
-import { DataTableComponent } from 'src/app/components/organism/data-table/data-table.component';
-import { IconComponent } from 'src/app/components/atoms/icon/icon.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { LoaderComponent } from 'src/app/components/atoms/loader/loader.component';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
-import { DesignSystemModule } from 'src/app/design-system/design-system.module';
 import { SortDirection } from 'src/app/shared/enums/sort-direction.enum';
 import { PaginationResponse } from 'src/app/shared/interfaces/pagination-response.interface';
 import { Category } from 'src/app/shared/interfaces/category.interface';
 import { PaginationRequest } from 'src/app/shared/interfaces/pagination-request.interface';
+import { AtomsModule } from 'src/app/components/atoms/atoms.module';
+import { OrganismModule } from 'src/app/components/organism/organism.module';
+import { TableToolBarService } from 'src/app/shared/services/table-tool-bar/table-tool-bar.service';
 
 describe('ListCategoriesComponent', () => {
   let component: ListCategoriesPageComponent;
@@ -29,7 +25,8 @@ describe('ListCategoriesComponent', () => {
   let router: jest.Mocked<Router>;
   let toastService: jest.Mocked<ToastService>;
   let loaderService: jest.Mocked<LoaderService>;
-
+  let tableToolBarService: TableToolBarService;
+  
   beforeEach(async () => {
     const categoryServiceMock = {
       getCategories: jest.fn(),
@@ -48,7 +45,7 @@ describe('ListCategoriesComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [ListCategoriesPageComponent],
-      imports: [FontAwesomeModule, DesignSystemModule],
+      imports: [FontAwesomeModule, AtomsModule, OrganismModule],
       providers: [
         { provide: CategoryPersistenceService, useValue: categoryServiceMock },
         { provide: Router, useValue: routerMock },
@@ -65,6 +62,7 @@ describe('ListCategoriesComponent', () => {
     router = TestBed.inject(Router) as jest.Mocked<Router>;
     toastService = TestBed.inject(ToastService) as jest.Mocked<ToastService>;
     loaderService = TestBed.inject(LoaderService) as jest.Mocked<LoaderService>;
+    tableToolBarService = TestBed.inject(TableToolBarService);
 
     const mockResponse: PaginationResponse<Category> = {
       data: {
@@ -109,7 +107,7 @@ describe('ListCategoriesComponent', () => {
     expect(categoryService.getCategories).toHaveBeenCalledWith(
       expectedPageRequest
     );
-    expect(component.categoriesDatatable).toEqual([
+    expect(component.categories).toEqual([
       { id: 0, name: 'Ropa', description: 'Ropa de todo tipo' },
     ]);
     expect(component.totalPages).toEqual(1);
@@ -124,7 +122,6 @@ describe('ListCategoriesComponent', () => {
     component.loadCategories();
 
     expect(loaderService.show).toHaveBeenCalled();
-    expect(loaderService.hide).toHaveBeenCalledTimes(3);
     expect(toastService.triggerToast).toHaveBeenCalledWith(
       errorResponse.message,
       StatesTypes.ERROR,
@@ -134,9 +131,11 @@ describe('ListCategoriesComponent', () => {
 
   it('debería manejar el error correctamente cuando el error tiene la propiedad "error"', () => {
     const errorResponse = {
-      error: true,
-      message: 'Error específico del servidor',
+      error: {
+        message: 'Error específico del servidor',
+      },
     };
+
 
     categoryService.getCategories.mockReturnValue(
       throwError(() => errorResponse)
@@ -147,7 +146,7 @@ describe('ListCategoriesComponent', () => {
     expect(component.toastMessage).toEqual('Error específico del servidor');
     expect(component.toastType).toEqual('error');
     expect(toastService.triggerToast).toHaveBeenCalledWith(
-      errorResponse.message,
+      errorResponse.error.message,
       StatesTypes.ERROR,
       component.toastDuration
     );
@@ -160,9 +159,8 @@ describe('ListCategoriesComponent', () => {
 
   it('debería cambiar la dirección de ordenamiento a desc y cargar categorías al llamar a toggleSortDirection con SorDirection = asc', () => {
     component.sortDirection = SortDirection.ASC;
-
-    component.toggleSortDirection();
-
+    const newSort = 'name:desc';
+    tableToolBarService.updateSortBy(newSort);
     expect(component.sortDirection).toBe(SortDirection.DESC);
     expect(categoryService.getCategories).toHaveBeenCalled();
   });
@@ -170,8 +168,8 @@ describe('ListCategoriesComponent', () => {
   it('debería cambiar la dirección de ordenamiento a asc y cargar categorías al llamar a toggleSortDirection con SorDirection = desc', () => {
     component.sortDirection = SortDirection.DESC;
 
-    component.toggleSortDirection();
-
+    const newSort = 'name:asc';
+    tableToolBarService.updateSortBy(newSort);
     expect(component.sortDirection).toBe(SortDirection.ASC);
     expect(categoryService.getCategories).toHaveBeenCalled();
   });

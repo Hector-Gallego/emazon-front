@@ -11,9 +11,9 @@ import {
   StatesTypes,
 } from 'src/app/shared/constants/commonConstants';
 import { ApiResponse } from 'src/app/shared/interfaces/api-response.interface';
-import { DesignSystemModule } from 'src/app/design-system/design-system.module';
-import { CategoryModule } from 'src/app/modules/category/category.module';
-import { CategoryDataForm } from 'src/app/shared/interfaces/category-data-form.interface';
+import { AtomsModule } from 'src/app/components/atoms/atoms.module';
+import { OrganismModule } from 'src/app/components/organism/organism.module';
+import { Category } from 'src/app/shared/interfaces/category.interface';
 
 describe('AddCategoryPageComponent', () => {
   let component: AddCategoryPageComponent;
@@ -40,8 +40,8 @@ describe('AddCategoryPageComponent', () => {
       imports: [
         FormsModule,
         ReactiveFormsModule,
-        DesignSystemModule,
-        CategoryModule,
+        AtomsModule,
+        OrganismModule
       ],
       declarations: [AddCategoryPageComponent],
       providers: [
@@ -73,7 +73,7 @@ describe('AddCategoryPageComponent', () => {
   });
 
   it('debería llamar a show() y addCategory() en onFormSubmit() con éxito', () => {
-    const mockCategory: CategoryDataForm = {
+    const mockCategory: Category = {
       name: 'ropa',
       description: 'ropa deportiva',
     };
@@ -98,7 +98,7 @@ describe('AddCategoryPageComponent', () => {
   });
 
   it('debería manejar errores en onFormSubmit()', () => {
-    const mockCategory: CategoryDataForm = {
+    const mockCategory: Category = {
       name: 'ropa',
       description: 'ropa deportiva',
     };
@@ -123,12 +123,12 @@ describe('AddCategoryPageComponent', () => {
   });
 
   it('debería manejar errores genéricos en onFormSubmit()', () => {
-    const mockCategory: CategoryDataForm = {
+    const mockCategory: Category = {
       name: 'ropa',
       description: 'ropa deportiva',
     };
 
-    categoryServiceSpy.addCategory.mockReturnValue(throwError({}));
+    categoryServiceSpy.addCategory.mockReturnValue(throwError(() => Error('error')));
 
     component.onFormSubmit(mockCategory);
 

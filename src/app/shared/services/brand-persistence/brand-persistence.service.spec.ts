@@ -8,7 +8,8 @@ import {
 import { environment } from 'src/environments/environment';
 import { BrandValuesConstants } from 'src/app/shared/constants/brand.constant';
 import { PaginationRequest } from '../../interfaces/pagination-request.interface';
-import { BrandDataForm } from '../../interfaces/brand-data-form.interface';
+import { Brand } from '../../interfaces/brand.interface';
+
 
 describe('BrandPersistenceService', () => {
   let service: BrandPersistenceService;
@@ -32,7 +33,7 @@ describe('BrandPersistenceService', () => {
   });
 
   it('debería enviar una solicitud POST para añadir una marca', () => {
-    const mockCategoryData: BrandDataForm = {
+    const mockCategoryData: Brand = {
       name: 'Sony',
       description: 'Marca de tecnología',
     };

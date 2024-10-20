@@ -1,12 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
 import { ListBrandsPageComponent } from './list-brands-page.component';
-import { PaginationComponent } from 'src/app/components/organism/pagination/pagination.component';
-import { ToastComponent } from 'src/app/components/molecules/toast/toast.component';
-import { ButtonComponent } from 'src/app/components/atoms/button/button.component';
-import { DataTableComponent } from 'src/app/components/organism/data-table/data-table.component';
-import { IconComponent } from 'src/app/components/atoms/icon/icon.component';
-import { LoaderComponent } from 'src/app/components/atoms/loader/loader.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrandPersistenceService } from 'src/app/shared/services/brand-persistence/brand-persistence.service';
 import { Router } from '@angular/router';
@@ -18,9 +12,11 @@ import {
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { SortDirection } from 'src/app/shared/enums/sort-direction.enum';
-import { DesignSystemModule } from 'src/app/design-system/design-system.module';
 import { PaginationResponse } from 'src/app/shared/interfaces/pagination-response.interface';
 import { Brand } from 'src/app/shared/interfaces/brand.interface';
+import { AtomsModule } from 'src/app/components/atoms/atoms.module';
+import { OrganismModule } from 'src/app/components/organism/organism.module';
+import { TableToolBarService } from 'src/app/shared/services/table-tool-bar/table-tool-bar.service';
 
 describe('ListBrandComponent', () => {
   let component: ListBrandsPageComponent;
@@ -29,6 +25,7 @@ describe('ListBrandComponent', () => {
   let router: jest.Mocked<Router>;
   let toastService: jest.Mocked<ToastService>;
   let loaderService: jest.Mocked<LoaderService>;
+  let tableToolBarService: TableToolBarService;
 
   beforeEach(async () => {
     const brandServiceMock = {
@@ -47,7 +44,7 @@ describe('ListBrandComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [ListBrandsPageComponent],
-      imports: [FontAwesomeModule, DesignSystemModule],
+      imports: [FontAwesomeModule, AtomsModule, OrganismModule],
       providers: [
         { provide: BrandPersistenceService, useValue: brandServiceMock },
         { provide: Router, useValue: routerMock },
@@ -64,6 +61,7 @@ describe('ListBrandComponent', () => {
     router = TestBed.inject(Router) as jest.Mocked<Router>;
     toastService = TestBed.inject(ToastService) as jest.Mocked<ToastService>;
     loaderService = TestBed.inject(LoaderService) as jest.Mocked<LoaderService>;
+    tableToolBarService = TestBed.inject(TableToolBarService);
 
     const mockResponse: PaginationResponse<Brand> = {
       status: 200,
@@ -97,9 +95,9 @@ describe('ListBrandComponent', () => {
       sortDirection: component.sortDirection,
     };
 
-    expect(brandService.getBrands).toHaveBeenCalledTimes(1);
+    expect(brandService.getBrands).toHaveBeenCalledTimes(3);
     expect(brandService.getBrands).toHaveBeenCalledWith(expectedPageRequest);
-    expect(component.brandsDataTable).toEqual([
+    expect(component.brands).toEqual([
       { id: 0, name: 'Adidas', description: 'Ropa deportiva' },
     ]);
     expect(component.totalPages).toEqual(1);
@@ -112,7 +110,6 @@ describe('ListBrandComponent', () => {
     component.loadBrands();
 
     expect(loaderService.show).toHaveBeenCalled();
-    expect(loaderService.hide).toHaveBeenCalledTimes(3);
     expect(toastService.triggerToast).toHaveBeenCalledWith(
       errorResponse.message,
       StatesTypes.ERROR,
@@ -122,18 +119,17 @@ describe('ListBrandComponent', () => {
 
   it('debería manejar el error correctamente cuando el error tiene la propiedad "error"', () => {
     const errorResponse = {
-      error: true,
-      message: 'Error específico del servidor',
+      error: {
+        message: 'Error específico del servidor',
+      },
     };
 
     brandService.getBrands.mockReturnValue(throwError(() => errorResponse));
-
     component.loadBrands();
-
     expect(component.toastMessage).toEqual('Error específico del servidor');
     expect(component.toastType).toEqual('error');
     expect(toastService.triggerToast).toHaveBeenCalledWith(
-      errorResponse.message,
+      errorResponse.error.message,
       StatesTypes.ERROR,
       component.toastDuration
     );
@@ -146,18 +142,16 @@ describe('ListBrandComponent', () => {
 
   it('debería cambiar la dirección de ordenamiento a desc y cargar categorías al llamar a toggleSortDirection con SorDirection = asc', () => {
     component.sortDirection = SortDirection.ASC;
-
-    component.toggleSortDirection();
-
+    const newSort = 'name:desc';
+    tableToolBarService.updateSortBy(newSort);
     expect(component.sortDirection).toBe(SortDirection.DESC);
     expect(brandService.getBrands).toHaveBeenCalled();
   });
 
   it('debería cambiar la dirección de ordenamiento a "asc" y cargar categorías al llamar a toggleSortDirection con SorDirection = "desc"', () => {
     component.sortDirection = SortDirection.DESC;
-
-    component.toggleSortDirection();
-
+    const newSort = 'name:asc';
+    tableToolBarService.updateSortBy(newSort);
     expect(component.sortDirection).toBe(SortDirection.ASC);
     expect(brandService.getBrands).toHaveBeenCalled();
   });

@@ -5,8 +5,8 @@ import {
 } from '@angular/common/http/testing';
 import { CategoryPersistenceService } from './category-persistence.service';
 import { environment } from 'src/environments/environment';
-import { CategoryDataForm } from '../../interfaces/category-data-form.interface';
 import { PaginationRequest } from 'src/app/shared/interfaces/pagination-request.interface';
+import { Category } from '../../interfaces/category.interface';
 
 describe('CategoryPersistenceService', () => {
   let service: CategoryPersistenceService;
@@ -30,7 +30,7 @@ describe('CategoryPersistenceService', () => {
   });
 
   it('debería enviar una solicitud POST para añadir una categoría', () => {
-    const mockCategoryData: CategoryDataForm = {
+    const mockCategoryData: Category = {
       name: 'Electrónica',
       description: 'Dispositivos y accesorios',
     };
