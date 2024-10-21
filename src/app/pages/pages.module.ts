@@ -8,6 +8,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { OrganismModule } from '../components/organism/organism.module';
 import { AtomsModule } from '../components/atoms/atoms.module';
 import { MoleculesModule } from '../components/molecules/molecules.module';
+import { AddArticlePageComponent } from './add-article-page/add-article-page.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { MoleculesModule } from '../components/molecules/molecules.module';
     AddCategoryPageComponent,
     ListBrandsPageComponent,
     ListCategoriesPageComponent,
+    AddArticlePageComponent,
   ],
   imports: [
     SharedModule,
