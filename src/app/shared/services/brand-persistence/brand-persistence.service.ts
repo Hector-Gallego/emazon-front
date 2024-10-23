@@ -37,4 +37,16 @@ export class BrandPersistenceService {
       }
     );
   }
+
+  getAllBrands() : Observable<any> {
+
+    const headers = {Authorization: environment.mockTokenAdmin};
+    return this.http.get<any>(
+      environment.stockApiUrl + BrandValuesConstants.END_POINT_BRAND + '/all',
+      {
+        headers,
+      }
+    )
+
+  }
 }

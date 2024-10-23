@@ -1,26 +1,40 @@
-@import '/src/styles/colors';
+@import "/src/styles/colors";
 .input-container {
+  width: 100%;
+  height: auto;
+
+  &__select {
     width: 100%;
-    height: auto;
-    
-  
-    &__select {
-      padding: 1rem;
-      border: none;
+    padding: 1rem;
+    border: 1px solid $gray-scale-spacer-light;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+    &:focus {
+      border-color: $primary-color;
+      outline: none;
+    }
+  }
+
+  &--no-border {
+    select,
+    option {
       color: $primary-color;
+      border: none;
       padding: 0.5rem;
-      margin-left: 1rem;
-     
       &:focus {
         color: $primary-color;
         border-color: $primary-color;
         outline: none;
       }
-  
     }
 
+    &--error {
+      border-color: $informing-error;
+    }
   }
-select, option{
-  color: $primary-color;
 
+  .input-container__error-message {
+    color: $informing-error;
+    font-size: 1.2rem;
+  }
 }

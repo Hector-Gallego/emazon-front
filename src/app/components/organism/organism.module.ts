@@ -8,6 +8,8 @@ import { AtomsModule } from '../atoms/atoms.module';
 import { MoleculesModule } from '../molecules/molecules.module';
 import { FormComponent } from './form/form.component';
 import { TableToolBarComponent } from './table-tool-bar/table-tool-bar.component';
+import { MultipleInputSelectComponent } from './multiple-input-select/multiple-input-select.component';
+
 
 
 @NgModule({
@@ -18,7 +20,8 @@ import { TableToolBarComponent } from './table-tool-bar/table-tool-bar.component
     PaginationComponent,
     FormComponent,
     TableToolBarComponent,
-    TableToolBarComponent
+    TableToolBarComponent,
+    MultipleInputSelectComponent
   ],
   imports: [SharedModule, AtomsModule, MoleculesModule],
   exports: [
@@ -27,7 +30,9 @@ import { TableToolBarComponent } from './table-tool-bar/table-tool-bar.component
     NavBarComponent,
     PaginationComponent,
     FormComponent,
-    TableToolBarComponent
+    TableToolBarComponent,
+    MultipleInputSelectComponent
+
   ],
 })
 export class OrganismModule {}

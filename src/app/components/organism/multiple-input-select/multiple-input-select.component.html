@@ -1,0 +1,34 @@
+<div class="input-container input-container--{{ state }}">
+  <div *ngIf="selectedValues.length > 0" class="input-container__selected-tags">
+    <span
+      *ngFor="let selected of selectedValues; let i = index"
+      class="input-container__tag"
+    >
+      {{ getOptionLabel(selected) }}
+      <app-icon
+        (click)="removeSelection(selected)"
+        [icon]="faCloseIcon"
+      ></app-icon>
+    </span>
+  </div>
+
+  <div class="input-container__options-container">
+    <ul class="input-container__options-list">
+      <li *ngFor="let option of options" class="input-container__options-items">
+        <span>{{ option.label }}</span>
+        <app-button
+          [size]="buttonSize"
+          [icon]="faAddIcon"
+          *ngIf="!isSelected(option.value)"
+          (buttonClick)="addSelection(option.value)"
+        ></app-button>
+      </li>
+    </ul>
+  </div>
+  <div
+    *ngIf="state === inputSatateError"
+    class="input-container__error-message"
+  >
+    {{ errorMessage }}
+  </div>
+</div>

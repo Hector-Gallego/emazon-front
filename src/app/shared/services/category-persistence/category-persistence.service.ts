@@ -37,4 +37,16 @@ export class CategoryPersistenceService {
       }
     );
   }
+
+  getAllCategories() : Observable<any> {
+
+    const headers = {Authorization: environment.mockTokenAdmin};
+    return this.http.get<any>(
+      environment.stockApiUrl + CategoryValuesConstants.END_POINT_CATEGORY + '/all',
+      {
+        headers,
+      }
+    )
+
+  }
 }

@@ -4,10 +4,12 @@ import { AddCategoryPageComponent } from './add-category-page/add-category-page.
 import { ListCategoriesPageComponent } from './list-categories-page/list-categories-page.component';
 import { AddBrandPageComponent } from './add-brand-page/add-brand-page.component';
 import { ListBrandsPageComponent } from './list-brands-page/list-brands-page.component';
+import { AddArticlePageComponent } from './add-article-page/add-article-page.component';
 
 const routes: Routes = [
   { path: 'crear-categoria', component: AddCategoryPageComponent },
   { path: 'crear-marca', component: AddBrandPageComponent },
+  { path: 'crear-articulo', component: AddArticlePageComponent },
   { path: 'marcas', component: ListBrandsPageComponent },
   { path: 'categorias', component: ListCategoriesPageComponent },
   { path: '', redirectTo: '/categorias', pathMatch: 'full' },

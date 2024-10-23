@@ -15,7 +15,8 @@ import { SortDirection } from 'src/app/shared/enums/sort-direction.enum';
 import { PaginationRequest } from 'src/app/shared/interfaces/pagination-request.interface';
 import { Category } from 'src/app/shared/interfaces/category.interface';
 import { TableToolBarService } from 'src/app/shared/services/table-tool-bar/table-tool-bar.service';
-import { SortMapper } from 'src/app/shared/mappers/sort.mapper';
+import { SortMapper } from 'src/app/shared/mappers/sort-mapper/sort.mapper';
+
 @Component({
   selector: 'app-list-categories',
   templateUrl: './list-categories-page.component.html',

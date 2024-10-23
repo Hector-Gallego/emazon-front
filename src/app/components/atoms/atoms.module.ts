@@ -8,7 +8,6 @@ import { LoaderComponent } from '../../components/atoms/loader/loader.component'
 import { LogoComponent } from '../../components/atoms/logo/logo.component';
 import { NavigationBarButtonComponent } from '../../components/atoms/navigation-bar-buttom/navigation-bar-button.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { MultipleInputSelectComponent } from './multiple-input-select/multiple-input-select.component';
 import { InputSelectComponent } from './input-select/input-select.component';
 
 @NgModule({
@@ -21,7 +20,6 @@ import { InputSelectComponent } from './input-select/input-select.component';
     LoaderComponent,
     LogoComponent,
     NavigationBarButtonComponent,
-    MultipleInputSelectComponent,
     InputSelectComponent,
   ],
   imports: [SharedModule],
@@ -34,7 +32,6 @@ import { InputSelectComponent } from './input-select/input-select.component';
     LoaderComponent,
     LogoComponent,
     NavigationBarButtonComponent,
-    MultipleInputSelectComponent,
     InputSelectComponent,
   ],
 })

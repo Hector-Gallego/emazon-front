@@ -9,6 +9,7 @@ export interface FormField {
   contentType: InputContentType;
   placeholder?: string;
   options?: { value: string, label: string }[]; 
-  selectionLimit?: number; 
+  maxSelectionLimit?: number; 
+  minSelectionLimit?: number;
   validators?: ValidatorFn[]; 
 }

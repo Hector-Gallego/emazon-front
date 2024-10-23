@@ -16,7 +16,8 @@ import { SortBy } from 'src/app/shared/enums/sort-by.enum';
 import { SortDirection } from 'src/app/shared/enums/sort-direction.enum';
 import { Brand } from 'src/app/shared/interfaces/brand.interface';
 import { TableToolBarService } from 'src/app/shared/services/table-tool-bar/table-tool-bar.service';
-import { SortMapper } from 'src/app/shared/mappers/sort.mapper';
+import { SortMapper } from 'src/app/shared/mappers/sort-mapper/sort.mapper';
+
 
 @Component({
   selector: 'app-list-brands-page',

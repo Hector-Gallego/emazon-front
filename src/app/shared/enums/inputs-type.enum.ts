@@ -1,5 +1,6 @@
 export enum InputType {
   TEXTAREA = 'textarea',
-  SELECT = 'select',
+  MULTIPLE_SELECT = 'multipleSelect',
   INPUT  ='input',
+  SELECT = 'select'
 }
