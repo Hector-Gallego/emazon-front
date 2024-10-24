@@ -1,5 +1,6 @@
-import { SortBy } from "../enums/sort-by.enum";
-import { SortDirection } from "../enums/sort-direction.enum";
+import { SortBy } from "../../enums/sort-by.enum";
+import { SortDirection } from "../../enums/sort-direction.enum";
+
 
 export class SortMapper{
 

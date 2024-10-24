@@ -10,7 +10,6 @@ import { BrandValuesConstants } from 'src/app/shared/constants/brand.constant';
 import { PaginationRequest } from '../../interfaces/pagination-request.interface';
 import { Brand } from '../../interfaces/brand.interface';
 
-
 describe('BrandPersistenceService', () => {
   let service: BrandPersistenceService;
   let httpMock: HttpTestingController;
@@ -56,7 +55,7 @@ describe('BrandPersistenceService', () => {
     req.flush(mockResponse);
   });
 
-  it('debería enviar una solicitud GET para obtener Marcas', () => {
+  it('debería enviar una solicitud GET para obtener Marcas paginadas', () => {
     const mockPageNumber = 1;
     const mockPageSize = 10;
     const mockSortBy = 'name';
@@ -93,6 +92,25 @@ describe('BrandPersistenceService', () => {
     expect(req.request.headers.get('Authorization')).toBe(
       environment.mockTokenAdmin
     );
+    req.flush(mockResponse);
+  });
+
+  it('debería enviar una solicitud GET para obtener todas las Marcas', () => {
+    const mockResponse = {
+      data: {
+        content: [{ name: 'Adidas', description: 'Ropa deportiva' }],
+        totalPages: 5,
+      },
+    };
+
+    service.getAllBrands().subscribe((response) => {
+      expect(response).toEqual(mockResponse);
+    });
+
+    const req = httpMock.expectOne(
+      environment.stockApiUrl + BrandValuesConstants.END_POINT_BRAND + '/all'
+    );
+    expect(req.request.method).toBe('GET');
     req.flush(mockResponse);
   });
 });

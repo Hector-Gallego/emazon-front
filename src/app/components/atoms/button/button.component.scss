@@ -67,6 +67,10 @@
     }
   }
 
+  &--S {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
 }
 
 @media (min-width: 768px) {
@@ -75,5 +79,11 @@
     width: 10.9rem;
     height: 4rem;
     font-size: 1.2rem;
+
+    &--S {
+      width: 2.5rem;
+      height: 2.5rem;
+      padding: 0;
+    }
   }
 }

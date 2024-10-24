@@ -7,6 +7,7 @@ import { CategoryPersistenceService } from './category-persistence.service';
 import { environment } from 'src/environments/environment';
 import { PaginationRequest } from 'src/app/shared/interfaces/pagination-request.interface';
 import { Category } from '../../interfaces/category.interface';
+import { CategoryValuesConstants } from '../../constants/category.constants';
 
 describe('CategoryPersistenceService', () => {
   let service: CategoryPersistenceService;
@@ -88,6 +89,26 @@ describe('CategoryPersistenceService', () => {
     expect(req.request.headers.get('Authorization')).toBe(
       environment.mockTokenAdmin
     );
+    req.flush(mockResponse);
+  });
+
+
+  it('debería enviar una solicitud GET para obtener todas las Marcas', () => {
+    const mockResponse = {
+      data: {
+        content: [{ name: 'Adidas', description: 'Ropa deportiva' }],
+        totalPages: 5,
+      },
+    };
+
+    service.getAllCategories().subscribe((response) => {
+      expect(response).toEqual(mockResponse);
+    });
+
+    const req = httpMock.expectOne(
+      environment.stockApiUrl + CategoryValuesConstants.END_POINT_CATEGORY + '/all'
+    );
+    expect(req.request.method).toBe('GET');
     req.flush(mockResponse);
   });
 });

@@ -1,6 +1,5 @@
 <form [formGroup]="formGroup">
   <div class="form">
-
     <div class="form__title">
       <h4>{{ formTitle }}</h4>
     </div>
@@ -10,11 +9,15 @@
     <div class="form__input-section" *ngFor="let field of fields">
       <app-label [label]="field.label"></app-label>
 
-      <ng-container *ngIf="field.type === inputTypeInput || field.type === inputTypeTextarea">
+      <ng-container
+        *ngIf="
+          field.type === inputTypeInput || field.type === inputTypeTextarea
+        "
+      >
         <app-input
           [typeContentInput]="field.contentType"
           placeholder="{{ field.placeholder }}"
-          formControlName="{{ field.formControlName }}"
+          [formControlName]="field.formControlName"
           [state]="
             formGroup.get(field.formControlName)?.invalid &&
             formGroup.get(field.formControlName)?.touched
@@ -26,14 +29,31 @@
         ></app-input>
       </ng-container>
 
-     
-      <ng-container *ngIf="field.type === inputTypeSelect">
+      <ng-container *ngIf="field.type === inputTypeMultipleSelect">
         <app-multiple-input-select
+          [formControlName]="field.formControlName"
           [placeholder]="field.placeholder || 'Seleccione una opción'"
           [options]="field.options || []"
-          [selectionLimit]="field.selectionLimit || 1"
-          (selectionChange)="onSelectionChange($event, field.formControlName)"
+          [state]="
+            formGroup.get(field.formControlName)?.invalid &&
+            formGroup.get(field.formControlName)?.touched
+              ? inputStateError
+              : inputStateDefault
+          "
+          [errorMessage]="getErrorMessage(field.formControlName)"
         ></app-multiple-input-select>
+      </ng-container>
+
+      <ng-container *ngIf="field.type === inputTypeSelect">
+        <app-input-select
+          [state]="formGroup.get(field.formControlName)?.invalid &&
+          formGroup.get(field.formControlName)?.touched
+            ? inputStateError
+            : inputStateDefault"
+          [formControlName]="field.formControlName"
+          [options]="field.options || []"
+          [errorMessage]="getErrorMessage(field.formControlName)"
+        ></app-input-select>  
       </ng-container>
     </div>
 

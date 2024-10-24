@@ -1,0 +1,55 @@
+@import "/src/styles/colors";
+.input-container {
+  width: 100%;
+  height: auto;
+  margin-bottom: 2rem;
+  border: 1px solid $gray-scale-spacer-light;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 1.3rem;
+  padding: 1rem;
+
+  &__selected-tags {
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid $gray-scale-spacer-light;
+    padding: 1rem;
+    border-radius: 4px;
+    max-height: 10rem;
+    overflow-y: scroll;
+  }
+  &__options-container {
+    overflow-y: scroll;
+    max-height: 20rem;
+  }
+
+  &__options-list {
+    padding: 1rem;
+  }
+  &__options-items {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0 0.5rem 0;
+  }
+
+  &__tag {
+    cursor: pointer;
+    font-size: 1.2rem;
+    
+
+    margin: 0.5rem;
+    background-color: $bg_light_gray;
+    padding: 0.5rem;
+    border-radius: 4px;
+  }
+
+  &--error {
+    border-color: $informing-error;
+  }
+  .input-container__error-message {
+    color: $informing-error;
+    font-size: 1.2rem;
+  }
+}

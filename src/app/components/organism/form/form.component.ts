@@ -3,8 +3,6 @@ import { FormBuilder, FormGroup, ValidatorFn } from '@angular/forms';
 import { ErrorMessages } from 'src/app/shared/constants/commonConstants';
 import { InputState } from 'src/app/shared/enums/input-state.enum';
 import { InputType } from 'src/app/shared/enums/inputs-type.enum';
-import { Brand } from 'src/app/shared/interfaces/brand.interface';
-import { Category } from 'src/app/shared/interfaces/category.interface';
 
 import { FormField } from 'src/app/shared/interfaces/form-field.interface';
 
@@ -17,14 +15,19 @@ export class FormComponent implements OnInit {
   @Input() formTitle: string = 'Formulario';
   @Input() buttonLabelText: string = 'Guardar';
   @Input() fields: FormField[] = [];
-  @Output() submitForm = new EventEmitter<Category | Brand>();
+
+  @Output() submitForm = new EventEmitter<any>();
+  @Output() pageChange = new EventEmitter<number>();
 
   inputStateError = InputState.ERROR;
   inputStateDefault = InputState.DEFAULT;
 
   inputTypeInput: InputType = InputType.INPUT;
   inputTypeTextarea: InputType = InputType.TEXTAREA;
+  inputTypeMultipleSelect: InputType = InputType.MULTIPLE_SELECT;
   inputTypeSelect: InputType = InputType.SELECT;
+  maxSelectionLimit: number = 0;
+  minSelectionLimit: number = 0;
 
   formGroup: FormGroup;
 
@@ -36,10 +39,15 @@ export class FormComponent implements OnInit {
     this.buildForm();
   }
 
-  private buildForm(): void {
+  buildForm(): void {
     const formControls: { [key: string]: [string, ValidatorFn[]] } = {};
     this.fields.forEach((field) => {
       formControls[field.formControlName] = ['', field.validators || []];
+
+      if (field.type === this.inputTypeMultipleSelect) {
+        this.maxSelectionLimit = field.maxSelectionLimit ?? 0;
+        this.minSelectionLimit = field.minSelectionLimit ?? 0;
+      }
     });
     this.formGroup = this.fb.group(formControls);
   }
@@ -63,15 +71,27 @@ export class FormComponent implements OnInit {
           control.errors['maxlength'].requiredLength
         );
       }
+      if (control.errors?.['min']) {
+        return ErrorMessages.POSITIVE_NUMBER_ERROR_MESSAGE;
+      }
+      if (control.errors?.['minSelection']) {
+        return ErrorMessages.MIN_SELECTION_ERROR_MESSAGE(
+          this.minSelectionLimit
+        );
+      }
+      if (control.errors?.['maxSelection']) {
+        return ErrorMessages.MAX_SELECTION_ERROR_MESSAGE(
+          this.maxSelectionLimit
+        );
+      }
+      if (control.errors?.['noInteger']) {
+        return ErrorMessages.ONLY_INTEGER_ERROR_MESSAGE;
+      }
     }
     return '';
   }
 
   resetForm() {
     this.formGroup.reset();
-  }
-
-  onSelectionChange(selectedValues: string[], formControlName: string): void {
-    this.formGroup.get(formControlName)?.setValue(selectedValues);
   }
 }

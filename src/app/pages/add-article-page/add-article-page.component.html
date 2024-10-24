@@ -1,5 +1,7 @@
 <app-form
-[formTitle]="'Agregar artículo'"
-[buttonLabelText]="'Guardar'"
-[fields]="articleFields"
-></app-form>
+  [formTitle]="'Agregar Artículo'"
+  [buttonLabelText]="'Guardar'"
+  [fields]="articleFields"
+  (submitForm)="onFormSubmit($event)"
+>
+</app-form>
