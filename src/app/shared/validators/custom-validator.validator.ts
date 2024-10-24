@@ -4,6 +4,7 @@ export class CustomValidator {
   static integer(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const regex = /^\d+$/;
+      //convertirlo a numero, y luego hacer la validacion
       const valid = regex.test(control.value);
       return valid ? null : { noInteger: true };
     };

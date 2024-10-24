@@ -79,7 +79,7 @@ describe('AddArticlePageComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('debería llamar a show() y addArticle() en onFormSubmit() con éxito', () => {
+  it('debería crear un articulo y llamar a show() y addArticle() en onFormSubmit() con éxito', () => {
     mockArticleService.addArticle.mockReturnValue(of(mockResponse));
 
     component.onFormSubmit(mockArticle);
