@@ -1,15 +1,27 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HeaderComponent } from './header.component';
-import { LogoComponent } from '../../atoms/logo/logo.component';
-import { By } from '@angular/platform-browser';
+import { NavigationEnd, Event, Router,} from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { Subject } from 'rxjs';
+import { AtomsModule } from '../../atoms/atoms.module';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
+  let routerMock: Partial<Router>;
+  let routerEventsSubject: Subject<Event>;
 
   beforeEach(async () => {
+    routerEventsSubject = new Subject<Event>();
+    routerMock = {
+      events: routerEventsSubject.asObservable(),
+      navigate: jest.fn(),
+    };
+
     await TestBed.configureTestingModule({
-      declarations: [HeaderComponent, LogoComponent],
+      imports: [FontAwesomeModule, AtomsModule ],
+      declarations: [HeaderComponent],
+      providers: [{ provide: Router, useValue: routerMock }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HeaderComponent);
@@ -17,12 +29,52 @@ describe('HeaderComponent', () => {
     fixture.detectChanges();
   });
 
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('debería crear el componente', () => {
     expect(component).toBeTruthy();
   });
 
-  it('debería contener el componente app-logo', () => {
-    const logoElement = fixture.debugElement.query(By.css('app-logo'));
-    expect(logoElement).toBeTruthy();
+  it('debería actualizar currentRoute al recibir un evento NavigationEnd', () => {
+    const testUrl = '/nueva-ruta';
+    component.ngOnInit();
+    
+    
+    routerEventsSubject.next(new NavigationEnd(1, testUrl, testUrl));
+   
+    fixture.detectChanges();
+    expect(component.currentRoute).toBe(testUrl);
   });
+
+  it('debería cambiar el valor de active al llamar a setActive', () => {
+    component.active = true;
+    component.setActive();
+    expect(component.active).toBe(false);
+
+    component.setActive();
+    expect(component.active).toBe(true);
+  });
+
+  it('debería retornar true cuando la ruta actual coincide en isActive', () => {
+    component.currentRoute = '/test-route';
+    expect(component.isActive('/test-route')).toBe(true);
+  });
+
+  it('debería retornar false cuando la ruta actual no coincide en isActive', () => {
+    component.currentRoute = '/test-route';
+    expect(component.isActive('/other-route')).toBe(false);
+  });
+
+  it('deberia devolver true si las rutas coinciden', ()=>{
+
+    const testRoute = '/articulos';
+
+    component.onNavigateto();
+
+    expect(routerMock.navigate).toHaveBeenCalledWith([testRoute]);
+
+  });
+ 
 });

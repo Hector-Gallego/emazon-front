@@ -38,7 +38,6 @@
       <div class="article-detail__quantity">
         <app-quantity-counter-button
           [stock]="article.quantity"
-          (quantityChange)="onQuantityChange($event)"
         ></app-quantity-counter-button>
         <span>+ {{ article.quantity }} disponibles</span>
       </div>

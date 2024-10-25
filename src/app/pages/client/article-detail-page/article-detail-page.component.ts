@@ -37,11 +37,6 @@ export class ArticleDetailPageComponent implements OnInit, OnDestroy {
   article!: ArticleResponse;
   subscriptions : Subscription = new Subscription();
  
-
-  onQuantityChange(quantity: number) {
-  
-  }
-
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }

@@ -9,15 +9,27 @@ describe('SortMapper', () => {
       expect(result).toBe(SortBy.NAME);
     });
 
+    it('debería mapear "description" a SortBy.DESCRIPTION', () => {
+      const result = SortMapper.mapSortBy('description');
+      expect(result).toBe(SortBy.DESCRIPTION);
+    });
+
+    it('debería mapear "brand_name" a SortBy.BRAND_NAME', () => {
+      const result = SortMapper.mapSortBy('brand_name');
+      expect(result).toBe(SortBy.BRAND_NAME);
+    });
+
+    it('debería mapear "category_name" a SortBy.CATEGORY_NAME', () => {
+      const result = SortMapper.mapSortBy('category_name');
+      expect(result).toBe(SortBy.CATEGORY_NAME);
+    });
+
     it('debería devolver SortBy.NAME para valores desconocidos', () => {
       const result = SortMapper.mapSortBy('unknownValue');
       expect(result).toBe(SortBy.NAME);
     });
 
-    it('debería mapear "NAME" a SortBy.NAME (case insensitive)', () => {
-      const result = SortMapper.mapSortBy('NAME');
-      expect(result).toBe(SortBy.NAME);
-    });
+   
   });
 
   describe('mapSortDirection', () => {
