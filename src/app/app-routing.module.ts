@@ -2,10 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
-    path: '',
-    loadChildren: () => import('./pages/pages.module').then(m => m.PageModule)
+    path: 'admin',
+    loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule)
   },
-  { path: '**', redirectTo: '', pathMatch: 'full' }  
+  {
+    path: '',
+    loadChildren: () => import('./pages/client/client.module').then(m => m.ClientModule)
+  },
+  { path: '**', redirectTo: '/articulos', pathMatch: 'full' }  
 ];
 
 @NgModule({

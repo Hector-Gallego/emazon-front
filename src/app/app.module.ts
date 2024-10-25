@@ -5,10 +5,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { PageModule } from './pages/pages.module';
 import { TemplatesModule } from './templates/templates.module';
 import { OrganismModule } from './components/organism/organism.module';
 import { MoleculesModule } from './components/molecules/molecules.module';
+import { AdminModule } from './pages/admin/admin.module';
+import { ClientModule } from './pages/client/client.module';
 
 
 
@@ -16,7 +17,6 @@ import { MoleculesModule } from './components/molecules/molecules.module';
   declarations: [AppComponent],
   imports: [
     TemplatesModule,
-    PageModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -24,7 +24,9 @@ import { MoleculesModule } from './components/molecules/molecules.module';
     BrowserModule,
     FontAwesomeModule,
     OrganismModule,
-    MoleculesModule
+    MoleculesModule,
+    AdminModule,
+    ClientModule
     
   ],
   providers: [],

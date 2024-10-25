@@ -1,0 +1,5 @@
+<div class="quantity-counter">
+  <app-button [disabled]="quantity <= 1" (buttonClick)="decrement()" [size]="buttonSizeAuto" [type]="buttonSecundary" [icon]="decrementIcon"></app-button>
+  <div class="quantity-counter__text">{{quantity}}</div>
+  <app-button [disabled]="quantity >= stock" (buttonClick)="increment()" [size]="buttonSizeAuto" [type]="buttonSecundary" [icon]="incrementIcon"></app-button>
+</div>

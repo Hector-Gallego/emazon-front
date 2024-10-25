@@ -9,6 +9,8 @@ import { MoleculesModule } from '../molecules/molecules.module';
 import { FormComponent } from './form/form.component';
 import { TableToolBarComponent } from './table-tool-bar/table-tool-bar.component';
 import { MultipleInputSelectComponent } from './multiple-input-select/multiple-input-select.component';
+import { CardComponent } from './card/card.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -21,9 +23,10 @@ import { MultipleInputSelectComponent } from './multiple-input-select/multiple-i
     FormComponent,
     TableToolBarComponent,
     TableToolBarComponent,
-    MultipleInputSelectComponent
+    MultipleInputSelectComponent,
+    CardComponent
   ],
-  imports: [SharedModule, AtomsModule, MoleculesModule],
+  imports: [SharedModule, AtomsModule, MoleculesModule, RouterModule],
   exports: [
     DataTableComponent,
     HeaderComponent,
@@ -31,7 +34,8 @@ import { MultipleInputSelectComponent } from './multiple-input-select/multiple-i
     PaginationComponent,
     FormComponent,
     TableToolBarComponent,
-    MultipleInputSelectComponent
+    MultipleInputSelectComponent,
+    CardComponent
 
   ],
 })

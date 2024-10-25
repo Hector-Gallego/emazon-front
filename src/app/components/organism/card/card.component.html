@@ -1,0 +1,18 @@
+<div class="card-container">
+  <div class="card-container__img-container">
+    <img class="card-container__img" src="{{ imageUrl }}" alt="" />
+  </div>
+
+  <div class="card-container__body">
+    <div class="card-container__name">
+      <span>{{ articleName | slice:0:20 }}{{ articleName.length > 20 ? '...' : '' }}</span>
+    </div>
+    <div class="card-container__brand">
+      <span>{{ articleBrandName }}</span>
+    </div>
+
+    <div class="card-container__price">
+      <span>{{ articlePrice | currency }}</span>
+    </div>
+  </div>
+</div>

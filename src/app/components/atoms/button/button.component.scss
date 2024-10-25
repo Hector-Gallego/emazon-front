@@ -71,6 +71,20 @@
     width: 2.5rem;
     height: 2.5rem;
   }
+
+  &--L{
+    width: 100%;
+    height: 4rem;
+    padding: 1rem;
+    font-size: 1.2rem;
+  }
+
+  &--AUTO{
+    width: auto;
+    height: 4rem;
+    padding: 1rem;
+    font-size: 1.2rem;
+  }
 }
 
 @media (min-width: 768px) {
@@ -85,5 +99,18 @@
       height: 2.5rem;
       padding: 0;
     }
+    &--AUTO{
+      width: auto;
+      height: 4rem;
+      padding: 1rem;
+      font-size: 1.2rem;
+    }
+    &--L{
+      width: auto;
+      height: 4rem;
+      padding: 1rem;
+      font-size: 1.2rem;
+    }
+  
   }
 }

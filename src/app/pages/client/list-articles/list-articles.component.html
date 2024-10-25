@@ -1,0 +1,26 @@
+<div class="articles-container">
+  <div class="articles-container__tool-bar"></div>
+
+  <app-table-tool-bar [showByoptions]="showByOptions" [sortByoptions]="sortByOptions"></app-table-tool-bar>
+
+  <div class="articles-container__items">
+    <ng-container *ngFor="let article of articles">
+      <app-card
+        [articlePrice]="article.price"
+        [articleName]="article.name"
+        [articleBrandName]="article.brand.name"
+        (click)="onNavigateDetail(article.id)"
+        [imageUrl]="'https://picsum.photos/600/600?random=' + article.id"
+      ></app-card>
+    </ng-container>
+    <app-loader></app-loader>
+  </div>
+
+  <div class="articles-container__pagination">
+    <app-pagination
+      [totalPages]="totalPages"
+      [currentPage]="currentPage"
+      (pageChange)="onPageChange($event)"
+    ></app-pagination>
+  </div>
+</div>

@@ -1,5 +1,43 @@
-<div class="header">
-  <div class="header__content">
-    <app-logo></app-logo>
+<header class="header">
+  <div class="header__logo">
+    <img src="../../../../assets/logo.svg" alt="" />
   </div>
-</div>
+
+  <button
+    (click)="setActive()"
+    class="header__button"
+    [ngClass]="{ 'header__button--disable': isAdmin }"
+  >
+    <app-icon class="header__svg" [icon]="menuIcon"></app-icon>
+  </button>
+
+  <nav
+    class="header__nav"
+    [ngClass]="{ 'header__nav--active': active }"
+    [ngClass]="{ 'header__nav--disable': isAdmin }"
+  >
+    <ul class="header__ul">
+      <li
+        [ngClass]="{ 'header__li--active': isActive('/articulos') }"
+        class="header__li"
+      >
+        <app-icon class="header__icon" [icon]="faArticlesIcon"></app-icon>
+        <a class="header__a" [routerLink]="['/articulos']">Artículos</a>
+      </li>
+      <li
+        class="header__li"
+        [ngClass]="{ 'header__li--active': isActive('/carrito') }"
+      >
+        <app-icon class="header__icon" [icon]="faIconShoppingCar"></app-icon>
+        <a class="header__a">Carrito</a>
+      </li>
+      <li
+        class="header__li"
+        [ngClass]="{ 'header__li--active': isActive('/salir') }"
+      >
+        <app-icon class="header__icon" [icon]="faLogoutIcon"></app-icon>
+        <a class="header__a">Cerrar Sesión</a>
+      </li>
+    </ul>
+  </nav>
+</header>
