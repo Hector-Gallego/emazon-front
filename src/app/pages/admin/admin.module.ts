@@ -1,0 +1,37 @@
+import { NgModule } from "@angular/core";
+import { AddBrandPageComponent } from "./add-brand-page/add-brand-page.component";
+import { AddCategoryPageComponent } from "./add-category-page/add-category-page.component";
+import { ListBrandsPageComponent } from "./list-brands-page/list-brands-page.component";
+import { ListCategoriesPageComponent } from "./list-categories-page/list-categories-page.component";
+import { AddArticlePageComponent } from "./add-article-page/add-article-page.component";
+import { SharedModule } from "src/app/shared/shared.module";
+import { AtomsModule } from "src/app/components/atoms/atoms.module";
+import { MoleculesModule } from "src/app/components/molecules/molecules.module";
+import { OrganismModule } from "src/app/components/organism/organism.module";
+import { AdminRoutingModule } from "./admin-routing.module";
+import { MainLayaoutComponent } from "src/app/templates/main-layaout/main-layaout.component";
+
+@NgModule({
+    declarations: [
+      AddBrandPageComponent,
+      AddCategoryPageComponent,
+      ListBrandsPageComponent,
+      ListCategoriesPageComponent,
+      AddArticlePageComponent,
+    ],
+    imports: [
+      SharedModule,
+      AtomsModule,
+      MoleculesModule,
+      OrganismModule,
+      AdminRoutingModule
+    ],
+    exports: [
+      AddBrandPageComponent,
+      AddCategoryPageComponent,
+      ListBrandsPageComponent,
+      ListCategoriesPageComponent,
+
+    ],
+  })
+  export class AdminModule {}

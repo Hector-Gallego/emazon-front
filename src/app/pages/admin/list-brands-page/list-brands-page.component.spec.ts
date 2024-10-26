@@ -137,7 +137,7 @@ describe('ListBrandComponent', () => {
 
   it('debería navegar a la creación de marca al hacer clic en el botón "Agregar"', () => {
     component.navigateToCreateBrand();
-    expect(router.navigate).toHaveBeenCalledWith(['/crear-marca']);
+    expect(router.navigate).toHaveBeenCalledWith(['admin/crear-marca']);
   });
 
   it('debería cambiar la dirección de ordenamiento a desc y cargar categorías al llamar a toggleSortDirection con SorDirection = asc', () => {

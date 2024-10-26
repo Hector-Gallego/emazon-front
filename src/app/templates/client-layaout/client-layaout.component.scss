@@ -1,0 +1,47 @@
+@import "/src/styles/colors";
+@import "/src/styles/variables";
+
+$nav-bar-width: 20rem;
+$content-padding: 2rem;
+$mobile-padding: 1rem;
+
+.layout-container {
+  height: 100vh;
+  
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  &__content {
+
+    box-sizing: border-box;
+    width: 100%;
+    padding: $mobile-padding;
+    
+
+  }
+}
+
+@media (min-width: 768px) {
+  .layout-container {
+
+    &__body {
+      
+    
+      flex-direction: row;
+      padding-left: $horizontal-padding;
+      padding-right: $horizontal-padding;
+    }
+    &__content {
+    
+    
+      margin: 0 auto;
+      width: 100%;
+      padding: $content-padding;
+    }
+  }
+}

@@ -7,13 +7,10 @@ $mobile-padding: 1rem;
 
 .layout-container {
   height: 100vh;
-  
 
   &__body {
     display: flex;
     flex-direction: column;
-    padding-left: $mobile-padding;
-    padding-right: $mobile-padding;
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
   }
@@ -22,36 +19,26 @@ $mobile-padding: 1rem;
   }
 
   &__content {
-
     box-sizing: border-box;
     width: 100%;
     padding: $mobile-padding;
-    
-
   }
 }
 
 @media (min-width: 768px) {
   .layout-container {
-   
-   
-   
     &__body {
-      
-    
       flex-direction: row;
       padding-left: $horizontal-padding;
       padding-right: $horizontal-padding;
     }
-    &__nav-bar {  
+    &__nav-bar {
       width: $nav-bar-width;
     }
 
     &__content {
-    
-    
       margin: 0 auto;
-      width: 50%;
+      width: 60%;
       padding: $content-padding;
     }
   }

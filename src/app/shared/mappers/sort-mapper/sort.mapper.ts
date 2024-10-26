@@ -8,6 +8,12 @@ export class SortMapper{
         switch (value.toLocaleLowerCase()) {
           case 'name':
             return SortBy.NAME;
+            case 'description':
+              return SortBy.DESCRIPTION;
+              case 'brand_name':
+              return SortBy.BRAND_NAME;
+              case 'category_name':
+              return SortBy.CATEGORY_NAME;
           default:
             return SortBy.NAME; 
         }

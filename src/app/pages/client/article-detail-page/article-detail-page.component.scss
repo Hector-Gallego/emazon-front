@@ -1,0 +1,103 @@
+@import '/src/styles/colors';
+.article-detail {
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+
+  &__image-container {
+    width: 100%;
+    height: 30rem;
+
+
+    overflow: hidden;
+    border-radius: 4px;
+  }
+  
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__name {
+    margin-top: 2rem;
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: $primary-color;
+    
+  }
+
+  &__brand {
+    
+    margin-top: 1rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+   
+    
+  }
+
+  &__categories{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    gap: 0.5rem;
+
+    
+  }
+
+  &__price {
+    
+    margin-top: 2rem;
+    font-size: 2.4rem;
+    font-weight: 500;
+    
+  }
+
+  &__description {
+    margin-top: 2rem;
+    font-size: 1.4rem;
+    
+  }
+
+  &__quantity{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+    color: $hover-color;
+    margin-bottom: 2rem;
+
+  }
+
+ 
+}
+
+@media (min-width :768px) {
+
+  .article-detail{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    &__image-container {
+      width: 100%;
+      height: 40rem;
+  
+  
+      overflow: hidden;
+      border-radius: 4px;
+    }
+
+    &__img-section{
+      width: 30%;
+    }
+    &__body-section{
+      width: 70%;
+      padding-left: 5rem;
+    }
+  }
+
+  
+}

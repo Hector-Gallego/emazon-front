@@ -1,0 +1,51 @@
+<div class="article-detail" *ngIf="article">
+  <section class="article-detail__img-section">
+    <div class="article-detail__image-container">
+      <img
+        class="article-detail__image"
+        src="https://picsum.photos/600/400"
+        alt=""
+      />
+    </div>
+  </section>
+
+  <section class="article-detail__body-section">
+    <div class="article-detail__name">
+      <span> {{ article.name }}</span>
+    </div>
+
+    <div class="article-detail__brand">
+      <span> {{ article.brand.name }} </span>
+    </div>
+
+    <div class="article-detail__categories">
+      <ng-container *ngFor="let category of article.categories">
+        <app-tag [text]="category.name"></app-tag>
+      </ng-container>
+    </div>
+
+    <div class="article-detail__price">
+      <span>{{ article.price | currency }}</span>
+    </div>
+
+    <div class="article-detail__description">
+      <p>
+        {{ article.description }}
+      </p>
+    </div>
+
+    <div class="article-detail__add-cart">
+      <div class="article-detail__quantity">
+        <app-quantity-counter-button
+          [stock]="article.quantity"
+        ></app-quantity-counter-button>
+        <span>+ {{ article.quantity }} disponibles</span>
+      </div>
+
+      <app-button
+        [size]="buttonSyzeL"
+        [label]="'añadir al carrito'"
+      ></app-button>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,12 @@
+@import '/src/styles/colors';
+.quantity-counter{
+    display: flex;
+    
+    align-items: center;
+
+    &__text{
+        color: $primary-color;
+        font-size: 1.4rem;
+        padding: 1rem;
+    }
+}

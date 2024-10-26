@@ -1,0 +1,8 @@
+@import '/src/styles/colors';
+.tag{
+    cursor: pointer;
+    font-size: 1.2rem;
+    background-color: $bg_light_gray;
+    padding: 0.5rem;
+    border-radius: 4px;
+  }

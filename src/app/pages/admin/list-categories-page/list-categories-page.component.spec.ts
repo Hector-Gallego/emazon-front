@@ -154,7 +154,7 @@ describe('ListCategoriesComponent', () => {
 
   it('debería navegar a la creación de categoría al hacer clic en el botón "Agregar"', () => {
     component.navigateToCreateCategory();
-    expect(router.navigate).toHaveBeenCalledWith(['/crear-categoria']);
+    expect(router.navigate).toHaveBeenCalledWith(['admin/crear-categoria']);
   });
 
   it('debería cambiar la dirección de ordenamiento a desc y cargar categorías al llamar a toggleSortDirection con SorDirection = asc', () => {

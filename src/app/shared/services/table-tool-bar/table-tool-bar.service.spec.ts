@@ -16,7 +16,7 @@ describe('TableToolBarService', () => {
 
   it('debería inicializar showBy$ con el valor por defecto', (done) => {
     service.showBy$.subscribe(value => {
-      expect(value).toBe('5');
+      expect(value).toBe('10');
       done();
     });
   });
