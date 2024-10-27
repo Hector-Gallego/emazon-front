@@ -15,8 +15,8 @@ import { CustomValidator } from 'src/app/shared/validators/custom-validator.vali
 import { get } from 'http';
 
 describe('CategoryFormComponent', () => {
-  let component: FormComponent;
-  let fixture: ComponentFixture<FormComponent>;
+  let component: FormComponent<any>;
+  let fixture: ComponentFixture<FormComponent<any>>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -84,99 +84,6 @@ describe('CategoryFormComponent', () => {
     expect(nameControl?.value).toBe('');
   });
 
-  it('debería marcar como inválido el campo "name"  si está vacío', () => {
-    const nameControl = component.formGroup.get('name');
-    nameControl?.setValue('');
-    expect(nameControl?.invalid).toBe(true);
-    expect(nameControl?.errors?.['required']).toBeTruthy();
-  });
-
-  it('debería mostrar un error si el valor de "name" supera la longitud máxima', () => {
-    const nameControl = component.formGroup.get('name');
-
-    const longNameString = 'a'.repeat(
-      CategoryFieldLimits.MAX_LENGTH_CATEGORY_NAME_FIELD + 1
-    );
-
-    nameControl?.setValue(longNameString);
-    expect(nameControl?.invalid).toBe(true);
-    expect(nameControl?.errors?.['maxlength']).toBeTruthy();
-  });
-
-  it('debería mostrar un error si el valor de "price" es menor a 1', () => {
-    const nameControl = component.formGroup.get('price');
-    nameControl?.setValue(0);
-    nameControl?.markAllAsTouched();
-
-    const errorMessage = component.getErrorMessage('price');
-    expect(errorMessage).toBe(ErrorMessages.POSITIVE_NUMBER_ERROR_MESSAGE);
-    expect(nameControl?.invalid).toBe(true);
-    expect(nameControl?.errors?.['min']).toBeTruthy();
-  });
-
-  it('debería mostrar un error si el valor de "quantity" no es un entero', () => {
-    const nameControl = component.formGroup.get('quantity');
-    nameControl?.setValue(123.323);
-    nameControl?.markAllAsTouched();
-    const errorMessage = component.getErrorMessage('quantity');
-    expect(errorMessage).toBe(ErrorMessages.ONLY_INTEGER_ERROR_MESSAGE);
-    expect(nameControl?.invalid).toBe(true);
-    expect(nameControl?.errors?.['noInteger']).toBeTruthy();
-  });
-
-  it('debería mostrar un error si se excede el limite maximo de seleciones', () => {
-    const nameControl = component.formGroup.get('categoryIds');
-    nameControl?.setValue([1, 2, 3, 4]);
-    nameControl?.markAllAsTouched();
-
-    const errorMessage = component.getErrorMessage('categoryIds');
-    expect(errorMessage).toBe(
-      ErrorMessages.MAX_SELECTION_ERROR_MESSAGE(
-        component.maxSelectionLimit
-      )
-    );
-
-    expect(nameControl?.invalid).toBe(true);
-    expect(nameControl?.errors?.['maxSelection']).toBeTruthy();
-  });
-
-  it('debería mostrar un error si se excede el limite minimo de seleciones', () => {
-    const nameControl = component.formGroup.get('categoryIds');
-    nameControl?.setValue([1]);
-    nameControl?.markAllAsTouched();
-
-    const errorMessage = component.getErrorMessage('categoryIds');
-    expect(errorMessage).toBe(
-      ErrorMessages.MIN_SELECTION_ERROR_MESSAGE(
-        component.minSelectionLimit
-      )
-    );
-    expect(nameControl?.invalid).toBe(true);
-    expect(nameControl?.errors?.['minSelection']).toBeTruthy();
-  });
-
-  it('debería mostrar mensaje de error requerido para el campo "name" ', () => {
-    component.formGroup.get('name')?.setValue('');
-    component.formGroup.get('name')?.markAsTouched();
-    const errorNameMessage = component.getErrorMessage('name');
-    expect(errorNameMessage).toBe(ErrorMessages.REQUIERED_ERROR_MESSAGE);
-  });
-
-  it('debería mostrar mensaje de error de longitud para el campo "name"', () => {
-    const longString = 'a'.repeat(
-      CategoryFieldLimits.MAX_LENGTH_CATEGORY_NAME_FIELD + 1
-    );
-    component.formGroup.get('name')?.setValue(longString);
-    component.formGroup.get('name')?.markAsTouched();
-
-    const errorMessage = component.getErrorMessage('name');
-    expect(errorMessage).toBe(
-      ErrorMessages.MAX_LENGTH_ERROR_MESSAGE(
-        CategoryFieldLimits.MAX_LENGTH_CATEGORY_NAME_FIELD
-      )
-    );
-  });
-
   it('debería emitir el evento de submit cuando el formulario es válido', () => {
     jest.spyOn(component.submitForm, 'emit');
     const expectedData = {
@@ -208,7 +115,6 @@ describe('CategoryFormComponent', () => {
   });
 
   it('debería asignar 0 a maxSelectionLimit y minSelectionLimit si son undefined', () => {
-    
     component.fields = [
       {
         label: 'Categorias',
@@ -220,12 +126,11 @@ describe('CategoryFormComponent', () => {
         contentType: InputContentType.TEXT,
       },
     ];
-  
+
     component.buildForm();
     expect(component.maxSelectionLimit).toBe(0);
     expect(component.minSelectionLimit).toBe(0);
     expect(component.formGroup.contains('categoryIds')).toBe(true);
-    expect(component.formGroup.get('categoryIds')?.value).toEqual("");
+    expect(component.formGroup.get('categoryIds')?.value).toEqual('');
   });
-  
 });

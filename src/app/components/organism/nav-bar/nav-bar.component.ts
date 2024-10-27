@@ -5,6 +5,7 @@ import {
   faBox,
   IconDefinition,
   faBars,
+  faUserPlus,
 } from '@fortawesome/free-solid-svg-icons';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
@@ -21,6 +22,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
   faTags: IconDefinition = faTags;
   faBox: IconDefinition = faBox;
   faBars: IconDefinition = faBars;
+  faAddUser: IconDefinition = faUserPlus;
 
   menuTittle: string = 'Menú';
   currentRoute: string = '';
@@ -34,6 +36,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
     { label: 'Categorías', icon: this.faList, route: '/admin/categorias' },
     { label: 'Marcas', icon: this.faTags, route: '/admin/marcas' },
     { label: 'Artículos', icon: this.faBox, route: '/admin/crear-articulo' },
+    { label: 'Auxiliar', icon: this.faAddUser, route: '/admin/crear-auxiliar' },
   ];
 
   constructor(private readonly router: Router) {

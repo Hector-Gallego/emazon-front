@@ -97,7 +97,7 @@ export class AddArticlePageComponent implements OnInit, OnDestroy {
     },
   ];
 
-  @ViewChild(FormComponent) articleForm!: FormComponent;
+  @ViewChild(FormComponent) articleForm!: FormComponent<Brand>;
   subscription = new Subscription();
   brands: Brand[] = [];
 

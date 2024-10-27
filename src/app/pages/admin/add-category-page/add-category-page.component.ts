@@ -51,7 +51,7 @@ export class AddCategoryPageComponent implements OnDestroy {
   ];
 
   private readonly subscription = new Subscription();
-  @ViewChild(FormComponent) categoryForm!: FormComponent;
+  @ViewChild(FormComponent) categoryForm!: FormComponent<Category>;
 
   toastMessage: string = '';
   toastType: StatesTypes = StatesTypes.SUCCESS;

@@ -10,6 +10,7 @@ import { MoleculesModule } from "src/app/components/molecules/molecules.module";
 import { OrganismModule } from "src/app/components/organism/organism.module";
 import { AdminRoutingModule } from "./admin-routing.module";
 import { MainLayaoutComponent } from "src/app/templates/main-layaout/main-layaout.component";
+import { AddWarehouseAssistantPageComponent } from './add-warehouse-assistant-page/add-warehouse-assistant-page.component';
 
 @NgModule({
     declarations: [
@@ -18,6 +19,7 @@ import { MainLayaoutComponent } from "src/app/templates/main-layaout/main-layaou
       ListBrandsPageComponent,
       ListCategoriesPageComponent,
       AddArticlePageComponent,
+      AddWarehouseAssistantPageComponent,
     ],
     imports: [
       SharedModule,
@@ -31,6 +33,7 @@ import { MainLayaoutComponent } from "src/app/templates/main-layaout/main-layaou
       AddCategoryPageComponent,
       ListBrandsPageComponent,
       ListCategoriesPageComponent,
+      AddWarehouseAssistantPageComponent
 
     ],
   })

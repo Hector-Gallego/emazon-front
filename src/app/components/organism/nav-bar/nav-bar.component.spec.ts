@@ -39,8 +39,8 @@ describe('NavBarComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('debería tener tres elementos en el menú', () => {
-    expect(component.menuItems.length).toBe(3);
+  it('debería tener 4 elementos en el menú', () => {
+    expect(component.menuItems.length).toBe(4);
   });
 
   it('debería renderizar un componente app-navigation-bar-button por cada elemento en el menú', () => {

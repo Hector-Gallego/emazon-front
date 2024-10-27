@@ -5,18 +5,19 @@ import { InputState } from 'src/app/shared/enums/input-state.enum';
 import { InputType } from 'src/app/shared/enums/inputs-type.enum';
 
 import { FormField } from 'src/app/shared/interfaces/form-field.interface';
+import { FormControlErrorsMapper } from 'src/app/shared/mappers/form-control-errors-mapper/form-control-errors.mapper';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
 })
-export class FormComponent implements OnInit {
+export class FormComponent<T> implements OnInit {
   @Input() formTitle: string = 'Formulario';
   @Input() buttonLabelText: string = 'Guardar';
   @Input() fields: FormField[] = [];
 
-  @Output() submitForm = new EventEmitter<any>();
+  @Output() submitForm = new EventEmitter<T>();
   @Output() pageChange = new EventEmitter<number>();
 
   inputStateError = InputState.ERROR;
@@ -62,33 +63,7 @@ export class FormComponent implements OnInit {
 
   getErrorMessage(controlName: string): string {
     const control = this.formGroup.get(controlName);
-    if (control?.touched && control?.invalid) {
-      if (control.errors?.['required']) {
-        return ErrorMessages.REQUIERED_ERROR_MESSAGE;
-      }
-      if (control.errors?.['maxlength']) {
-        return ErrorMessages.MAX_LENGTH_ERROR_MESSAGE(
-          control.errors['maxlength'].requiredLength
-        );
-      }
-      if (control.errors?.['min']) {
-        return ErrorMessages.POSITIVE_NUMBER_ERROR_MESSAGE;
-      }
-      if (control.errors?.['minSelection']) {
-        return ErrorMessages.MIN_SELECTION_ERROR_MESSAGE(
-          this.minSelectionLimit
-        );
-      }
-      if (control.errors?.['maxSelection']) {
-        return ErrorMessages.MAX_SELECTION_ERROR_MESSAGE(
-          this.maxSelectionLimit
-        );
-      }
-      if (control.errors?.['noInteger']) {
-        return ErrorMessages.ONLY_INTEGER_ERROR_MESSAGE;
-      }
-    }
-    return '';
+    return FormControlErrorsMapper.mapErrorMessage(control, this.minSelectionLimit, this.maxSelectionLimit);
   }
 
   resetForm() {

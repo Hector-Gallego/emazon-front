@@ -16,10 +16,12 @@ import { of, throwError } from 'rxjs';
 import { ArticlePersistenceService } from 'src/app/shared/services/article-persistence/article-persistence.service';
 import { PaginationRequest } from 'src/app/shared/interfaces/pagination-request.interface';
 import { ErrorMessages, StatesTypes } from 'src/app/shared/constants/commonConstants';
+import { Router } from '@angular/router';
 
 describe('ListArticlesComponent', () => {
   let component: ListArticlesComponent;
   let fixture: ComponentFixture<ListArticlesComponent>;
+  let router: Router;
 
   const toastServiceMock = {
     triggerToast: jest.fn(),
@@ -84,6 +86,7 @@ describe('ListArticlesComponent', () => {
       ],
     }).compileComponents();
 
+    router = TestBed.inject(Router); 
     fixture = TestBed.createComponent(ListArticlesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

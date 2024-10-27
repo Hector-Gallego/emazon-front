@@ -32,7 +32,7 @@ export class AddBrandPageComponent implements OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  @ViewChild(FormComponent) brandForm!: FormComponent;
+  @ViewChild(FormComponent) brandForm!: FormComponent<Brand>;
 
   brandFields: FormField[] = [
     {

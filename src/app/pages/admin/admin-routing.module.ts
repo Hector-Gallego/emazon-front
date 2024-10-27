@@ -6,6 +6,7 @@ import { AddArticlePageComponent } from './add-article-page/add-article-page.com
 import { ListBrandsPageComponent } from './list-brands-page/list-brands-page.component';
 import { ListCategoriesPageComponent } from './list-categories-page/list-categories-page.component';
 import { MainLayaoutComponent } from 'src/app/templates/main-layaout/main-layaout.component';
+import { AddWarehouseAssistantPageComponent } from './add-warehouse-assistant-page/add-warehouse-assistant-page.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,7 @@ const routes: Routes = [
       { path: 'crear-articulo', component: AddArticlePageComponent },
       { path: 'marcas', component: ListBrandsPageComponent },
       { path: 'categorias', component: ListCategoriesPageComponent },
+      { path: 'crear-auxiliar', component: AddWarehouseAssistantPageComponent },
 
       { path: '', redirectTo: 'categorias', pathMatch: 'full' },
     ],

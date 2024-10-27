@@ -1,9 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HeaderComponent } from './header.component';
-import { NavigationEnd, Event, Router,} from '@angular/router';
+import { NavigationEnd, Event, Router, RouterModule,} from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Subject } from 'rxjs';
 import { AtomsModule } from '../../atoms/atoms.module';
+
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -19,7 +20,7 @@ describe('HeaderComponent', () => {
     };
 
     await TestBed.configureTestingModule({
-      imports: [FontAwesomeModule, AtomsModule ],
+      imports: [FontAwesomeModule, AtomsModule, ],
       declarations: [HeaderComponent],
       providers: [{ provide: Router, useValue: routerMock }],
     }).compileComponents();
