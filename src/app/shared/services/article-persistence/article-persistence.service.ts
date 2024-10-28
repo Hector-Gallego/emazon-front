@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 import { ArticleValuesConstants } from '../../constants/article.constant';
 import { PaginationRequest } from '../../interfaces/pagination-request.interface';
 import { PaginationResponse } from '../../interfaces/pagination-response.interface';
-import { Category } from '../../interfaces/category.interface';
+import { checkToken } from 'src/app/core/interceptors/token-interceptor/token.interceptor';
 
 @Injectable({
   providedIn: 'root'
@@ -17,34 +17,32 @@ export class ArticlePersistenceService {
   constructor(private readonly http: HttpClient) { }
 
   addArticle(articleData: Article): Observable<ApiResponse> {
-    const headers = { Authorization: environment.mockTokenAdmin };
+    
     return this.http.post<ApiResponse>(
       environment.stockApiUrl + ArticleValuesConstants.END_POINT_ARTILCLE_SAVE,
       articleData,
-      { headers }
+      { context: checkToken() }
     );
   }
 
   getArticles(
     paginationRequest: PaginationRequest
   ): Observable<PaginationResponse<ArticleResponse>> {
-    const headers = { Authorization: environment.mockTokenAdmin };
     let params = new HttpParams({ fromObject: { ...paginationRequest } });
     return this.http.get<PaginationResponse<ArticleResponse>>(
       environment.stockApiUrl + ArticleValuesConstants.END_POINT_ARTILCLE,
       {
         params,
-        headers,
+        context: checkToken(),
       }
     );
   }
 
   getArticleById(id: number): Observable<ApiResponseData<ArticleResponse>>{
-    const headers = { Authorization: environment.mockTokenAdmin };
     return this.http.get<ApiResponseData<ArticleResponse>>(
       environment.stockApiUrl + ArticleValuesConstants.END_POINT_ARTILCLE +`/${id}`,
       {
-        headers
+        context: checkToken()
       }
     );
   }

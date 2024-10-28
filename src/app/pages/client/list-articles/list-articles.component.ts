@@ -30,7 +30,7 @@ export class ListArticlesComponent implements OnInit, OnDestroy {
   ) {}
 
   onNavigateDetail(id: number) {
-    this.router.navigate(['/detalle-articulo', id]);
+    this.router.navigate(['/tienda/detalle-articulo', id]);
   }
 
   showByOptions = [

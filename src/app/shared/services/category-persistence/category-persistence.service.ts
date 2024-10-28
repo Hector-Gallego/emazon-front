@@ -7,6 +7,7 @@ import { ApiResponse } from '../../interfaces/api-response.interface';
 import { CategoryValuesConstants } from 'src/app/shared/constants/category.constants';
 import { PaginationRequest } from 'src/app/shared/interfaces/pagination-request.interface';
 import { PaginationResponse } from 'src/app/shared/interfaces/pagination-response.interface';
+import { checkToken } from 'src/app/core/interceptors/token-interceptor/token.interceptor';
 
 @Injectable({
   providedIn: 'root',
@@ -15,36 +16,34 @@ export class CategoryPersistenceService {
   constructor(private readonly http: HttpClient) {}
 
   addCategory(categoryData: Category): Observable<ApiResponse> {
-    const headers = { Authorization: environment.mockTokenAdmin };
+    
     return this.http.post<ApiResponse>(
       environment.stockApiUrl + CategoryValuesConstants.END_POINT_CATEGORY,
       categoryData,
-      { headers }
+      { context: checkToken()}
     );
   }
 
   getCategories(
     paginationRequest: PaginationRequest
   ): Observable<PaginationResponse<Category>> {
-    const headers = { Authorization: environment.mockTokenAdmin };
     let params = new HttpParams({ fromObject: { ...paginationRequest } });
 
     return this.http.get<PaginationResponse<Category>>(
       environment.stockApiUrl + CategoryValuesConstants.END_POINT_CATEGORY,
       {
         params,
-        headers,
+        context: checkToken()
       }
     );
   }
 
   getAllCategories() : Observable<any> {
 
-    const headers = {Authorization: environment.mockTokenAdmin};
     return this.http.get<any>(
       environment.stockApiUrl + CategoryValuesConstants.END_POINT_CATEGORY + '/all',
       {
-        headers,
+        context: checkToken()
       }
     )
 

@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { BrandValuesConstants } from 'src/app/shared/constants/brand.constant';
 import { PaginationRequest } from '../../interfaces/pagination-request.interface';
 import { PaginationResponse } from 'src/app/shared/interfaces/pagination-response.interface';
+import { checkToken } from 'src/app/core/interceptors/token-interceptor/token.interceptor';
 
 
 @Injectable({
@@ -16,35 +17,33 @@ export class BrandPersistenceService {
   constructor(private readonly http: HttpClient) {}
 
   addBrand(brandData: Brand): Observable<ApiResponse> {
-    const headers = { Authorization: environment.mockTokenAdmin };
     return this.http.post<ApiResponse>(
       environment.stockApiUrl + BrandValuesConstants.END_POINT_BRAND,
       brandData,
-      { headers }
+      { context: checkToken() }
     );
   }
 
   getBrands(
     paginationRequest: PaginationRequest
   ): Observable<PaginationResponse<Brand>> {
-    const headers = { Authorization: environment.mockTokenAdmin };
+   
     let params = new HttpParams({ fromObject: { ...paginationRequest } });
     return this.http.get<PaginationResponse<Brand>>(
       environment.stockApiUrl + BrandValuesConstants.END_POINT_BRAND,
       {
         params,
-        headers,
+        context: checkToken()
       }
     );
   }
 
   getAllBrands() : Observable<any> {
 
-    const headers = {Authorization: environment.mockTokenAdmin};
     return this.http.get<any>(
       environment.stockApiUrl + BrandValuesConstants.END_POINT_BRAND + '/all',
       {
-        headers,
+        context: checkToken()
       }
     )
 

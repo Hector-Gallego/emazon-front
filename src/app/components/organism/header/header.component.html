@@ -14,10 +14,11 @@
   <nav
     class="header__nav"
     [ngClass]="{ 'header__nav--active': active }"
-    [ngClass]="{ 'header__nav--disable': isAdmin }"
+    
   >
     <ul class="header__ul">
       <li
+        *appShowForRoles="[roleCleint]"
         [ngClass]="{ 'header__li--active': isActive('/articulos') }"
         class="header__li"
       >
@@ -25,6 +26,7 @@
         <a class="header__a" [routerLink]="['/articulos']">Artículos</a>
       </li>
       <li
+      *appShowForRoles="[roleCleint]"
         class="header__li"
         [ngClass]="{ 'header__li--active': isActive('/carrito') }"
       >
@@ -32,11 +34,12 @@
         <a class="header__a">Carrito</a>
       </li>
       <li
+      *appShowForRoles="[roleAux, roleAdmin, roleCleint]"
         class="header__li"
         [ngClass]="{ 'header__li--active': isActive('/salir') }"
       >
         <app-icon class="header__icon" [icon]="faLogoutIcon"></app-icon>
-        <a class="header__a">Cerrar Sesión</a>
+        <a (click)="onLogout()" class="header__a">Cerrar Sesión</a>
       </li>
     </ul>
   </nav>

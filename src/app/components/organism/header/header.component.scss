@@ -32,9 +32,6 @@
   }
   &__nav {
     padding-right: $horizontal-padding;
-    &--disable{
-      display: none;
-    }
   }
 
   &__icon {
@@ -71,9 +68,6 @@
   .header {
     &__button {
       display: flex;
-      &--disable{
-        display: none;
-      }
     }
 
     &__menu{

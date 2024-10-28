@@ -2,15 +2,26 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ArticleDetailPageComponent } from './article-detail-page/article-detail-page.component';
 import { ListArticlesComponent } from './list-articles/list-articles.component';
-import { ClientLayaoutComponent } from 'src/app/templates/client-layaout/client-layaout.component';
+import { ClientTemplateComponent } from 'src/app/templates/client-template/client-template.component';
+import { hasRole } from 'src/app/core/guards/hasRole/has-role.guard';
+import { Role } from 'src/app/shared/enums/role.enum';
+
 
 const routes: Routes = [
   {
     path: '',
-    component: ClientLayaoutComponent,
+    component: ClientTemplateComponent,
     children: [
-      { path: 'articulos', component: ListArticlesComponent },
-      { path: 'detalle-articulo/:id', component: ArticleDetailPageComponent },
+      {
+        path: 'articulos',
+        component: ListArticlesComponent,
+        canActivate: [hasRole([Role.CLIENT])],
+      },
+      {
+        path: 'detalle-articulo/:id',
+        component: ArticleDetailPageComponent,
+        canActivate: [hasRole([Role.CLIENT])],
+      },
       { path: '', redirectTo: '/articulos', pathMatch: 'full' },
     ],
   },

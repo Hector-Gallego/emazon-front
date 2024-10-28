@@ -11,6 +11,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { ButtonType } from 'src/app/shared/enums/button-type.enum';
+import { Role } from 'src/app/shared/enums/role.enum';
 
 @Component({
   selector: 'app-nav-bar',
@@ -30,13 +31,16 @@ export class NavBarComponent implements OnInit, OnDestroy {
   isSidebarOpen: boolean = false;
   screenWidth: number;
 
+  roleAdmin: Role = Role.ADMIN;
+  roleAux: Role = Role.WAREHOUSE_ASSISTANT;
+  roleClient: Role = Role.CLIENT;
   subscription = new Subscription();
 
   menuItems = [
-    { label: 'Categorías', icon: this.faList, route: '/admin/categorias' },
-    { label: 'Marcas', icon: this.faTags, route: '/admin/marcas' },
-    { label: 'Artículos', icon: this.faBox, route: '/admin/crear-articulo' },
-    { label: 'Auxiliar', icon: this.faAddUser, route: '/admin/crear-auxiliar' },
+    { label: 'Categorías', icon: this.faList, route: '/admin/categorias', roles:[this.roleAdmin, this.roleAux] },
+    { label: 'Marcas', icon: this.faTags, route: '/admin/marcas', roles:[this.roleAdmin, this.roleAux] },
+    { label: 'Artículos', icon: this.faBox, route: '/admin/crear-articulo' , roles:[this.roleAdmin, this.roleAux] },
+    { label: 'Auxiliar', icon: this.faAddUser, route: '/admin/crear-auxiliar' , roles:[this.roleAdmin] },
   ];
 
   constructor(private readonly router: Router) {

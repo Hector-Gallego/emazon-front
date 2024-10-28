@@ -11,6 +11,8 @@ import { TableToolBarComponent } from './table-tool-bar/table-tool-bar.component
 import { MultipleInputSelectComponent } from './multiple-input-select/multiple-input-select.component';
 import { CardComponent } from './card/card.component';
 import { RouterModule } from '@angular/router';
+import { CoreModule } from 'src/app/core/core.module';
+
 
 
 
@@ -26,7 +28,7 @@ import { RouterModule } from '@angular/router';
     MultipleInputSelectComponent,
     CardComponent
   ],
-  imports: [SharedModule, AtomsModule, MoleculesModule, RouterModule],
+  imports: [SharedModule, AtomsModule, MoleculesModule, RouterModule , CoreModule],
   exports: [
     DataTableComponent,
     HeaderComponent,
