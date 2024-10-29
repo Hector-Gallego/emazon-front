@@ -9,7 +9,7 @@ import { AtomsModule } from "src/app/components/atoms/atoms.module";
 import { MoleculesModule } from "src/app/components/molecules/molecules.module";
 import { OrganismModule } from "src/app/components/organism/organism.module";
 import { AdminRoutingModule } from "./admin-routing.module";
-import { MainLayaoutComponent } from "src/app/templates/main-layaout/main-layaout.component";
+import { AdminTemplateComponent } from "src/app/templates/admin-template/admin-template.component";
 import { AddWarehouseAssistantPageComponent } from './add-warehouse-assistant-page/add-warehouse-assistant-page.component';
 
 @NgModule({

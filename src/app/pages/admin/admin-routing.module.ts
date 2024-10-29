@@ -5,22 +5,55 @@ import { AddBrandPageComponent } from './add-brand-page/add-brand-page.component
 import { AddArticlePageComponent } from './add-article-page/add-article-page.component';
 import { ListBrandsPageComponent } from './list-brands-page/list-brands-page.component';
 import { ListCategoriesPageComponent } from './list-categories-page/list-categories-page.component';
-import { MainLayaoutComponent } from 'src/app/templates/main-layaout/main-layaout.component';
+import { AdminTemplateComponent } from 'src/app/templates/admin-template/admin-template.component';
 import { AddWarehouseAssistantPageComponent } from './add-warehouse-assistant-page/add-warehouse-assistant-page.component';
+import {  HasRoleGuard} from 'src/app/core/guards/hasRole/has-role.guard';
+import { Role } from 'src/app/shared/enums/role.enum';
+import { AdminRoutes } from 'src/app/shared/constants/routes.constants';
 
 const routes: Routes = [
   {
     path: '',
-    component: MainLayaoutComponent, 
+    component: AdminTemplateComponent,
     children: [
-      { path: 'crear-categoria', component: AddCategoryPageComponent },
-      { path: 'crear-marca', component: AddBrandPageComponent },
-      { path: 'crear-articulo', component: AddArticlePageComponent },
-      { path: 'marcas', component: ListBrandsPageComponent },
-      { path: 'categorias', component: ListCategoriesPageComponent },
-      { path: 'crear-auxiliar', component: AddWarehouseAssistantPageComponent },
+      {
+        path: AdminRoutes.CREATE_CATEGORY,
+        component: AddCategoryPageComponent,
+        canActivate: [HasRoleGuard],
+        data: {allowRoles: [Role.ADMIN, Role.WAREHOUSE_ASSISTANT]},
+      },
+      {
+        path: AdminRoutes.CREATE_BRAND,
+        component: AddBrandPageComponent,
+        canActivate: [HasRoleGuard],
+        data: {allowRoles: [Role.ADMIN, Role.WAREHOUSE_ASSISTANT]},
+      },
+      {
+        path: AdminRoutes.CREATE_ARTICLE,
+        component: AddArticlePageComponent,
+        canActivate: [HasRoleGuard],
+        data: {allowRoles: [Role.ADMIN, Role.WAREHOUSE_ASSISTANT]},
+      },
+      {
+        path: AdminRoutes.BRANDS,
+        component: ListBrandsPageComponent,
+        canActivate: [HasRoleGuard],
+        data: {allowRoles: [Role.ADMIN, Role.WAREHOUSE_ASSISTANT]},
+      },
+      {
+        path: AdminRoutes.CATEGORIES,
+        component: ListCategoriesPageComponent,
+        canActivate: [HasRoleGuard],
+        data: {allowRoles: [Role.ADMIN, Role.WAREHOUSE_ASSISTANT]},
+      },
+      {
+        path: AdminRoutes.CREATE_WAREHOUSE_ASSISTANT,
+        component: AddWarehouseAssistantPageComponent,
+        canActivate: [HasRoleGuard],
+        data: {allowRoles: [Role.ADMIN]},
+      },
 
-      { path: '', redirectTo: 'categorias', pathMatch: 'full' },
+      { path: '', redirectTo: AdminRoutes.CATEGORIES, pathMatch: 'full' },
     ],
   },
 ];

@@ -5,8 +5,9 @@
   </div>
   <div class="nav-bar-container__menu" [ngClass]="{'open': isSidebarOpen}">
     <ng-container *ngFor="let item of menuItems">
-      <div class="nav-bar-container__menu__item">
+      <div  class="nav-bar-container__menu__item">
         <app-navigation-bar-button
+        *appShowForRoles="item.roles"
           [label]="item.label"
           [icon]="item.icon"
           (click)="navigate(item.route)"

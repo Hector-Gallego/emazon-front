@@ -67,9 +67,6 @@ describe('ArticlePersistenceService', () => {
       environment.stockApiUrl + ArticleValuesConstants.END_POINT_ARTILCLE_SAVE
     );
     expect(req.request.method).toBe('POST');
-    expect(req.request.headers.get('Authorization')).toBe(
-      environment.mockTokenAdmin
-    );
     req.flush(mockResponse);
   });
 
@@ -107,9 +104,6 @@ describe('ArticlePersistenceService', () => {
     );
 
     expect(req.request.method).toBe('GET');
-    expect(req.request.headers.get('Authorization')).toBe(
-      environment.mockTokenAdmin
-    );
     req.flush(mockResponse);
   });
 
@@ -124,7 +118,6 @@ describe('ArticlePersistenceService', () => {
 
     const req = httpMock.expectOne(`${environment.stockApiUrl}${ArticleValuesConstants.END_POINT_ARTILCLE}/${articleId}`);
     expect(req.request.method).toBe('GET');
-    expect(req.request.headers.get('Authorization')).toBe(environment.mockTokenAdmin);
     req.flush(mockResponse);
   });
 

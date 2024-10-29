@@ -1,0 +1,25 @@
+<div class="login">
+  <section class="login__image-section">
+    <div class="login__logo">
+      <img src="../../../../assets/logo-purple.svg" alt="" />
+    </div>
+    <img
+      class="login__loguito"
+      src="../../../../assets/logo-sesion-3.svg"
+      alt=""
+    />
+  </section>
+  <section class="login__form-section">
+    <div class="login__form-container">
+      <app-form
+        [formTitle]="'Iniciar sesión'"
+        [fields]="loginFields"
+        [buttonLabelText]="'Ingresar'"
+        (submitForm)="onFormSubmit($event)"
+      ></app-form>
+      <p class="login__register-p">
+        No se encuentra registrado? <a class="login__register-a">Registrese</a>
+      </p>
+    </div>
+  </section>
+</div>

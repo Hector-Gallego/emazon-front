@@ -1,14 +1,15 @@
 import { NgModule } from "@angular/core";
-import { MainLayaoutComponent } from "./main-layaout/main-layaout.component";
+import { AdminTemplateComponent } from "./admin-template/admin-template.component";
 import { SharedModule } from "../shared/shared.module";
 import { AppRoutingModule } from "../app-routing.module";
 import { OrganismModule } from "../components/organism/organism.module";
-import { ClientLayaoutComponent } from './client-layaout/client-layaout.component';
+import { ClientTemplateComponent } from './client-template/client-template.component';
+
 
 
 @NgModule({
 
-    declarations:[MainLayaoutComponent, ClientLayaoutComponent],
+    declarations:[AdminTemplateComponent, ClientTemplateComponent],
     imports: [SharedModule, AppRoutingModule, OrganismModule],
-    exports: [MainLayaoutComponent, ClientLayaoutComponent]
+    exports: [AdminTemplateComponent, ClientTemplateComponent]
 }) export class TemplatesModule {}
