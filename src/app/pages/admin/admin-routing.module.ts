@@ -17,7 +17,7 @@ const routes: Routes = [
     component: AdminTemplateComponent,
     children: [
       {
-        path: AdminRoutes.CATEGORIES,
+        path: AdminRoutes.CREATE_CATEGORY,
         component: AddCategoryPageComponent,
         canActivate: [HasRoleGuard],
         data: {allowRoles: [Role.ADMIN, Role.WAREHOUSE_ASSISTANT]},

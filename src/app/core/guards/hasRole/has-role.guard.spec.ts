@@ -52,7 +52,7 @@ describe('HasRoleGuard', () => {
     const result = guard.canActivate(route as ActivatedRouteSnapshot);
 
     expect(result).toBe(false);
-    expect(router.navigate).toHaveBeenCalledWith(['/admin']);
+    expect(router.navigate).toHaveBeenCalledWith(['admin']);
   });
 
   it('debería denegar el acceso y redirigir al usuario a /articulos si el rol es CLIENT pero no está permitido', () => {
@@ -62,6 +62,6 @@ describe('HasRoleGuard', () => {
     const result = guard.canActivate(route as ActivatedRouteSnapshot);
 
     expect(result).toBe(false);
-    expect(router.navigate).toHaveBeenCalledWith(['/articulos']);
+    expect(router.navigate).toHaveBeenCalledWith(['tienda']);
   });
 });

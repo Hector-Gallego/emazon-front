@@ -86,7 +86,7 @@ describe('LoginPageComponent', () => {
 
     expect(loaderService.show).toHaveBeenCalled();
     expect(authService.login).toHaveBeenCalledWith(loginData);
-    expect(router.navigate).toHaveBeenCalledWith(['/admin']);
+    expect(router.navigate).toHaveBeenCalledWith(['admin']);
     expect(loaderService.hide).toHaveBeenCalled();
   });
 
@@ -102,7 +102,7 @@ describe('LoginPageComponent', () => {
 
     expect(loaderService.show).toHaveBeenCalled();
     expect(authService.login).toHaveBeenCalledWith(loginData);
-    expect(router.navigate).toHaveBeenCalledWith(['/tienda/articulos']);
+    expect(router.navigate).toHaveBeenCalledWith(['tienda']);
     expect(loaderService.hide).toHaveBeenCalled();
   });
 

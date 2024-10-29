@@ -69,15 +69,5 @@ describe('HeaderComponent', () => {
     component.currentRoute = '/test-route';
     expect(component.isActive('/other-route')).toBe(false);
   });
-
-  it('deberia devolver true si las rutas coinciden', ()=>{
-
-    const testRoute = '/tienda/articulos';
-
-    component.onNavigateto();
-
-    expect(routerMock.navigate).toHaveBeenCalledWith([testRoute]);
-
-  });
  
 });

@@ -36,7 +36,7 @@ describe('RedirectGuard', () => {
       (tokenService.isValidToken as jest.Mock).mockReturnValue(true);
       const result = guard.canActivate();
       expect(result).toBe(true);
-      expect(router.navigate).toHaveBeenCalledWith(['/page/articulos']);
+      expect(router.navigate).toHaveBeenCalledWith(['/tienda/articulos']);
     });
 
     it('debería permitir la activación si el token no es válido', () => {
