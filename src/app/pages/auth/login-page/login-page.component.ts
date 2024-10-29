@@ -9,6 +9,7 @@ import {
   ErrorMessages,
   StatesTypes,
 } from 'src/app/shared/constants/commonConstants';
+import { MainRoutes } from 'src/app/shared/constants/routes.constants';
 import { InputContentType } from 'src/app/shared/enums/input-content-type.enum';
 import { InputType } from 'src/app/shared/enums/inputs-type.enum';
 import { Role } from 'src/app/shared/enums/role.enum';
@@ -70,8 +71,8 @@ export class LoginPageComponent {
           const userRole = this.tokenService.getRoleUser();
           this.router.navigate([
             userRole === Role.ADMIN || userRole === Role.WAREHOUSE_ASSISTANT
-              ? '/admin'
-              : '/tienda/articulos',
+              ? MainRoutes.ADMIN
+              : MainRoutes.STORE,
           ]);
           this.loginForm.resetForm();
         },

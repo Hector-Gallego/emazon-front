@@ -16,31 +16,31 @@
     [ngClass]="{ 'header__nav--active': active }"
     
   >
-    <ul class="header__ul">
+  <ul class="header__ul">
+    <ng-container *ngFor="let item of menuItems">
       <li
-        *appShowForRoles="[roleCleint]"
-        [ngClass]="{ 'header__li--active': isActive('/articulos') }"
+        *appShowForRoles="item.roles"
+        [ngClass]="{ 'header__li--active': isActive(item.route) }"
         class="header__li"
       >
-        <app-icon class="header__icon" [icon]="faArticlesIcon"></app-icon>
-        <a class="header__a" [routerLink]="['/articulos']">Artículos</a>
+        <app-icon class="header__icon" [icon]="item.icon"></app-icon>
+        <a 
+          class="header__a"
+          [routerLink]="[item.route]"
+          *ngIf="!item.isLogout"
+        >
+          {{ item.label }}
+        </a>
+        <a 
+          class="header__a" 
+          *ngIf="item.isLogout" 
+          (click)="onLogout()"
+        >
+          {{ item.label }}
+        </a>
       </li>
-      <li
-      *appShowForRoles="[roleCleint]"
-        class="header__li"
-        [ngClass]="{ 'header__li--active': isActive('/carrito') }"
-      >
-        <app-icon class="header__icon" [icon]="faIconShoppingCar"></app-icon>
-        <a class="header__a">Carrito</a>
-      </li>
-      <li
-      *appShowForRoles="[roleAux, roleAdmin, roleCleint]"
-        class="header__li"
-        [ngClass]="{ 'header__li--active': isActive('/salir') }"
-      >
-        <app-icon class="header__icon" [icon]="faLogoutIcon"></app-icon>
-        <a (click)="onLogout()" class="header__a">Cerrar Sesión</a>
-      </li>
-    </ul>
+    </ng-container>
+  </ul>
+  
   </nav>
 </header>

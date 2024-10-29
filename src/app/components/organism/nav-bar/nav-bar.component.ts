@@ -12,6 +12,10 @@ import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { ButtonType } from 'src/app/shared/enums/button-type.enum';
 import { Role } from 'src/app/shared/enums/role.enum';
+import {
+  AdminRoutes,
+  MainRoutes,
+} from 'src/app/shared/constants/routes.constants';
 
 @Component({
   selector: 'app-nav-bar',
@@ -37,10 +41,30 @@ export class NavBarComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
 
   menuItems = [
-    { label: 'Categorías', icon: this.faList, route: '/admin/categorias', roles:[this.roleAdmin, this.roleAux] },
-    { label: 'Marcas', icon: this.faTags, route: '/admin/marcas', roles:[this.roleAdmin, this.roleAux] },
-    { label: 'Artículos', icon: this.faBox, route: '/admin/crear-articulo' , roles:[this.roleAdmin, this.roleAux] },
-    { label: 'Auxiliar', icon: this.faAddUser, route: '/admin/crear-auxiliar' , roles:[this.roleAdmin] },
+    {
+      label: 'Categorías',
+      icon: this.faList,
+      route: `/${MainRoutes.ADMIN}/${AdminRoutes.CATEGORIES}`,
+      roles: [this.roleAdmin, this.roleAux],
+    },
+    {
+      label: 'Marcas',
+      icon: this.faTags,
+      route: `/${MainRoutes.ADMIN}/${AdminRoutes.BRANDS}`,
+      roles: [this.roleAdmin, this.roleAux],
+    },
+    {
+      label: 'Artículos',
+      icon: this.faBox,
+      route: `/${MainRoutes.ADMIN}/${AdminRoutes.CREATE_ARTICLE}`,
+      roles: [this.roleAdmin, this.roleAux],
+    },
+    {
+      label: 'Auxiliar',
+      icon: this.faAddUser,
+      route: `/${MainRoutes.ADMIN}/${AdminRoutes.CREATE_WAREHOUSE_ASSISTANT}`,
+      roles: [this.roleAdmin],
+    },
   ];
 
   constructor(private readonly router: Router) {
@@ -51,6 +75,9 @@ export class NavBarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
+    this.currentRoute = this.router.url;
+    
     const subs = this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event) => {

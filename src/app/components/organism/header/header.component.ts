@@ -2,14 +2,13 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import {
   faBars,
-  faShoppingCart,
   faSignOut,
   faStore,
-  faUser,
   IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
 import { filter, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth-service/auth.service';
+import { ClientRoutes, MainRoutes } from 'src/app/shared/constants/routes.constants';
 import { Role } from 'src/app/shared/enums/role.enum';
 
 @Component({
@@ -18,16 +17,14 @@ import { Role } from 'src/app/shared/enums/role.enum';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  faIconShoppingCar: IconDefinition = faShoppingCart;
-  faIconUser: IconDefinition = faUser;
+
   faLogoutIcon: IconDefinition = faSignOut;
   faArticlesIcon: IconDefinition = faStore;
   menuIcon: IconDefinition = faBars;
   subscription = new Subscription();
   active: boolean = true;
   currentRoute: string = '';
-  roleAdmin : Role = Role.ADMIN;
-  roleAux : Role = Role.WAREHOUSE_ASSISTANT;
+
   roleCleint : Role = Role.CLIENT;
   @Input() isAdmin: boolean = false;
 
@@ -36,6 +33,9 @@ export class HeaderComponent implements OnInit {
     private readonly authService: AuthService
   ) {}
   ngOnInit(): void {
+
+    this.currentRoute = this.router.url;
+
     const subs = this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event) => {
@@ -46,10 +46,25 @@ export class HeaderComponent implements OnInit {
     this.subscription.add(subs);
   }
 
-  onNavigateto(): void {
-    this.router.navigate(['/tienda/articulos']);
-  }
+  roleClient = Role.CLIENT;
+  roleAux = Role.WAREHOUSE_ASSISTANT;
+  roleAdmin = Role.ADMIN;
 
+  menuItems = [
+    {
+      label: 'Artículos',
+      icon: this.faArticlesIcon,
+      route: `/${MainRoutes.STORE}/${ClientRoutes.ARTICLES}`,
+      roles: [this.roleClient]
+    },
+    {
+      label: 'Cerrar Sesión',
+      icon: this.faLogoutIcon,
+      route: `${MainRoutes.LOGOUT}`,
+      roles: [this.roleAux, this.roleAdmin, this.roleClient],
+      isLogout: true 
+    }
+  ];
   setActive(): void {
     this.active = !this.active;
   }
@@ -59,6 +74,6 @@ export class HeaderComponent implements OnInit {
   }
   onLogout() {
     this.authService.logout();
-    this.router.navigate(['/auth/login']);
+    this.router.navigate([`/${MainRoutes.AUTH}/${MainRoutes.LOGIN}`]);
   }
 }

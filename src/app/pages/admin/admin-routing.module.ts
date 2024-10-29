@@ -9,6 +9,7 @@ import { AdminTemplateComponent } from 'src/app/templates/admin-template/admin-t
 import { AddWarehouseAssistantPageComponent } from './add-warehouse-assistant-page/add-warehouse-assistant-page.component';
 import {  HasRoleGuard} from 'src/app/core/guards/hasRole/has-role.guard';
 import { Role } from 'src/app/shared/enums/role.enum';
+import { AdminRoutes } from 'src/app/shared/constants/routes.constants';
 
 const routes: Routes = [
   {
@@ -16,43 +17,43 @@ const routes: Routes = [
     component: AdminTemplateComponent,
     children: [
       {
-        path: 'crear-categoria',
+        path: AdminRoutes.CATEGORIES,
         component: AddCategoryPageComponent,
         canActivate: [HasRoleGuard],
         data: {allowRoles: [Role.ADMIN, Role.WAREHOUSE_ASSISTANT]},
       },
       {
-        path: 'crear-marca',
+        path: AdminRoutes.CREATE_BRAND,
         component: AddBrandPageComponent,
         canActivate: [HasRoleGuard],
         data: {allowRoles: [Role.ADMIN, Role.WAREHOUSE_ASSISTANT]},
       },
       {
-        path: 'crear-articulo',
+        path: AdminRoutes.CREATE_ARTICLE,
         component: AddArticlePageComponent,
         canActivate: [HasRoleGuard],
         data: {allowRoles: [Role.ADMIN, Role.WAREHOUSE_ASSISTANT]},
       },
       {
-        path: 'marcas',
+        path: AdminRoutes.BRANDS,
         component: ListBrandsPageComponent,
         canActivate: [HasRoleGuard],
         data: {allowRoles: [Role.ADMIN, Role.WAREHOUSE_ASSISTANT]},
       },
       {
-        path: 'categorias',
+        path: AdminRoutes.CATEGORIES,
         component: ListCategoriesPageComponent,
         canActivate: [HasRoleGuard],
         data: {allowRoles: [Role.ADMIN, Role.WAREHOUSE_ASSISTANT]},
       },
       {
-        path: 'crear-auxiliar',
+        path: AdminRoutes.CREATE_WAREHOUSE_ASSISTANT,
         component: AddWarehouseAssistantPageComponent,
         canActivate: [HasRoleGuard],
         data: {allowRoles: [Role.ADMIN]},
       },
 
-      { path: '', redirectTo: 'categorias', pathMatch: 'full' },
+      { path: '', redirectTo: AdminRoutes.CATEGORIES, pathMatch: 'full' },
     ],
   },
 ];

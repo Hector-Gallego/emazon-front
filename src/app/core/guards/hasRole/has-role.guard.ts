@@ -6,7 +6,7 @@ import {
 } from '@angular/router';
 import { TokenService } from '../../services/token-service/token.service';
 import { Role } from 'src/app/shared/enums/role.enum';
-import { Observable } from 'rxjs';
+import { MainRoutes } from 'src/app/shared/constants/routes.constants';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +22,7 @@ export class HasRoleGuard implements CanActivate {
   
     if (!allowedRoles.includes(userRole)) {
     
-      const targetRoute = userRole === Role.CLIENT ? '/articulos' : '/admin';
+      const targetRoute = userRole === Role.CLIENT ? MainRoutes.STORE : MainRoutes.ADMIN;
       this.router.navigate([targetRoute]);
       return false;
     }

@@ -5,6 +5,7 @@ import {
 } from '@angular/router';
 
 import { TokenService } from '../../services/token-service/token.service';
+import { MainRoutes } from 'src/app/shared/constants/routes.constants';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,7 @@ export class IsLoggedGuard implements CanLoad {
     const isValidToken = this.tokenService.isValidToken();
    
     if (!isValidToken) {
-      this.router.navigate(['/auth/login']);
+      this.router.navigate([`/${MainRoutes.AUTH}/${MainRoutes.LOGIN}`]);
       return false;
     }
     return true;

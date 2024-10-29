@@ -5,6 +5,7 @@ import { ListArticlesComponent } from './list-articles/list-articles.component';
 import { ClientTemplateComponent } from 'src/app/templates/client-template/client-template.component';
 import { HasRoleGuard } from 'src/app/core/guards/hasRole/has-role.guard';
 import { Role } from 'src/app/shared/enums/role.enum';
+import { ClientRoutes } from 'src/app/shared/constants/routes.constants';
 
 
 const routes: Routes = [
@@ -13,18 +14,18 @@ const routes: Routes = [
     component: ClientTemplateComponent,
     children: [
       {
-        path: 'articulos',
+        path: ClientRoutes.ARTICLES,
         component: ListArticlesComponent,
         canActivate: [HasRoleGuard],
         data: {allowRoles: [Role.CLIENT]},
       },
       {
-        path: 'detalle-articulo/:id',
+        path: ClientRoutes.ARTICLE_DETAIL,
         component: ArticleDetailPageComponent,
         canActivate: [HasRoleGuard],
         data: {allowRoles: [Role.CLIENT]},
       },
-      { path: '', redirectTo: '/articulos', pathMatch: 'full' },
+      { path: '', redirectTo: ClientRoutes.ARTICLES, pathMatch: 'full' },
     ],
   },
 ];
