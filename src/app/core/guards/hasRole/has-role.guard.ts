@@ -1,19 +1,31 @@
-import { inject, Injectable } from '@angular/core';
-import { CanActivate, Route, Router } from '@angular/router';
+import { Injectable } from '@angular/core';
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  Router,
+} from '@angular/router';
 import { TokenService } from '../../services/token-service/token.service';
 import { Role } from 'src/app/shared/enums/role.enum';
+import { Observable } from 'rxjs';
 
-
-export function hasRole(allowedRoles: Role[]) {
-  return () => {
-    const userRole = inject(TokenService).getRoleUser();
-   
+@Injectable({
+  providedIn: 'root',
+})
+export class HasRoleGuard implements CanActivate {
+  constructor(
+    private readonly tokenService: TokenService,
+    private readonly router: Router
+  ) {}
+  canActivate(route: ActivatedRouteSnapshot): boolean {
+    const userRole = this.tokenService.getRoleUser();
+    const allowedRoles = route.data?.['allowRoles'];
+  
     if (!allowedRoles.includes(userRole)) {
-      const router = inject(Router);
+    
       const targetRoute = userRole === Role.CLIENT ? '/articulos' : '/admin';
-      router.navigate([targetRoute]);
+      this.router.navigate([targetRoute]);
       return false;
     }
     return true;
-  };
+  }
 }

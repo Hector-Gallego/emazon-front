@@ -60,7 +60,7 @@ export class LoginPageComponent {
   @ViewChild(FormComponent) logindForm!: FormComponent<LoginRequest>;
 
   onFormSubmit(loginData: LoginRequest) {
-    console.log(loginData);
+    
     this.loaderService.show();
     const addBrandSubscription = this.authService
       .login(loginData)

@@ -7,7 +7,7 @@ import { ListBrandsPageComponent } from './list-brands-page/list-brands-page.com
 import { ListCategoriesPageComponent } from './list-categories-page/list-categories-page.component';
 import { AdminTemplateComponent } from 'src/app/templates/admin-template/admin-template.component';
 import { AddWarehouseAssistantPageComponent } from './add-warehouse-assistant-page/add-warehouse-assistant-page.component';
-import { hasRole} from 'src/app/core/guards/hasRole/has-role.guard';
+import {  HasRoleGuard} from 'src/app/core/guards/hasRole/has-role.guard';
 import { Role } from 'src/app/shared/enums/role.enum';
 
 const routes: Routes = [
@@ -18,32 +18,38 @@ const routes: Routes = [
       {
         path: 'crear-categoria',
         component: AddCategoryPageComponent,
-        canActivate: [hasRole([Role.ADMIN, Role.WAREHOUSE_ASSISTANT])],
+        canActivate: [HasRoleGuard],
+        data: {allowRoles: [Role.ADMIN, Role.WAREHOUSE_ASSISTANT]},
       },
       {
         path: 'crear-marca',
         component: AddBrandPageComponent,
-        canActivate: [hasRole([Role.ADMIN, Role.WAREHOUSE_ASSISTANT])],
+        canActivate: [HasRoleGuard],
+        data: {allowRoles: [Role.ADMIN, Role.WAREHOUSE_ASSISTANT]},
       },
       {
         path: 'crear-articulo',
         component: AddArticlePageComponent,
-        canActivate: [hasRole([Role.ADMIN, Role.WAREHOUSE_ASSISTANT])],
+        canActivate: [HasRoleGuard],
+        data: {allowRoles: [Role.ADMIN, Role.WAREHOUSE_ASSISTANT]},
       },
       {
         path: 'marcas',
         component: ListBrandsPageComponent,
-        canActivate: [hasRole([Role.ADMIN, Role.WAREHOUSE_ASSISTANT])],
+        canActivate: [HasRoleGuard],
+        data: {allowRoles: [Role.ADMIN, Role.WAREHOUSE_ASSISTANT]},
       },
       {
         path: 'categorias',
         component: ListCategoriesPageComponent,
-        canActivate: [hasRole([Role.ADMIN, Role.WAREHOUSE_ASSISTANT])],
+        canActivate: [HasRoleGuard],
+        data: {allowRoles: [Role.ADMIN, Role.WAREHOUSE_ASSISTANT]},
       },
       {
         path: 'crear-auxiliar',
         component: AddWarehouseAssistantPageComponent,
-        canActivate: [hasRole([Role.ADMIN])],
+        canActivate: [HasRoleGuard],
+        data: {allowRoles: [Role.ADMIN]},
       },
 
       { path: '', redirectTo: 'categorias', pathMatch: 'full' },

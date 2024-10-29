@@ -1,50 +1,67 @@
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { Role } from 'src/app/shared/enums/role.enum';
+import { HasRoleGuard } from './has-role.guard';
 import { TokenService } from '../../services/token-service/token.service';
-import { hasRole } from './has-role.guard';
+import { Role } from 'src/app/shared/enums/role.enum';
+import { ActivatedRouteSnapshot } from '@angular/router';
 
-let tokenService: TokenService;
-let router: Router;
-
-xdescribe('hasRole Guard', () => {
-  const mockTokenService = {
-    getRoleUser: jest.fn(),
-  };
-
-  const mockRouter = {
-    navigate: jest.fn(),
-  };
+describe('HasRoleGuard', () => {
+  let guard: HasRoleGuard;
+  let tokenService: jest.Mocked<TokenService>;
+  let router: jest.Mocked<Router>;
+  let route: Partial<ActivatedRouteSnapshot>;
 
   beforeEach(() => {
+    const tokenServiceMock = {
+      getRoleUser: jest.fn(),
+    };
+
+    const routerMock = {
+      navigate: jest.fn(),
+    };
+
+    route = {
+      data: { allowRoles: [Role.ADMIN, Role.CLIENT] },
+    };
+
     TestBed.configureTestingModule({
       providers: [
-        { provide: TokenService, useValue: mockTokenService },
-        { provide: Router, useValue: mockRouter },
+        HasRoleGuard,
+        { provide: TokenService, useValue: tokenServiceMock },
+        { provide: Router, useValue: routerMock },
       ],
     });
 
-    tokenService = TestBed.inject(TokenService);
-    router = TestBed.inject(Router);
+    router = TestBed.inject(Router) as jest.Mocked<Router>;
+    tokenService = TestBed.inject(TokenService) as jest.Mocked<TokenService>;
+    guard = TestBed.inject(HasRoleGuard);
   });
 
-  test('debería retornar true si el usuario tiene un rol valido', () => {
-    const allowedRoles = [Role.ADMIN, Role.CLIENT];
-    mockTokenService.getRoleUser.mockReturnValue(Role.ADMIN);
+  it('debería permitir el acceso si el rol del usuario está en los roles permitidos', () => {
+    tokenService.getRoleUser.mockReturnValue(Role.ADMIN);
 
-    const guard = hasRole(allowedRoles);
+    const result = guard.canActivate(route as ActivatedRouteSnapshot);
 
-    expect(guard()).toBe(true);
+    expect(result).toBe(true);
     expect(router.navigate).not.toHaveBeenCalled();
   });
 
-  test('debería redireccionar a /articulos si el usuario es CLIENT', () => {
-    const allowedRoles = [Role.ADMIN];
-    mockTokenService.getRoleUser.mockReturnValue(Role.CLIENT);
+  it('debería denegar el acceso y redirigir al usuario a /admin si no tiene un rol permitido', () => {
+    tokenService.getRoleUser.mockReturnValue(Role.NO_ROLE);
 
-    //const guard = TestBed.runInInjectionContext(() => hasRole(allowedRoles));
+    const result = guard.canActivate(route as ActivatedRouteSnapshot);
 
-    //expect(guard()).toBe(false);
+    expect(result).toBe(false);
+    expect(router.navigate).toHaveBeenCalledWith(['/admin']);
+  });
+
+  it('debería denegar el acceso y redirigir al usuario a /articulos si el rol es CLIENT pero no está permitido', () => {
+    tokenService.getRoleUser.mockReturnValue(Role.CLIENT);
+    route.data = { allowRoles: [Role.ADMIN] };
+
+    const result = guard.canActivate(route as ActivatedRouteSnapshot);
+
+    expect(result).toBe(false);
     expect(router.navigate).toHaveBeenCalledWith(['/articulos']);
   });
 });

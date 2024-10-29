@@ -27,7 +27,7 @@ describe('NavBarComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [NavBarComponent, NavigationBarButtonComponent],
-      imports: [FontAwesomeModule],
+      imports: [FontAwesomeModule, CoreModule],
       providers: [{ provide: Router, useValue: routerMock }],
     }).compileComponents();
 

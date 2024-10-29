@@ -52,7 +52,6 @@ export class TokenService {
       const decodeToken = jwtDecode<CustomJwtPayload>(token);
       if (decodeToken?.role) {
         const role = decodeToken.role;
-        console.log(role);
         switch (role) {
           case 'ADMIN':
             return Role.ADMIN;
