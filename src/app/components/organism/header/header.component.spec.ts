@@ -4,6 +4,8 @@ import { NavigationEnd, Event, Router, RouterModule,} from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Subject } from 'rxjs';
 import { AtomsModule } from '../../atoms/atoms.module';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CoreModule } from 'src/app/core/core.module';
 
 
 describe('HeaderComponent', () => {
@@ -20,7 +22,7 @@ describe('HeaderComponent', () => {
     };
 
     await TestBed.configureTestingModule({
-      imports: [FontAwesomeModule, AtomsModule, ],
+      imports: [FontAwesomeModule, AtomsModule, HttpClientTestingModule, CoreModule ],
       declarations: [HeaderComponent],
       providers: [{ provide: Router, useValue: routerMock }],
     }).compileComponents();
@@ -70,7 +72,7 @@ describe('HeaderComponent', () => {
 
   it('deberia devolver true si las rutas coinciden', ()=>{
 
-    const testRoute = '/articulos';
+    const testRoute = '/tienda/articulos';
 
     component.onNavigateto();
 

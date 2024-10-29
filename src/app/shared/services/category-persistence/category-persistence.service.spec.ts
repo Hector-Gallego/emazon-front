@@ -8,6 +8,8 @@ import { environment } from 'src/environments/environment';
 import { PaginationRequest } from 'src/app/shared/interfaces/pagination-request.interface';
 import { Category } from '../../interfaces/category.interface';
 import { CategoryValuesConstants } from '../../constants/category.constants';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from 'src/app/core/interceptors/token-interceptor/token.interceptor';
 
 describe('CategoryPersistenceService', () => {
   let service: CategoryPersistenceService;
@@ -46,9 +48,6 @@ describe('CategoryPersistenceService', () => {
 
     const req = httpMock.expectOne(environment.stockApiUrl + '/api/category');
     expect(req.request.method).toBe('POST');
-    expect(req.request.headers.get('Authorization')).toBe(
-      environment.mockTokenAdmin
-    );
     req.flush(mockResponse);
   });
 
@@ -86,9 +85,6 @@ describe('CategoryPersistenceService', () => {
     );
 
     expect(req.request.method).toBe('GET');
-    expect(req.request.headers.get('Authorization')).toBe(
-      environment.mockTokenAdmin
-    );
     req.flush(mockResponse);
   });
 

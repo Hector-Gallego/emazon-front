@@ -5,14 +5,15 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AtomsModule } from 'src/app/components/atoms/atoms.module';
 import { OrganismModule } from 'src/app/components/organism/organism.module';
 import { AdminModule } from 'src/app/pages/admin/admin.module';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-describe('ClientLayaoutComponent', () => {
+describe('ClientTemplateComponent', () => {
   let component: ClientTemplateComponent;
   let fixture: ComponentFixture<ClientTemplateComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AdminModule, AtomsModule, RouterTestingModule, OrganismModule],
+      imports: [AdminModule, AtomsModule, RouterTestingModule, OrganismModule, HttpClientTestingModule],
       declarations: [ ClientTemplateComponent ]
     })
     .compileComponents();
@@ -22,7 +23,7 @@ describe('ClientLayaoutComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('debería crear el componente', () => {
     expect(component).toBeTruthy();
   });
 });

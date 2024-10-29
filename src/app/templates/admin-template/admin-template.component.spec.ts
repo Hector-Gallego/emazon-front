@@ -5,6 +5,7 @@ import { AtomsModule } from 'src/app/components/atoms/atoms.module';
 import { OrganismModule } from 'src/app/components/organism/organism.module';
 import { AdminModule } from 'src/app/pages/admin/admin.module';
 import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('MainLayaoutComponent', () => {
   let component: AdminTemplateComponent;
@@ -13,7 +14,7 @@ describe('MainLayaoutComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AdminTemplateComponent],
-      imports: [AdminModule, AtomsModule, RouterTestingModule, OrganismModule ],
+      imports: [AdminModule, AtomsModule, RouterTestingModule, OrganismModule, HttpClientTestingModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AdminTemplateComponent);

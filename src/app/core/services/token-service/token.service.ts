@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { faL } from '@fortawesome/free-solid-svg-icons';
 import { jwtDecode, JwtPayload } from 'jwt-decode';
 import { Role } from 'src/app/shared/enums/role.enum';
-import { getCookie, setCookie, removeCookie } from 'typescript-cookie';
+
+
+import Cookies from 'js-cookie';
 
 interface CustomJwtPayload extends JwtPayload {
   role?: string;
@@ -14,17 +15,17 @@ export class TokenService {
   constructor() {}
 
   saveToken(token: string) {
-    setCookie('token', token, { expires: 365, path: '/' });
+    Cookies.set('token', token, { expires: 365, path: '/' });
   }
 
   getToken() {
-    const token = getCookie('token');
+    const token = Cookies.get('token');
 
     return token;
   }
 
   removeToken() {
-    removeCookie('token');
+    Cookies.remove('token');
   }
 
   isValidToken() {
@@ -44,7 +45,7 @@ export class TokenService {
     return false;
   }
   
-  getRoleUSer(): Role {
+  getRoleUser(): Role {
     const token = this.getToken();
 
     if (token) {

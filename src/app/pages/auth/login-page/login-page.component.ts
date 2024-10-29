@@ -24,7 +24,7 @@ import { UserPersistenceService } from 'src/app/shared/services/user-persistence
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss'],
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent {
   constructor(
     private readonly authService: AuthService,
     private readonly toastService: ToastService,
@@ -67,7 +67,7 @@ export class LoginPageComponent implements OnInit {
       .pipe(finalize(() => this.loaderService.hide()))
       .subscribe({
         next: () => {
-          const userRole = this.tokenService.getRoleUSer();
+          const userRole = this.tokenService.getRoleUser();
           this.router.navigate([
             userRole === Role.ADMIN || userRole === Role.WAREHOUSE_ASSISTANT
               ? '/admin'
@@ -91,5 +91,5 @@ export class LoginPageComponent implements OnInit {
     this.subscription.add(addBrandSubscription);
   }
   @ViewChild(FormComponent) loginForm!: FormComponent<LoginRequest>;
-  ngOnInit(): void {}
+
 }

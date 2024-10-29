@@ -10,7 +10,7 @@ import {
 import { Observable } from 'rxjs';
 import { TokenService } from '../../services/token-service/token.service';
 
-const CHECK_TOKEN = new HttpContextToken<boolean>(() => false);
+export const CHECK_TOKEN = new HttpContextToken<boolean>(() => false);
 export function checkToken() {
   return new HttpContext().set(CHECK_TOKEN, true);
 }

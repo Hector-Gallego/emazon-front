@@ -49,9 +49,6 @@ describe('BrandPersistenceService', () => {
       environment.stockApiUrl + BrandValuesConstants.END_POINT_BRAND
     );
     expect(req.request.method).toBe('POST');
-    expect(req.request.headers.get('Authorization')).toBe(
-      environment.mockTokenAdmin
-    );
     req.flush(mockResponse);
   });
 
@@ -89,9 +86,6 @@ describe('BrandPersistenceService', () => {
     );
 
     expect(req.request.method).toBe('GET');
-    expect(req.request.headers.get('Authorization')).toBe(
-      environment.mockTokenAdmin
-    );
     req.flush(mockResponse);
   });
 

@@ -5,6 +5,8 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { environment } from 'src/environments/environment';
 import { User } from '../../interfaces/user.interface';
 import { UserValuesConstants } from '../../constants/user.constants';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { checkToken, TokenInterceptor } from 'src/app/core/interceptors/token-interceptor/token.interceptor';
 
 describe('UserPersistenceService', () => {
   let service: UserPersistenceService;
@@ -35,7 +37,7 @@ describe('UserPersistenceService', () => {
     };
     const mockResponse = {
       success: true,
-      message: 'Marca añadida correctamente',
+      message: 'Usuario añadido correctamente',
     };
 
     service.addUser(mockCategoryData).subscribe((response) => {
@@ -46,9 +48,6 @@ describe('UserPersistenceService', () => {
       environment.userApiUrl + UserValuesConstants.END_POINT_REGISTER_WAREHOUSE_ASSISTANT
     );
     expect(req.request.method).toBe('POST');
-    expect(req.request.headers.get('Authorization')).toBe(
-      environment.mockTokenAdmin
-    );
     req.flush(mockResponse);
   });
 

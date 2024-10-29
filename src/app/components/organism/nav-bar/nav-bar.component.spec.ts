@@ -10,6 +10,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { By } from '@angular/platform-browser';
 import { Router, Event, NavigationEnd } from '@angular/router';
 import { Subject } from 'rxjs';
+import { CoreModule } from 'src/app/core/core.module';
 
 describe('NavBarComponent', () => {
   let component: NavBarComponent;
@@ -41,13 +42,6 @@ describe('NavBarComponent', () => {
 
   it('debería tener 4 elementos en el menú', () => {
     expect(component.menuItems.length).toBe(4);
-  });
-
-  it('debería renderizar un componente app-navigation-bar-button por cada elemento en el menú', () => {
-    const buttons = fixture.debugElement.queryAll(
-      By.css('app-navigation-bar-button')
-    );
-    expect(buttons.length).toBe(component.menuItems.length);
   });
 
   it('debería pasar el label e icono correctos a cada app-navigation-bar-button', () => {

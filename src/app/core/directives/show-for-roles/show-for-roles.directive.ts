@@ -1,7 +1,6 @@
 import {
   Directive,
   Input,
-  OnDestroy,
   OnInit,
   TemplateRef,
   ViewContainerRef,
@@ -21,7 +20,7 @@ export class ShowForRolesDirective implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const userRole = this.tokenService.getRoleUSer();
+    const userRole = this.tokenService.getRoleUser();
 
     if (this.allowRoles && this.allowRoles.includes(userRole)) {
       this.viewContainerRef.createEmbeddedView(this.templateRef);
