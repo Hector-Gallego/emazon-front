@@ -1,0 +1,48 @@
+<div>
+  <form
+    class="popup-form"
+    [ngStyle]="{ top: top, left: left }"
+    [formGroup]="formGroup"
+  >
+    <div class="popup-form__data">
+      <p class="popup-form__p">
+        <span class="popup-form__span">Id:</span> {{ articleID }}
+      </p>
+      <p class="popup-form__p">
+        <span class="popup-form__span">Nombre:</span> {{ articleName }}
+      </p>
+      <p class="popup-form__p">
+        <span class="popup-form__span">Cantidad Actual:</span>
+        {{ articleStock }}
+      </p>
+    </div>
+    <div class="popup-form__label">
+      <app-label [label]="'Ingrese la cantidad a añadir'"></app-label>
+    </div>
+
+    <app-input
+      [state]="
+        formGroup.get('quantity')?.invalid && formGroup.get('quantity')?.touched
+          ? inputStateError
+          : InputStateDefault
+      "
+      [placeholder]="'Cantidad'"
+      [formControlName]="'quantity'"
+      [errorMessage]="getErrorMessage('quantity')"
+      [typeContentInput]="inputTypeContentNumber"
+    ></app-input>
+    <div class="popup-form__inputs">
+      <app-button
+        [type]="buttonTypeSecundary"
+        [disabled]="!formGroup.valid"
+        (click)="onSubmit()"
+        [label]="'Aceptar'"
+      ></app-button>
+      <app-button
+        [type]="buttonTypeSecundaryCancel"
+        (buttonClick)="onClose()"
+        [label]="'Cancelar'"
+      ></app-button>
+    </div>
+  </form>
+</div>

@@ -1,4 +1,3 @@
-
 <table class="data-table">
   <thead class="data-table__header">
     <tr>
@@ -9,8 +8,14 @@
   </thead>
   <tbody class="data-table__body">
     <tr *ngFor="let row of data" class="data-table__body__row">
-      <td *ngFor="let header of headers" class="data-table__body__cell">
-        {{ row[header.key] }}
+      <td *ngFor="let header of headers" class="">
+        <app-data-cell
+          [icon]="iconCell"
+          (buttonClick)="onButtonClick($event)"
+          (buttonClick)="onGetDatRow(row)"
+          [isConCell]="header.key === 'quantity'"
+          [data]="row[header.key]"
+        ></app-data-cell>
       </td>
     </tr>
   </tbody>

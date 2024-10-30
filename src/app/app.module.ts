@@ -13,7 +13,9 @@ import { ClientModule } from './pages/client/client.module';
 import { AuthModule } from './pages/auth/auth.module';
 import { TokenInterceptor } from './core/interceptors/token-interceptor/token.interceptor';
 import { ShowForRolesDirective } from './core/directives/show-for-roles/show-for-roles.directive';
-
+import { HttpErrorHandlerInterceptor } from './core/interceptors/http-error-handler-intercepor/http-error-handler.interceptor';
+import { HttpSuccesHandlerInterceptor } from './core/interceptors/http-succes-handler-interceptor/http-succes-handler.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -30,11 +32,15 @@ import { ShowForRolesDirective } from './core/directives/show-for-roles/show-for
     MoleculesModule,
     AdminModule,
     ClientModule,
-    AuthModule
+    AuthModule,
+    BrowserAnimationsModule
+
     
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: HttpErrorHandlerInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: HttpSuccesHandlerInterceptor, multi: true}
   ],
   bootstrap: [AppComponent],
 })

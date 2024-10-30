@@ -1,0 +1,6 @@
+<div class="cell">
+  {{ data }}
+  <div (click)="onClick($event)" [ngClass]="{'cell__icon--active':isConCell}" class="cell__icon">
+    <fa-icon [icon]="icon"></fa-icon>
+  </div>
+</div>

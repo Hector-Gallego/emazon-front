@@ -1,5 +1,6 @@
 import { Brand } from "./brand.interface";
 import { Category } from "./category.interface";
+import { DataRow } from "./data-row.interface";
 
 export interface Article{
     id?: number;
@@ -11,7 +12,7 @@ export interface Article{
     brandId: number,
 }
 
-export interface ArticleResponse{
+export interface ArticleResponse {
     id: number;
     name: string;
     description: string,
@@ -19,4 +20,14 @@ export interface ArticleResponse{
     price: number,
     categories : Category[],
     brand: Brand,
+}
+
+export interface ArticleDataTable extends DataRow{
+    id: number;
+    name: string;
+    description: string,
+    quantity: number,
+    price: number,
+    categoryNames : string,
+    brandName: string,
 }

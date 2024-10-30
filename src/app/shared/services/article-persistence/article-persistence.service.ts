@@ -4,10 +4,11 @@ import { Article, ArticleResponse } from '../../interfaces/article.interface';
 import { Observable } from 'rxjs';
 import { ApiResponse, ApiResponseData } from '../../interfaces/api-response.interface';
 import { environment } from 'src/environments/environment';
-import { ArticleValuesConstants } from '../../constants/article.constant';
+import { ArticleValuesConstants, StockValueConstants } from '../../constants/article.constant';
 import { PaginationRequest } from '../../interfaces/pagination-request.interface';
 import { PaginationResponse } from '../../interfaces/pagination-response.interface';
 import { checkToken } from 'src/app/core/interceptors/token-interceptor/token.interceptor';
+import { SupplyRequest } from '../../interfaces/supply-request.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,14 @@ export class ArticlePersistenceService {
       environment.stockApiUrl + ArticleValuesConstants.END_POINT_ARTILCLE_SAVE,
       articleData,
       { context: checkToken() }
+    );
+  }
+
+  addSupply(supply: SupplyRequest): Observable<ApiResponse>{
+    return this.http.put<ApiResponse>(
+      environment.stockApiUrl + StockValueConstants.END_POINT_SUPPLY_STOCK,
+      supply,
+      {context: checkToken()}
     );
   }
 

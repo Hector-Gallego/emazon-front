@@ -4,6 +4,7 @@ export const AdminRoutes = {
     CREATE_ARTICLE: 'crear-articulo',
     BRANDS: 'marcas',
     CATEGORIES: 'categorias',
+    ARTIClES: 'articulos',
     CREATE_WAREHOUSE_ASSISTANT: 'crear-auxiliar',
   } as const;
   

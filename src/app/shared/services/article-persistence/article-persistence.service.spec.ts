@@ -4,9 +4,10 @@ import { ArticlePersistenceService } from './article-persistence.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { Article, ArticleResponse } from '../../interfaces/article.interface';
 import { environment } from 'src/environments/environment';
-import { ArticleValuesConstants } from '../../constants/article.constant';
+import { ArticleValuesConstants, StockValueConstants } from '../../constants/article.constant';
 import { PaginationRequest } from '../../interfaces/pagination-request.interface';
-import { ApiResponseData } from '../../interfaces/api-response.interface';
+import { ApiResponse, ApiResponseData } from '../../interfaces/api-response.interface';
+import { SupplyRequest } from '../../interfaces/supply-request.interface';
 
 describe('ArticlePersistenceService', () => {
   let service: ArticlePersistenceService;
@@ -107,7 +108,7 @@ describe('ArticlePersistenceService', () => {
     req.flush(mockResponse);
   });
 
-  it('should get article by ID', () => {
+  it('debería obtener un articulo por su ID', () => {
     
 
     const articleId = 1;
@@ -120,5 +121,31 @@ describe('ArticlePersistenceService', () => {
     expect(req.request.method).toBe('GET');
     req.flush(mockResponse);
   });
+
+  it('debería enviar una solicitud PUT para añadir un suministro', () => {
+    const mockSupplyData: SupplyRequest = {
+      articleId: 1,
+      quantity: 10,
+      cartIds: []
+    };
+  
+    const mockResponse: ApiResponse = {
+      status: 200,
+      message: 'Suministro añadido correctamente',
+      timestamp: ''
+    };
+  
+    service.addSupply(mockSupplyData).subscribe((response) => {
+      expect(response).toEqual(mockResponse);
+    });
+  
+    const req = httpMock.expectOne(
+      environment.stockApiUrl + StockValueConstants.END_POINT_SUPPLY_STOCK
+    );
+    expect(req.request.method).toBe('PUT');
+    expect(req.request.body).toEqual(mockSupplyData); 
+    req.flush(mockResponse); 
+  });
+  
 
 });

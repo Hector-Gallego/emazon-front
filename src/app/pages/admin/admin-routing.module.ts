@@ -10,6 +10,7 @@ import { AddWarehouseAssistantPageComponent } from './add-warehouse-assistant-pa
 import {  HasRoleGuard} from 'src/app/core/guards/hasRole/has-role.guard';
 import { Role } from 'src/app/shared/enums/role.enum';
 import { AdminRoutes } from 'src/app/shared/constants/routes.constants';
+import { ListArticlesAdminPageComponent } from './list-articles-admin-page/list-articles-admin-page.component';
 
 const routes: Routes = [
   {
@@ -43,6 +44,12 @@ const routes: Routes = [
       {
         path: AdminRoutes.CATEGORIES,
         component: ListCategoriesPageComponent,
+        canActivate: [HasRoleGuard],
+        data: {allowRoles: [Role.ADMIN, Role.WAREHOUSE_ASSISTANT]},
+      },
+      {
+        path: AdminRoutes.ARTIClES,
+        component: ListArticlesAdminPageComponent,
         canActivate: [HasRoleGuard],
         data: {allowRoles: [Role.ADMIN, Role.WAREHOUSE_ASSISTANT]},
       },
