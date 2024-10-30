@@ -119,8 +119,7 @@ export class ListArticlesAdminPageComponent implements OnInit {
       sortDirection: this.sortDirection,
     };
 
-    const getBrandsSubscription = this.articleService
-
+    const getArticlessSubscription = this.articleService
       .getArticles(pageRequest)
       .pipe(finalize(() => this.loader.hide()))
       .subscribe({
@@ -133,7 +132,7 @@ export class ListArticlesAdminPageComponent implements OnInit {
         },
       });
 
-    this.subscription.add(getBrandsSubscription);
+    this.subscription.add(getArticlessSubscription);
   }
 
   onAddSupply(quantity: number) {
@@ -146,7 +145,7 @@ export class ListArticlesAdminPageComponent implements OnInit {
         cartIds: [],
       };
     }
-    this.articleService
+    const addSuuplySubscription = this.articleService
       .addSupply(this.supply)
       .pipe(finalize(() => this.loader.hide()))
       .subscribe({
@@ -155,6 +154,7 @@ export class ListArticlesAdminPageComponent implements OnInit {
         },
       });
     this.selectedArticleId = null;
+    this.subscription.add(addSuuplySubscription);
   }
 
   navigateToCreateArticle(): void {
