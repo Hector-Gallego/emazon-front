@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AdminTemplateComponent } from './admin-template.component';
-import { RouterModule } from '@angular/router';
+
+import { AuthTemplateComponent } from './auth-template.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { AtomsModule } from 'src/app/components/atoms/atoms.module';
 import { OrganismModule } from 'src/app/components/organism/organism.module';
 import { AdminModule } from 'src/app/pages/admin/admin.module';
-import { RouterTestingModule } from '@angular/router/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-describe('MainLayaoutComponent', () => {
-  let component: AdminTemplateComponent;
-  let fixture: ComponentFixture<AdminTemplateComponent>;
+describe('AuthTemplateComponent', () => {
+  let component: AuthTemplateComponent;
+  let fixture: ComponentFixture<AuthTemplateComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AdminTemplateComponent],
+      declarations: [AuthTemplateComponent],
       imports: [
         AdminModule,
         AtomsModule,
@@ -23,12 +23,12 @@ describe('MainLayaoutComponent', () => {
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AdminTemplateComponent);
+    fixture = TestBed.createComponent(AuthTemplateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('debería crear el componente', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

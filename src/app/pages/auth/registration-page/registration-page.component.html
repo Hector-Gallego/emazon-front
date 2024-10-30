@@ -1,0 +1,11 @@
+<div class="login__form-container">
+    <app-form
+      [formTitle]="'Registro de usuario'"
+      [fields]="userFields"
+      [buttonLabelText]="'Registrarse'"
+      (submitForm)="onFormSubmit($event)"
+    ></app-form>
+    <p class="login__register-p">
+      Ya se encuentra registrado? <a [routerLink]="loginRoute" class="login__register-a">Iniciar sesión</a>
+    </p>
+  </div>

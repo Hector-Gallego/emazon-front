@@ -80,4 +80,22 @@ describe('TokenInterceptor', () => {
       expect(httpHandler.handle).toHaveBeenCalledTimes(1);
     });
   });
+
+  it('debería no agregar el token si CHECK_TOKEN no está activado', () => {
+    (tokenService.getToken as jest.Mock).mockReturnValue(undefined); 
+  
+    const request = new HttpRequest('GET', '/test', {
+      context: new HttpContext().set(CHECK_TOKEN, false),
+    });
+  
+    interceptor.intercept(request, httpHandler).subscribe((event) => {
+      if (event instanceof HttpResponse) {
+        expect(event.body).toBe(request);
+      }
+    });
+  
+    expect(httpHandler.handle).toHaveBeenCalledWith(request); 
+    expect(httpHandler.handle).toHaveBeenCalledTimes(1);
+  });
+  
 });

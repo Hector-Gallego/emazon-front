@@ -59,6 +59,7 @@ export class LoginPageComponent {
 
   private readonly subscription = new Subscription();
   @ViewChild(FormComponent) logindForm!: FormComponent<LoginRequest>;
+   registrationRoute = `/${MainRoutes.AUTH}/${MainRoutes.REGISTER}`
 
   onFormSubmit(loginData: LoginRequest) {
     

@@ -26,4 +26,14 @@ export class UserPersistenceService {
       { context: checkToken() }
     );
   }
+
+  addUserClient(userData: User): Observable<ApiResponse> {
+      
+    return this.http.post<ApiResponse>(
+      environment.userApiUrl +
+        UserValuesConstants.END_POINT_REGISTER_CLIENT,
+      userData,
+      { context: checkToken() }
+    );
+  }
 }

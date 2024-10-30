@@ -1,0 +1,35 @@
+.login{
+
+    &__register-p{
+        padding: 1.5rem 0.5rem;
+        font-size: 1.3rem;
+    }
+    &__register-a{
+        cursor: pointer;
+        color: blueviolet;
+        font-weight: 500;
+        padding: 1.5rem 0.5rem;
+        font-size: 1.3rem;
+        text-decoration: underline;
+    }
+
+    
+}
+
+@media screen and (min-width: 768px) {
+
+    .login{
+
+        &__register-p{
+            color: white;
+            
+        }
+        &__register-a{
+            
+            color: white;
+            
+        }
+       
+    }
+    
+}

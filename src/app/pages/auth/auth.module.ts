@@ -5,10 +5,11 @@ import { OrganismModule } from 'src/app/components/organism/organism.module';
 import { MoleculesModule } from 'src/app/components/molecules/molecules.module';
 import { AtomsModule } from 'src/app/components/atoms/atoms.module';
 import { AuthRoutingModule } from './auth-routing.module';
+import { RegistrationPageComponent } from './registration-page/registration-page.component';
 
 
 @NgModule({
-  declarations: [LoginPageComponent],
+  declarations: [LoginPageComponent, RegistrationPageComponent],
   imports: [
     SharedModule,
     OrganismModule,
@@ -17,6 +18,6 @@ import { AuthRoutingModule } from './auth-routing.module';
     AuthRoutingModule
   
   ],
-  exports: [LoginPageComponent],
+  exports: [LoginPageComponent, RegistrationPageComponent],
 })
 export class AuthModule {}
