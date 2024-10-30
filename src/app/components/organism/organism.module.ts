@@ -12,7 +12,7 @@ import { MultipleInputSelectComponent } from './multiple-input-select/multiple-i
 import { CardComponent } from './card/card.component';
 import { RouterModule } from '@angular/router';
 import { CoreModule } from 'src/app/core/core.module';
-import { ModalComponent } from './modal/modal.component';
+import { PopupAddSupplyComponent } from './popup-add-supply/popup-add-supply.component';
 
 
 
@@ -28,7 +28,7 @@ import { ModalComponent } from './modal/modal.component';
     TableToolBarComponent,
     MultipleInputSelectComponent,
     CardComponent,
-    ModalComponent
+    PopupAddSupplyComponent
   ],
   imports: [SharedModule, AtomsModule, MoleculesModule, RouterModule , CoreModule],
   exports: [
@@ -40,7 +40,7 @@ import { ModalComponent } from './modal/modal.component';
     TableToolBarComponent,
     MultipleInputSelectComponent,
     CardComponent,
-    ModalComponent
+    PopupAddSupplyComponent
 
   ],
 })

@@ -17,11 +17,11 @@ import { FormControlErrorsMapper } from 'src/app/shared/mappers/form-control-err
 import { CustomValidator } from 'src/app/shared/validators/custom-validator.validator';
 
 @Component({
-  selector: 'app-modal',
-  templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.scss'],
+  selector: 'app-popup-add-supply',
+  templateUrl: './popup-add-supply.component.html',
+  styleUrls: ['./popup-add-supply.component.scss'],
 })
-export class ModalComponent {
+export class PopupAddSupplyComponent {
   quantity: number | null = null;
   quantityControl: FormControl = new FormControl('', [Validators.required]);
 

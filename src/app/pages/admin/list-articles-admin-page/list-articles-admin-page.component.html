@@ -33,7 +33,7 @@
   </section>
 </div>
 <ng-container *ngIf="isPopupVisible && selectedArticleId">
-  <app-modal
+  <app-popup-add-supply
     [articleID]="selectedArticleId"
     [articleName]="selectedArticleName"
     [articleStock]="selectedArticleStock"
@@ -41,5 +41,5 @@
     [left]="popupPosition.left"
     (quantityAddStock)="onAddSupply($event)"
     (close)="closePopup()"
-  ></app-modal>
+  ></app-popup-add-supply>
 </ng-container>
