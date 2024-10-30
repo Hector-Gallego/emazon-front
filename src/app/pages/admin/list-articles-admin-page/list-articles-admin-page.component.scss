@@ -12,6 +12,7 @@
        max-height: 30rem;
        min-height: 30rem;
        overflow-y: auto;
+       overflow-x: visible;
        position: relative;
 
        &__button{
@@ -43,6 +44,7 @@
       }
       &__data{
         height: 50rem;
+        overflow-x: hidden;
       }
     }
 

@@ -1,4 +1,4 @@
-import { HttpHeaders } from '@angular/common/http';
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { faPlus, IconDefinition } from '@fortawesome/free-solid-svg-icons';
@@ -24,6 +24,24 @@ import { TableToolBarService } from 'src/app/shared/services/table-tool-bar/tabl
   selector: 'app-list-articles-admin-page',
   templateUrl: './list-articles-admin-page.component.html',
   styleUrls: ['./list-articles-admin-page.component.scss'],
+  animations: [
+    trigger('inOutAnimation', [
+      transition(':enter', [
+        style({opacity: '0'} ),
+        animate(
+          '0.5s ease-out',
+          style({ opacity: '1' })
+        ),
+      ]),
+      transition(':leave', [
+        style({ opacity: '1' }),
+        animate(
+          '0.5s ease-in',
+          style({ opacity: '0'})
+        ),
+      ]),
+    ]),
+  ],
 })
 export class ListArticlesAdminPageComponent implements OnInit {
   constructor(
@@ -136,7 +154,6 @@ export class ListArticlesAdminPageComponent implements OnInit {
   }
 
   onAddSupply(quantity: number) {
-    
     this.loader.show();
     if (this.selectedArticleId !== null) {
       this.supply = {

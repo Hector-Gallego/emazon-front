@@ -15,7 +15,7 @@ import { TokenInterceptor } from './core/interceptors/token-interceptor/token.in
 import { ShowForRolesDirective } from './core/directives/show-for-roles/show-for-roles.directive';
 import { HttpErrorHandlerInterceptor } from './core/interceptors/http-error-handler-intercepor/http-error-handler.interceptor';
 import { HttpSuccesHandlerInterceptor } from './core/interceptors/http-succes-handler-interceptor/http-succes-handler.interceptor';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -32,7 +32,9 @@ import { HttpSuccesHandlerInterceptor } from './core/interceptors/http-succes-ha
     MoleculesModule,
     AdminModule,
     ClientModule,
-    AuthModule
+    AuthModule,
+    BrowserAnimationsModule
+
     
   ],
   providers: [
