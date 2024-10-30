@@ -20,7 +20,14 @@ describe('DataCellComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('debería crear el componente', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('debería emitir el evento buttonClick al hacer click en el botón', () => {
+    jest.spyOn(component.buttonClick, 'emit');
+    const mockEvent = new MouseEvent('click');
+    component.onClick(mockEvent);
+    expect(component.buttonClick.emit).toHaveBeenCalledWith(mockEvent);
   });
 });

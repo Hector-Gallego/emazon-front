@@ -12,7 +12,7 @@
         <app-data-cell
           [icon]="iconCell"
           (buttonClick)="onButtonClick($event)"
-          (buttonClick)="onIdArticle(row)"
+          (buttonClick)="onGetDatRow(row)"
           [isConCell]="header.key === 'quantity'"
           [data]="row[header.key]"
         ></app-data-cell>

@@ -11,14 +11,14 @@ import { TableHeader } from 'src/app/shared/interfaces/table-header.interface';
 })
 export class DataTableComponent<T extends DataRow> {
   @Output() mouseCoords: EventEmitter<MouseEvent > = new EventEmitter();
-  @Output() getArticleId: EventEmitter<ArticleDataTable>  = new EventEmitter();
+  @Output() getDataRow: EventEmitter<T>  = new EventEmitter();
 
   @Input() iconCell : IconDefinition = faEdit;
   onButtonClick(event: MouseEvent) {
     this.mouseCoords.emit(event);
   }
-  onIdArticle(article: T) {
-    this.getArticleId.emit(article as unknown as ArticleDataTable);
+  onGetDatRow(data: T) {
+    this.getDataRow.emit(data as unknown as T);
   }
   @Input() headers: TableHeader[] = [];
   @Input() data: T[] = [];

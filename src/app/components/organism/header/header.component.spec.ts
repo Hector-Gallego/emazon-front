@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { AtomsModule } from '../../atoms/atoms.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CoreModule } from 'src/app/core/core.module';
+import { MainRoutes } from 'src/app/shared/constants/routes.constants';
 
 
 describe('HeaderComponent', () => {
@@ -68,6 +69,11 @@ describe('HeaderComponent', () => {
   it('debería retornar false cuando la ruta actual no coincide en isActive', () => {
     component.currentRoute = '/test-route';
     expect(component.isActive('/other-route')).toBe(false);
+  });
+
+  it('debería llamar al método logout y redirigir al login en onLogout', () => {
+    component.onLogout();
+    expect(routerMock.navigate).toHaveBeenCalledWith([`/${MainRoutes.AUTH}/${MainRoutes.LOGIN}`]);
   });
  
 });
