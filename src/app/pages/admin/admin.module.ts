@@ -11,6 +11,7 @@ import { OrganismModule } from "src/app/components/organism/organism.module";
 import { AdminRoutingModule } from "./admin-routing.module";
 import { AdminTemplateComponent } from "src/app/templates/admin-template/admin-template.component";
 import { AddWarehouseAssistantPageComponent } from './add-warehouse-assistant-page/add-warehouse-assistant-page.component';
+import { ListArticlesAdminPageComponent } from './list-articles-admin-page/list-articles-admin-page.component';
 
 @NgModule({
     declarations: [
@@ -20,6 +21,7 @@ import { AddWarehouseAssistantPageComponent } from './add-warehouse-assistant-pa
       ListCategoriesPageComponent,
       AddArticlePageComponent,
       AddWarehouseAssistantPageComponent,
+      ListArticlesAdminPageComponent,
     ],
     imports: [
       SharedModule,
@@ -33,7 +35,8 @@ import { AddWarehouseAssistantPageComponent } from './add-warehouse-assistant-pa
       AddCategoryPageComponent,
       ListBrandsPageComponent,
       ListCategoriesPageComponent,
-      AddWarehouseAssistantPageComponent
+      AddWarehouseAssistantPageComponent,
+      ListArticlesAdminPageComponent
 
     ],
   })

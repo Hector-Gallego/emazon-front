@@ -12,6 +12,7 @@ import { MultipleInputSelectComponent } from './multiple-input-select/multiple-i
 import { CardComponent } from './card/card.component';
 import { RouterModule } from '@angular/router';
 import { CoreModule } from 'src/app/core/core.module';
+import { ModalComponent } from './modal/modal.component';
 
 
 
@@ -26,7 +27,8 @@ import { CoreModule } from 'src/app/core/core.module';
     TableToolBarComponent,
     TableToolBarComponent,
     MultipleInputSelectComponent,
-    CardComponent
+    CardComponent,
+    ModalComponent
   ],
   imports: [SharedModule, AtomsModule, MoleculesModule, RouterModule , CoreModule],
   exports: [
@@ -37,7 +39,8 @@ import { CoreModule } from 'src/app/core/core.module';
     FormComponent,
     TableToolBarComponent,
     MultipleInputSelectComponent,
-    CardComponent
+    CardComponent,
+    ModalComponent
 
   ],
 })

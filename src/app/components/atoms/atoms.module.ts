@@ -10,6 +10,7 @@ import { NavigationBarButtonComponent } from '../../components/atoms/navigation-
 import { SharedModule } from 'src/app/shared/shared.module';
 import { InputSelectComponent } from './input-select/input-select.component';
 import { TagComponent } from './tag/tag.component';
+import { DataCellComponent } from './data-cell/data-cell.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { TagComponent } from './tag/tag.component';
     NavigationBarButtonComponent,
     InputSelectComponent,
     TagComponent,
+    DataCellComponent,
   ],
   imports: [SharedModule],
   exports: [
@@ -35,7 +37,8 @@ import { TagComponent } from './tag/tag.component';
     LogoComponent,
     NavigationBarButtonComponent,
     InputSelectComponent,
-    TagComponent
+    TagComponent,
+    DataCellComponent
   ],
 })
 export class AtomsModule {}

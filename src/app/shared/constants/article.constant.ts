@@ -7,3 +7,7 @@ export const ArticleFieldLimits = {
     END_POINT_ARTILCLE: '/api/article',
     END_POINT_ARTILCLE_SAVE: '/api/article/save',
   } as const;
+
+  export const StockValueConstants = {
+    END_POINT_SUPPLY_STOCK: '/api/stock'
+  } as const;

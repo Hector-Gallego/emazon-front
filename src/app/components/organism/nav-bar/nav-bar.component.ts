@@ -56,7 +56,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
     {
       label: 'Artículos',
       icon: this.faBox,
-      route: `/${MainRoutes.ADMIN}/${AdminRoutes.CREATE_ARTICLE}`,
+      route: `/${MainRoutes.ADMIN}/${AdminRoutes.ARTIClES}`,
       roles: [this.roleAdmin, this.roleAux],
     },
     {
