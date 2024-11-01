@@ -11,6 +11,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { InputSelectComponent } from './input-select/input-select.component';
 import { TagComponent } from './tag/tag.component';
 import { DataCellComponent } from './data-cell/data-cell.component';
+import { IconBadgeComponent } from './icon-badge/icon-badge.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { DataCellComponent } from './data-cell/data-cell.component';
     InputSelectComponent,
     TagComponent,
     DataCellComponent,
+    IconBadgeComponent,
   ],
   imports: [SharedModule],
   exports: [
@@ -38,7 +40,8 @@ import { DataCellComponent } from './data-cell/data-cell.component';
     NavigationBarButtonComponent,
     InputSelectComponent,
     TagComponent,
-    DataCellComponent
+    DataCellComponent,
+    IconBadgeComponent
   ],
 })
 export class AtomsModule {}

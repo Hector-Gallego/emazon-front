@@ -8,8 +8,12 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { filter, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth-service/auth.service';
-import { ClientRoutes, MainRoutes } from 'src/app/shared/constants/routes.constants';
+import {
+  ClientRoutes,
+  MainRoutes,
+} from 'src/app/shared/constants/routes.constants';
 import { Role } from 'src/app/shared/enums/role.enum';
+import { ShoppingCartStateService } from 'src/app/shared/services/shopping-cart-state/shopping-cart-state.service';
 
 @Component({
   selector: 'app-header',
@@ -17,7 +21,6 @@ import { Role } from 'src/app/shared/enums/role.enum';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-
   faLogoutIcon: IconDefinition = faSignOut;
   faArticlesIcon: IconDefinition = faStore;
   menuIcon: IconDefinition = faBars;
@@ -25,15 +28,17 @@ export class HeaderComponent implements OnInit {
   active: boolean = true;
   currentRoute: string = '';
 
-  roleCleint : Role = Role.CLIENT;
+  roleCleint: Role = Role.CLIENT;
+
+  itemsCartQuantity: number = 0;
   @Input() isAdmin: boolean = false;
 
   constructor(
     private readonly router: Router,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly shoppingCartSatateService: ShoppingCartStateService
   ) {}
   ngOnInit(): void {
-
     this.currentRoute = this.router.url;
 
     const subs = this.router.events
@@ -43,7 +48,14 @@ export class HeaderComponent implements OnInit {
         this.currentRoute = navigationEndEvent.url;
       });
 
+    const subCartState = this.shoppingCartSatateService.itemsInCart$.subscribe(
+      (quantity) => {
+        this.itemsCartQuantity = quantity;
+      }
+    );
+
     this.subscription.add(subs);
+    this.subscription.add(subCartState);
   }
 
   roleClient = Role.CLIENT;
@@ -55,15 +67,15 @@ export class HeaderComponent implements OnInit {
       label: 'Artículos',
       icon: this.faArticlesIcon,
       route: `/${MainRoutes.STORE}/${ClientRoutes.ARTICLES}`,
-      roles: [this.roleClient]
+      roles: [this.roleClient],
     },
     {
       label: 'Cerrar Sesión',
       icon: this.faLogoutIcon,
       route: `${MainRoutes.LOGOUT}`,
       roles: [this.roleAux, this.roleAdmin, this.roleClient],
-      isLogout: true 
-    }
+      isLogout: true,
+    },
   ];
   setActive(): void {
     this.active = !this.active;
@@ -73,6 +85,7 @@ export class HeaderComponent implements OnInit {
     return this.currentRoute === route;
   }
   onLogout() {
+    this.shoppingCartSatateService.clearShoppingCart();
     this.authService.logout();
     this.router.navigate([`/${MainRoutes.AUTH}/${MainRoutes.LOGIN}`]);
   }

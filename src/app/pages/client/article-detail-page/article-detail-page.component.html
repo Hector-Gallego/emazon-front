@@ -37,15 +37,22 @@
     <div class="article-detail__add-cart">
       <div class="article-detail__quantity">
         <app-quantity-counter-button
+        (quantityChange)="getQuantityToAdd($event)"
           [stock]="article.quantity"
         ></app-quantity-counter-button>
         <span>+ {{ article.quantity }} disponibles</span>
+       
       </div>
 
       <app-button
+        (buttonClick)="addItemToShoppinCart()"
         [size]="buttonSyzeL"
         [label]="'añadir al carrito'"
       ></app-button>
+     
+      
     </div>
+   
   </section>
+  <app-loader></app-loader>
 </div>

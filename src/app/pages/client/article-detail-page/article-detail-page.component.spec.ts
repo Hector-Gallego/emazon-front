@@ -19,6 +19,9 @@ import {
   StatesTypes,
 } from 'src/app/shared/constants/commonConstants';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
+import { ShoppingCartPersistenceService } from 'src/app/shared/services/shopping-cart-persistence/shopping-cart-persistence.service';
+import { ShoppingCartStateService } from 'src/app/shared/services/shopping-cart-state/shopping-cart-state.service';
+import { CartItem } from 'src/app/shared/interfaces/cart-item.inteface';
 describe('ArticleDetailPageComponent', () => {
   let component: ArticleDetailPageComponent;
   let fixture: ComponentFixture<ArticleDetailPageComponent>;
@@ -53,8 +56,20 @@ describe('ArticleDetailPageComponent', () => {
     data: mockArticle,
     timestamp: '2024-10-12',
   };
+  const mockCartItem: CartItem = {
+    articleId: 1,
+    quantity: 1,
+  };
   const articleServiceMock = {
     getArticleById: jest.fn().mockReturnValue(of(apiResponseMock)),
+  };
+
+  const shoppingCartPersistenceServiceMock = {
+    saveItemtoShoppingCart: jest.fn(),
+  };
+
+  const shoppingCartStateServiceMock = {
+    addItemToShoppingCart: jest.fn(),
   };
 
   beforeEach(async () => {
@@ -78,6 +93,8 @@ describe('ArticleDetailPageComponent', () => {
         },
         { provide: LoaderService, useValue: loaderServiceMock },
         { provide: ToastService, useValue: toastServiceMock },
+        { provide: ShoppingCartPersistenceService, useValue: shoppingCartPersistenceServiceMock },
+        { provide: ShoppingCartStateService, useValue: shoppingCartStateServiceMock },
       ],
     }).compileComponents();
 
@@ -133,5 +150,39 @@ describe('ArticleDetailPageComponent', () => {
       StatesTypes.ERROR,
       component.toastDuration
     );
+  });
+
+  it('debería mostrar el loader, añadir un artículo al carrito y ocultar el loader al finalizar', () => {
+    shoppingCartPersistenceServiceMock.saveItemtoShoppingCart.mockReturnValue(of(null));
+    component.article = { id: 1, name: 'Artículo de prueba' } as any;
+    component.quantityToAdd = 1;
+
+    component.addItemToShoppinCart();
+
+    expect(loaderServiceMock.show).toHaveBeenCalled();
+    expect(shoppingCartPersistenceServiceMock.saveItemtoShoppingCart).toHaveBeenCalledWith(mockCartItem);
+    expect(shoppingCartStateServiceMock.addItemToShoppingCart).toHaveBeenCalledWith(mockCartItem);
+    expect(loaderServiceMock.hide).toHaveBeenCalled();
+  });
+
+  it('debería ocultar el loader al fallar la operación de añadir artículo al carrito', () => {
+    shoppingCartPersistenceServiceMock.saveItemtoShoppingCart.mockReturnValue(throwError(() => new Error('Error de prueba')));
+
+    component.article = { id: 1, name: 'Artículo de prueba' } as any;
+    component.quantityToAdd = 1;
+
+    component.addItemToShoppinCart();
+
+    expect(loaderServiceMock.show).toHaveBeenCalled();
+    expect(shoppingCartPersistenceServiceMock.saveItemtoShoppingCart).toHaveBeenCalledWith(mockCartItem);
+    expect(loaderServiceMock.hide).toHaveBeenCalled();
+  });
+
+  it('debería actualizar quantityToAdd al llamar a getQuantityToAdd', () => {
+    const testQuantity = 5;
+    
+    component.getQuantityToAdd(testQuantity);
+  
+    expect(component.quantityToAdd).toEqual(testQuantity);
   });
 });

@@ -1,0 +1,26 @@
+@import "/src/styles/colors";
+.badge {
+  cursor: pointer;
+  position: relative;
+  padding: 0.5rem;
+  border-radius: 4px;
+
+  &__icon {
+    font-size: 1.5rem;
+  }
+  &__span {
+    padding: 0 0.5rem;
+    background-color: $informing-error;
+    color: white;
+    position: absolute;
+    border-radius: 4px;
+
+    top: -5px;
+    right: -10px;
+  }
+
+  &:hover {
+    color: white;
+    background-color: $hover-color;
+  }
+}

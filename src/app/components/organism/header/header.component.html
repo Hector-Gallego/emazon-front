@@ -3,44 +3,44 @@
     <img src="../../../../assets/logo.svg" alt="" />
   </div>
 
-  <button
-    (click)="setActive()"
-    class="header__button"
-    [ngClass]="{ 'header__button--disable': isAdmin }"
-  >
-    <app-icon class="header__svg" [icon]="menuIcon"></app-icon>
-  </button>
-
-  <nav
-    class="header__nav"
-    [ngClass]="{ 'header__nav--active': active }"
+  <div class="header__button-section">
+    <div class="header__button">
+      <app-icon-badge [quantity]="itemsCartQuantity"></app-icon-badge>
+    </div>
+    <button
+      (click)="setActive()"
+      class="header__button"
+      [ngClass]="{ 'header__button--disable': isAdmin }"
+    >
+      <app-icon class="header__svg" [icon]="menuIcon"></app-icon>
+    </button>
     
-  >
-  <ul class="header__ul">
-    <ng-container *ngFor="let item of menuItems">
-      <li
-        *appShowForRoles="item.roles"
-        [ngClass]="{ 'header__li--active': isActive(item.route) }"
-        class="header__li"
-      >
-        <app-icon class="header__icon" [icon]="item.icon"></app-icon>
-        <a 
-          class="header__a"
-          [routerLink]="[item.route]"
-          *ngIf="!item.isLogout"
+  </div>
+
+  <nav class="header__nav" [ngClass]="{ 'header__nav--active': active }">
+    <ul class="header__ul">
+      <div class="header__cart">
+        <app-icon-badge [quantity]="itemsCartQuantity"></app-icon-badge>
+      </div>
+      <ng-container *ngFor="let item of menuItems">
+        <li
+          *appShowForRoles="item.roles"
+          [ngClass]="{ 'header__li--active': isActive(item.route) }"
+          class="header__li"
         >
-          {{ item.label }}
-        </a>
-        <a 
-          class="header__a" 
-          *ngIf="item.isLogout" 
-          (click)="onLogout()"
-        >
-          {{ item.label }}
-        </a>
-      </li>
-    </ng-container>
-  </ul>
-  
+          <app-icon class="header__icon" [icon]="item.icon"></app-icon>
+          <a
+            class="header__a"
+            [routerLink]="[item.route]"
+            *ngIf="!item.isLogout"
+          >
+            {{ item.label }}
+          </a>
+          <a class="header__a" *ngIf="item.isLogout" (click)="onLogout()">
+            {{ item.label }}
+          </a>
+        </li>
+      </ng-container>
+    </ul>
   </nav>
 </header>
