@@ -29,7 +29,7 @@
           [imgUrl]="'https://picsum.photos/600/600?random=' + article.id"
           [article]="article"
           (itemRemoved)="deleteItemToShoppingCart($event)"
-          [sufficentStock]="article.sufficientStock"
+          [sufficentStock]="article.sufficientStock ?? false"
         ></app-shopping-cart-item-detail-card>
       </ng-container>
       <app-loader></app-loader>

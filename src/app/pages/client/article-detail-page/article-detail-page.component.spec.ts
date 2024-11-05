@@ -44,6 +44,8 @@ describe('ArticleDetailPageComponent', () => {
     price: 10,
     categories: [],
     brand: mockBrand,
+    sufficientStock: false,
+    supplyDate: new Date()
   };
 
   const apiResponseMock: ApiResponseData<ArticleResponse> = {

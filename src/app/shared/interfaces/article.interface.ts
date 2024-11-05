@@ -20,8 +20,8 @@ export interface ArticleResponse {
     price: number,
     categories : Category[],
     brand: Brand,
-    sufficientStock: boolean,
-    supplyDate: Date,
+    sufficientStock?: boolean,
+    supplyDate?: Date,
     
 }
 
