@@ -4,7 +4,7 @@
   width: 100%;
   justify-content: center;
   align-items: center;
-  padding: 0.5rem;
+  padding: 1rem;
   margin-bottom: 2rem;
   height: auto;
 
@@ -13,12 +13,13 @@
 
   &__header {
     width: 100%;
-    //height: 10rem;
     overflow: hidden;
     display: flex;
     justify-content: start;
     align-items: center;
-    padding: 1rem;
+    flex-direction: column;
+    
+    
   }
 
   &__name p {
@@ -31,19 +32,20 @@
 
   &__img {
     height: 100%;
-    max-width: 40%;
-    width: 40%;
+    width: 100%;
     object-fit: cover;
     border-radius: 4px;
+    margin-bottom: 1rem;
   }
 
   &__body {
-    padding: 1rem;
+   
     font-size: 1.2rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
+    margin-bottom: 1rem;
   }
 
   &__price p {
@@ -61,6 +63,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+    margin-bottom: 1rem;
   }
 
   &__tag{
@@ -75,8 +78,15 @@
     
   }
 
-  &__header-body{
-    padding: 2rem;
+
+  &__supply p{
+
+    color: $informing-error;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    hyphens: none;
+    margin-bottom: 1rem;
+
   }
 }
 
@@ -90,6 +100,7 @@
       height: 20rem;
       align-items: center;
       justify-content: start;
+      flex-direction: row;
     }
 
     &__name p {
@@ -118,8 +129,10 @@
 
     &__img {
       height: 100%;
+      width: 40%;
       min-width: 20rem;
       object-fit: cover;
+      margin-right: 2rem;
     }
   }
 }

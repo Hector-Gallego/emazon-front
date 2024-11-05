@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { finalize, Observable, Subscription } from 'rxjs';
+import { StatesTypes } from 'src/app/shared/constants/commonConstants';
 import { ButtonSize } from 'src/app/shared/enums/button-size.enum';
 import { SortBy } from 'src/app/shared/enums/sort-by.enum';
 import { SortDirection } from 'src/app/shared/enums/sort-direction.enum';
@@ -12,7 +13,9 @@ import { BrandPersistenceService } from 'src/app/shared/services/brand-persisten
 import { CategoryPersistenceService } from 'src/app/shared/services/category-persistence/category-persistence.service';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 import { ShoppingCartPersistenceService } from 'src/app/shared/services/shopping-cart-persistence/shopping-cart-persistence.service';
+import { ShoppingCartStateService } from 'src/app/shared/services/shopping-cart-state/shopping-cart-state.service';
 import { TableToolBarService } from 'src/app/shared/services/table-tool-bar/table-tool-bar.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 
 @Component({
   selector: 'app-shopping-cart-details-page',
@@ -20,10 +23,13 @@ import { TableToolBarService } from 'src/app/shared/services/table-tool-bar/tabl
   styleUrls: ['./shopping-cart-details-page.component.scss'],
 })
 export class ShoppingCartDetailsPageComponent implements OnInit {
+  
   constructor(
     private readonly loaderService: LoaderService,
+    private readonly toastService: ToastService,
     private readonly tableToolBarService: TableToolBarService,
     private readonly shoppinCartPersistenceService: ShoppingCartPersistenceService,
+    private readonly shoppingCartSatateService: ShoppingCartStateService,
     private readonly brandService: BrandPersistenceService,
     private readonly categoryService: CategoryPersistenceService
   ) {}
@@ -59,10 +65,9 @@ export class ShoppingCartDetailsPageComponent implements OnInit {
   categoryFilterName: string = '';
   brandFilterName: string = '';
   isEmpty: boolean = false;
-
+ 
   ngOnInit(): void {
     this.loadShoppingCart();
-
 
     const getCategoriesSubscription = this.categoryService
       .getAllCategories()
@@ -144,6 +149,7 @@ export class ShoppingCartDetailsPageComponent implements OnInit {
       .getShoppingCart(pageRequest)
       .pipe(finalize(() => this.loaderService.hide()))
       .subscribe((response) => {
+        
         this.articles = response.customPage.content;
         this.totalPurchase = response.totalPurchase;
         this.totalPages = response.customPage.totalPages;
@@ -156,5 +162,21 @@ export class ShoppingCartDetailsPageComponent implements OnInit {
   onPageChange(newPage: number): void {
     this.currentPage = newPage;
     this.loadShoppingCart();
+  }
+
+  deleteItemToShoppingCart(articleId: number) {
+    this.shoppinCartPersistenceService
+      .deleteItemFromShoppingCart(articleId)
+      .pipe(finalize(() => this.loaderService.show()))
+      .subscribe((response) => {
+        this.shoppingCartSatateService.deleteItemFromShoppingCart(articleId);
+        this.loaderService.hide();
+        this.loadShoppingCart();
+        this.toastService.triggerToast(
+          response.message,
+          StatesTypes.SUCCESS,
+          10000
+        );
+      });
   }
 }

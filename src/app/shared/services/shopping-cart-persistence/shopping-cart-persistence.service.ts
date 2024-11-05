@@ -31,10 +31,19 @@ export class ShoppingCartPersistenceService {
   getShoppingCart(
     paginationRequest: ShoppinCartRequest
   ): Observable<ShoppinCartResponse<ArticleResponse>> {
-    
     return this.http.post<ShoppinCartResponse<ArticleResponse>>(
-      environment.shoppingCartApiUrl + ShoppiCartValueConstants.END_POINT_GET_SHOPPIN_CART,
+      environment.shoppingCartApiUrl +
+        ShoppiCartValueConstants.END_POINT_GET_SHOPPIN_CART,
       paginationRequest,
+      {
+        context: checkToken(),
+      }
+    );
+  }
+
+  deleteItemFromShoppingCart(articleId: number): Observable<ApiResponse> {
+    return this.http.delete<ApiResponse>(
+      `${environment.shoppingCartApiUrl}${ShoppiCartValueConstants.END_POINT_ADD_ITEM_SHOPPIN_CART}/${articleId}`,
       {
         context: checkToken(),
       }

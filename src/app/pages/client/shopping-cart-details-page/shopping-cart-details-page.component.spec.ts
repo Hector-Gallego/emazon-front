@@ -11,6 +11,7 @@ import { ShoppingCartPersistenceService } from 'src/app/shared/services/shopping
 import { TableToolBarService } from 'src/app/shared/services/table-tool-bar/table-tool-bar.service';
 import { AtomsModule } from 'src/app/components/atoms/atoms.module';
 import { OrganismModule } from 'src/app/components/organism/organism.module';
+import { ApiResponse } from 'src/app/shared/interfaces/api-response.interface';
 
 describe('ShoppingCartDetailsPageComponent', () => {
   let component: ShoppingCartDetailsPageComponent;
@@ -37,6 +38,7 @@ describe('ShoppingCartDetailsPageComponent', () => {
 
     shoppingCartPersistenceServiceMock = {
       getShoppingCart: jest.fn(),
+      deleteItemFromShoppingCart: jest.fn().mockReturnValue(of({})),
     } as unknown as jest.Mocked<ShoppingCartPersistenceService>;
 
     brandServiceMock = {
@@ -61,6 +63,7 @@ describe('ShoppingCartDetailsPageComponent', () => {
 
     fixture = TestBed.createComponent(ShoppingCartDetailsPageComponent);
     component = fixture.componentInstance;
+    jest.spyOn(component, 'loadShoppingCart');
   });
 
   it('debería cargar el carrito de compras y las categorías y marcas al inicializar', () => {
@@ -127,5 +130,23 @@ describe('ShoppingCartDetailsPageComponent', () => {
 
     expect(component.currentPage).toEqual(2);
     expect(shoppingCartPersistenceServiceMock.getShoppingCart).toHaveBeenCalled(); 
+  });
+
+  it('debería eliminar un artículo del carrito y mostrar un mensaje de éxito', () => {
+    const articleId = 1;
+    const mockResponse: ApiResponse = {
+      message: 'Artículo eliminado con éxito',
+      status: 0,
+      timestamp: ''
+    };
+
+    
+    shoppingCartPersistenceServiceMock.deleteItemFromShoppingCart.mockReturnValue(of(mockResponse));
+    component.deleteItemToShoppingCart(articleId);
+    expect(loaderServiceMock.show).toHaveBeenCalled();
+    expect(shoppingCartPersistenceServiceMock.deleteItemFromShoppingCart).toHaveBeenCalledWith(articleId);
+    expect(loaderServiceMock.hide).toHaveBeenCalled();
+    expect(component.loadShoppingCart).toHaveBeenCalled();
+   
   });
 });

@@ -51,4 +51,19 @@ describe('ShoppingCartPersistenceService', () => {
     expect(req.request.body).toEqual(mockCartItem);
     req.flush(mockApiResponse);
   });
+
+  it('debería eliminar el item del carrito y retornar la respuesta correcta', () => {
+    const articleId = 1; 
+
+    service.deleteItemFromShoppingCart(articleId).subscribe((response) => {
+      expect(response).toEqual(mockApiResponse);
+    });
+
+    const req = httpTestingController.expectOne(
+      `${environment.shoppingCartApiUrl}${ShoppiCartValueConstants.END_POINT_ADD_ITEM_SHOPPIN_CART}/${articleId}`
+    );
+
+    expect(req.request.method).toBe('DELETE');
+    req.flush(mockApiResponse); 
+  });
 });

@@ -20,6 +20,9 @@ export interface ArticleResponse {
     price: number,
     categories : Category[],
     brand: Brand,
+    sufficientStock: boolean,
+    supplyDate: Date,
+    
 }
 
 export interface ArticleDataTable extends DataRow{

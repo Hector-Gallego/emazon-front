@@ -5,6 +5,12 @@
       <div class="card__name">
         <p>{{ article.name }}</p>
       </div>
+      <div class="card__supply" *ngIf="!sufficentStock">
+        <p>
+          Artículo no disponible, fecha estimada de llegada:
+          {{ article.supplyDate }}
+        </p>
+      </div>
       <div class="card__brand">
         <p>{{ article.brand.name }}</p>
       </div>
@@ -13,6 +19,7 @@
           <app-tag class="card__tag" [text]="category.name"></app-tag>
         </ng-container>
       </div>
+      
     </div>
   </div>
   <div class="card__body">
@@ -28,11 +35,13 @@
       <span>Total: </span>
       <p>{{ article.price * article.quantity | currency }}</p>
     </div>
+
     <div class="buttons">
       <app-button
         [size]="buttonSize"
         [type]="buttonTypeSecundary"
         [icon]="removeIcon"
+        (buttonClick)="getArticleId(article.id)"
       ></app-button>
     </div>
   </div>

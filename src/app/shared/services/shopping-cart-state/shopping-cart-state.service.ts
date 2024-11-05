@@ -25,6 +25,10 @@ export class ShoppingCartStateService {
     this.itemsInCartSubject.next(this.cartItems.size);
   }
 
+  deleteItemFromShoppingCart(articleId: number) {
+    this.cartItems.delete(articleId);
+    this.updateShoppingCartBadge(); 
+  }
 
   setInitialItemsInCart(articlesId: number[]) {
     this.cartItems = new Set(articlesId);

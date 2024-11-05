@@ -44,7 +44,9 @@ describe('ShoppingCartItemDetailCardComponent', () => {
       brand: {
         name: '',
         description: ''
-      }
+      },
+      sufficientStock: false,
+      supplyDate: new Date()
     };
     component.imgUrl = testUrl;
     component.article = testArticle;
@@ -52,6 +54,13 @@ describe('ShoppingCartItemDetailCardComponent', () => {
 
     expect(component.imgUrl).toBe(testUrl);
     expect(component.article).toBe(testArticle);
+  });
+
+  it('debería emitir el articleId cuando se llama a getArticleId', () => {
+    const articleId = 1;
+    jest.spyOn(component.itemRemoved, 'emit'); 
+    component.getArticleId(articleId);
+    expect(component.itemRemoved.emit).toHaveBeenCalledWith(articleId); 
   });
 
 

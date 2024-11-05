@@ -17,7 +17,7 @@ describe('ShoppingCartStateService', () => {
     const articleId = 1;
     service.addItemToShoppingCart(articleId);
 
-    service.itemsInCart$.subscribe(count => {
+    service.itemsInCart$.subscribe((count) => {
       expect(count).toBe(1);
     });
   });
@@ -38,7 +38,7 @@ describe('ShoppingCartStateService', () => {
 
     expect(service['cartItems'].size).toBe(0);
 
-    service.itemsInCart$.subscribe(count => {
+    service.itemsInCart$.subscribe((count) => {
       expect(count).toBe(0);
     });
   });
@@ -49,8 +49,20 @@ describe('ShoppingCartStateService', () => {
 
     expect(Array.from(service['cartItems'])).toEqual(initialArticleIds);
 
-    service.itemsInCart$.subscribe(count => {
+    service.itemsInCart$.subscribe((count) => {
       expect(count).toBe(initialArticleIds.length);
+    });
+  });
+
+  it('debería eliminar un artículo del carrito', () => {
+    const articleId = 1;
+    service.addItemToShoppingCart(articleId);
+
+    expect(service['cartItems'].has(articleId)).toBe(true);
+    service.deleteItemFromShoppingCart(articleId);
+    expect(service['cartItems'].has(articleId)).toBe(false);
+    service.itemsInCart$.subscribe((count) => {
+      expect(count).toBe(0);
     });
   });
 });
