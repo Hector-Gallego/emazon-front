@@ -1,0 +1,39 @@
+<div class="card">
+  <div class="card__header">
+    <img class="card__img" src="{{ imgUrl }}" alt="" />
+    <div class="card__header-body">
+      <div class="card__name">
+        <p>{{ article.name }}</p>
+      </div>
+      <div class="card__brand">
+        <p>{{ article.brand.name }}</p>
+      </div>
+      <div class="card__categories">
+        <ng-container *ngFor="let category of article?.categories">
+          <app-tag class="card__tag" [text]="category.name"></app-tag>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <div class="card__body">
+    <div class="card__quantity">
+      <span>Cantidad: </span>
+      <p>{{ article.quantity }}</p>
+    </div>
+    <div class="card__price">
+      <span>Precio: </span>
+      <p>{{ article.price | currency }}</p>
+    </div>
+    <div class="card__price">
+      <span>Total: </span>
+      <p>{{ article.price * article.quantity | currency }}</p>
+    </div>
+    <div class="buttons">
+      <app-button
+        [size]="buttonSize"
+        [type]="buttonTypeSecundary"
+        [icon]="removeIcon"
+      ></app-button>
+    </div>
+  </div>
+</div>

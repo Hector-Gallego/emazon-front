@@ -15,7 +15,6 @@ li {
   --tipo-secundaria: Verdana;
 }
 
-
 /* Reseteamos los margin y paddings de todas las etiquetas */
 *,
 *::before,
@@ -66,7 +65,8 @@ li {
 
 /* (Opcional) Configuramos anclas suaves */
 html {
-    font-size: 10px;
+  //margin-right: calc(-1 * (100vw - 100%));
+  font-size: 10px;
   scroll-behavior: smooth;
 }
 
@@ -116,7 +116,6 @@ label {
   background-color: transparent;
   color: inherit;
   display: block;
-  
 }
 
 /* Reseteamos las tablas */

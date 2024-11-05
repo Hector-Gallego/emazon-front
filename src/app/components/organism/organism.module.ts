@@ -13,6 +13,7 @@ import { CardComponent } from './card/card.component';
 import { RouterModule } from '@angular/router';
 import { CoreModule } from 'src/app/core/core.module';
 import { PopupAddSupplyComponent } from './popup-add-supply/popup-add-supply.component';
+import { ShoppingCartItemDetailCardComponent } from './shopping-cart-item-detail-card/shopping-cart-item-detail-card.component';
 
 
 
@@ -28,7 +29,8 @@ import { PopupAddSupplyComponent } from './popup-add-supply/popup-add-supply.com
     TableToolBarComponent,
     MultipleInputSelectComponent,
     CardComponent,
-    PopupAddSupplyComponent
+    PopupAddSupplyComponent,
+    ShoppingCartItemDetailCardComponent
   ],
   imports: [SharedModule, AtomsModule, MoleculesModule, RouterModule , CoreModule],
   exports: [
@@ -40,7 +42,8 @@ import { PopupAddSupplyComponent } from './popup-add-supply/popup-add-supply.com
     TableToolBarComponent,
     MultipleInputSelectComponent,
     CardComponent,
-    PopupAddSupplyComponent
+    PopupAddSupplyComponent,
+    ShoppingCartItemDetailCardComponent
 
   ],
 })

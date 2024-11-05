@@ -7,30 +7,28 @@ import { CartItem } from '../../interfaces/cart-item.inteface';
 })
 export class ShoppingCartStateService {
   constructor() {}
-  private cartItems: CartItem[] = [];
-
+  private cartItems: Set<number> = new Set();
   private itemsInCartSubject = new BehaviorSubject<number>(0);
   itemsInCart$ = this.itemsInCartSubject.asObservable();
 
-  addItemToShoppingCart(item: CartItem) {
-    const existingItemIndex = this.cartItems.findIndex(
-      (cartItem) => cartItem.articleId === item.articleId
-    );
-
-    if (existingItemIndex !== -1) {
-      this.cartItems[existingItemIndex].quantity += item.quantity;
-    } else {
-      this.cartItems.push(item);
-    }
-    this.itemsInCartSubject.next(this.cartItems.length);
+  addItemToShoppingCart(articleId: number) {
+    this.cartItems.add(articleId);
+    this.itemsInCartSubject.next(this.cartItems.size);
   }
 
   clearShoppingCart() {
-    this.cartItems = [];
+    this.cartItems.clear();
     this.updateShoppingCartBadge();
   }
 
   private updateShoppingCartBadge() {
-    this.itemsInCartSubject.next(this.cartItems.length);
+    this.itemsInCartSubject.next(this.cartItems.size);
   }
+
+
+  setInitialItemsInCart(articlesId: number[]) {
+    this.cartItems = new Set(articlesId);
+    this.itemsInCartSubject.next(this.cartItems.size); 
+  }
+
 }

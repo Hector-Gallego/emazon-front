@@ -1,0 +1,62 @@
+<div class="items">
+  <div class="items__articles-container">
+    <div class="items__title">
+      <h4>Artículos seleccionados</h4>
+    </div>
+
+    <div *ngIf="!isEmpty" class="items__tool-bar">
+      <app-table-tool-bar
+        [isShoppinCart]="true"
+        [sortByoptions]="sortByOptions"
+        [showByoptions]="showByOptions"
+        [filterByBrandNameOptions]="brandOptions"
+        [filterByCategoryNameOptions]="categoryOptions"
+      ></app-table-tool-bar>
+    </div>
+    <div class="items__list">
+      <div *ngIf="isEmpty" class="items__empty">
+        <img
+          class="items__empty-img"
+          src="../../../../assets/empty.svg"
+          alt=""
+        />
+        <p class="items__empty-p">
+          Todavía no ha agragado Articulos a el carrito.
+        </p>
+      </div>
+      <ng-container *ngFor="let article of articles">
+        <app-shopping-cart-item-detail-card
+          [imgUrl]="'https://picsum.photos/600/600?random=' + article.id"
+          [article]="article"
+        ></app-shopping-cart-item-detail-card>
+      </ng-container>
+      <app-loader></app-loader>
+    </div>
+
+    <div *ngIf="!isEmpty" class="items__pagination">
+      <app-pagination
+        [totalPages]="totalPages"
+        [currentPage]="currentPage"
+        (pageChange)="onPageChange($event)"
+      ></app-pagination>
+    </div>
+  </div>
+
+  <div  class="items__purchase-container">
+    <div class="items__details">
+      <p class="items__title">Resumen de la compra</p>
+      <app-divisor></app-divisor>
+      <div class="items__total">
+        <span>Total</span>
+        <p>{{ totalPurchase | currency }}</p>
+      </div>
+      <div class="items__button">
+        <app-button
+          [size]="buttonSizeLarge"
+          [label]="'Completar compra'"
+          [disabled]="totalPurchase <= 0"
+        ></app-button>
+      </div>
+    </div>
+  </div>
+</div>

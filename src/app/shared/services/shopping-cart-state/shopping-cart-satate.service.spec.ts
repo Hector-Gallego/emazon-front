@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
 import { ShoppingCartStateService } from './shopping-cart-state.service';
-import { CartItem } from '../../interfaces/cart-item.inteface';
 
 describe('ShoppingCartStateService', () => {
   let service: ShoppingCartStateService;
@@ -14,37 +13,44 @@ describe('ShoppingCartStateService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('debería agregar un nuevo item al carrito', () => {
-    const item: CartItem = { articleId: 1, quantity: 1 };
-    service.addItemToShoppingCart(item);
+  it('debería agregar un nuevo artículo al carrito', () => {
+    const articleId = 1;
+    service.addItemToShoppingCart(articleId);
 
     service.itemsInCart$.subscribe(count => {
       expect(count).toBe(1);
     });
   });
 
-  it('debería aumentar la cantidad de un item existente en el carrito', () => {
-    const item: CartItem = { articleId: 1, quantity: 1 };
-    const sameItem: CartItem = { articleId: 1, quantity: 2 };
+  it('no debería duplicar un artículo ya existente en el carrito', () => {
+    const articleId = 1;
 
-    service.addItemToShoppingCart(item);
-    service.addItemToShoppingCart(sameItem);
+    service.addItemToShoppingCart(articleId);
+    service.addItemToShoppingCart(articleId);
 
- 
-    expect(service['cartItems'].length).toBe(1);
-
-    expect(service['cartItems'][0].quantity).toBe(3);
+    expect(service['cartItems'].size).toBe(1);
   });
 
   it('debería limpiar el carrito de compras', () => {
-    const item: CartItem = { articleId: 1, quantity: 1 };
-    service.addItemToShoppingCart(item);
+    const articleId = 1;
+    service.addItemToShoppingCart(articleId);
     service.clearShoppingCart();
 
-    expect(service['cartItems'].length).toBe(0);
+    expect(service['cartItems'].size).toBe(0);
 
     service.itemsInCart$.subscribe(count => {
       expect(count).toBe(0);
+    });
+  });
+
+  it('debería establecer los artículos iniciales en el carrito', () => {
+    const initialArticleIds = [1, 2];
+    service.setInitialItemsInCart(initialArticleIds);
+
+    expect(Array.from(service['cartItems'])).toEqual(initialArticleIds);
+
+    service.itemsInCart$.subscribe(count => {
+      expect(count).toBe(initialArticleIds.length);
     });
   });
 });

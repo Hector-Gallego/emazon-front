@@ -1,15 +1,11 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
-  faShoppingBag,
   faShoppingBasket,
   IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
 import { finalize, Subscription } from 'rxjs';
-import {
-  ErrorMessages,
-  StatesTypes,
-} from 'src/app/shared/constants/commonConstants';
+import { StatesTypes } from 'src/app/shared/constants/commonConstants';
 import { ButtonSize } from 'src/app/shared/enums/button-size.enum';
 import { ArticleResponse } from 'src/app/shared/interfaces/article.interface';
 import { CartItem } from 'src/app/shared/interfaces/cart-item.inteface';
@@ -25,30 +21,28 @@ import { ToastService } from 'src/app/shared/services/toast/toast.service';
   styleUrls: ['./article-detail-page.component.scss'],
 })
 export class ArticleDetailPageComponent implements OnInit, OnDestroy {
-  
   constructor(
     private readonly articleService: ArticlePersistenceService,
-    private readonly toastService: ToastService,
     private readonly loaderService: LoaderService,
+    private readonly toastService: ToastService,
     private readonly route: ActivatedRoute,
     private readonly shoppingCartPersistenceService: ShoppingCartPersistenceService,
     private readonly shoppinCartStateService: ShoppingCartStateService
   ) {}
 
   quantityToAdd: number = 1;
-  toastMessage: string = '';
-  toastType: StatesTypes = StatesTypes.SUCCESS;
-  toastDuration: number = 10000;
   faIconShoppingCart: IconDefinition = faShoppingBasket;
   buttonSyzeL: ButtonSize = ButtonSize.L;
   articleId: number = 0;
   article!: ArticleResponse;
   subscriptions: Subscription = new Subscription();
+  estimatedArrivalDate: string = '';
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
   ngOnInit(): void {
+    this.calculateEstimatedArrivalDate();
     this.route.params.subscribe((params) => {
       this.articleId = +params['id'];
     });
@@ -66,17 +60,6 @@ export class ArticleDetailPageComponent implements OnInit, OnDestroy {
         next: (response) => {
           this.article = response.data;
         },
-        error: (error) => {
-          this.toastMessage =
-            error?.error?.message || ErrorMessages.GENERIC_ERROR_MESSAGE;
-
-          this.toastType = StatesTypes.ERROR;
-          this.toastService.triggerToast(
-            this.toastMessage,
-            this.toastType,
-            this.toastDuration
-          );
-        },
       });
 
     this.subscriptions.add(getArticleSubscription);
@@ -84,20 +67,37 @@ export class ArticleDetailPageComponent implements OnInit, OnDestroy {
 
   addItemToShoppinCart() {
     this.loaderService.show();
+
     const cartItem: CartItem = {
       articleId: this.article.id,
       quantity: this.quantityToAdd,
     };
 
-    this.shoppingCartPersistenceService
+    const saveItemtoShoppingCartSubscription = this.shoppingCartPersistenceService
       .saveItemtoShoppingCart(cartItem)
       .pipe(finalize(() => this.loaderService.hide()))
-      .subscribe(() => {
-        this.shoppinCartStateService.addItemToShoppingCart(cartItem);
+      .subscribe((response) => {
+        this.shoppinCartStateService.addItemToShoppingCart(this.article.id);
+
+        this.toastService.triggerToast(
+          response.message,
+          StatesTypes.SUCCESS,
+          10000
+        );
+        
       });
+
+      this.subscriptions.add(saveItemtoShoppingCartSubscription);
   }
 
   getQuantityToAdd(quantity: number) {
     this.quantityToAdd = quantity;
+  }
+
+  calculateEstimatedArrivalDate(): void {
+    const today = new Date();
+    const estimatedDate = new Date(today);
+    estimatedDate.setDate(today.getDate() + 5);
+    this.estimatedArrivalDate = estimatedDate.toLocaleDateString();
   }
 }

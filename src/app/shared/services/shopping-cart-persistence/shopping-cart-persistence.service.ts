@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
@@ -7,6 +7,9 @@ import { environment } from 'src/environments/environment';
 import { ShoppiCartValueConstants } from '../../constants/shopping-cart.constant';
 import { checkToken } from 'src/app/core/interceptors/token-interceptor/token.interceptor';
 import { CartItem } from '../../interfaces/cart-item.inteface';
+import { ShoppinCartRequest } from '../../interfaces/shopping-cart-request.interface';
+import { ShoppinCartResponse } from '../../interfaces/shopping-cart-response.interface';
+import { ArticleResponse } from '../../interfaces/article.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +22,19 @@ export class ShoppingCartPersistenceService {
       environment.shoppingCartApiUrl +
         ShoppiCartValueConstants.END_POINT_ADD_ITEM_SHOPPIN_CART,
       itemCart,
+      {
+        context: checkToken(),
+      }
+    );
+  }
+
+  getShoppingCart(
+    paginationRequest: ShoppinCartRequest
+  ): Observable<ShoppinCartResponse<ArticleResponse>> {
+    
+    return this.http.post<ShoppinCartResponse<ArticleResponse>>(
+      environment.shoppingCartApiUrl + ShoppiCartValueConstants.END_POINT_GET_SHOPPIN_CART,
+      paginationRequest,
       {
         context: checkToken(),
       }

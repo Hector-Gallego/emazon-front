@@ -10,6 +10,9 @@ export class TableToolBarComponent {
   constructor(private readonly tableToolBarService: TableToolBarService) {}
   @Input() showByoptions: { value: string; label: string }[] = [];
   @Input() sortByoptions: { value: string; label: string }[] = [];
+  @Input() filterByCategoryNameOptions : { value: string; label: string }[] = [];
+  @Input() filterByBrandNameOptions : { value: string; label: string }[] = [];
+  @Input() isShoppinCart : boolean = false;
 
   onShowByChange(value: string): void {
     this.tableToolBarService.updateShowBy(value);
@@ -17,5 +20,12 @@ export class TableToolBarComponent {
 
   onSortByChange(value: string): void {
     this.tableToolBarService.updateSortBy(value);
+  }
+
+  onFilterByCategoryNameChange(value: string): void{
+    this.tableToolBarService.updateFilterByCategoryName(value);
+  }
+  onFilterByBrandNameChange(value: string): void{
+    this.tableToolBarService.updateFilterByBrandName(value);
   }
 }

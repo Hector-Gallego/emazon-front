@@ -5,7 +5,7 @@ export interface PaginationResponse<T> {
   timestamp: string;
 }
 
-interface Data <T>{
+export interface Data <T>{
   content: T[];
   pageNumber: number;
   pageSize: number;

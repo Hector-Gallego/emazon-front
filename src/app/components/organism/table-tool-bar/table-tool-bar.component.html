@@ -1,12 +1,39 @@
 <div class="table-tool-bar">
-    
-  <div class="table-tool-bar__show-by">
+  <div class="table-tool-bar__field">
     <app-label [label]="'Mostrar:'"></app-label>
-    <app-input-select [borderType]="'no-border'" (selectionChange)="onShowByChange($event)" [options]="showByoptions"></app-input-select>
+    <app-input-select
+      [borderType]="'no-border'"
+      (selectionChange)="onShowByChange($event)"
+      [options]="showByoptions"
+    ></app-input-select>
   </div>
 
-  <div class="table-tool-bar__sort-by">
+  
+  <div class="table-tool-bar__field">
     <app-label [label]="'Ordenar por:'"></app-label>
-    <app-input-select [borderType]="'no-border'" (selectionChange)="onSortByChange($event)" [options]="sortByoptions"></app-input-select>
+    <app-input-select
+      [borderType]="'no-border'"
+      (selectionChange)="onSortByChange($event)"
+      [options]="sortByoptions"
+    ></app-input-select>
   </div>
+
+  <div *ngIf="isShoppinCart" class="table-tool-bar__field-category">
+    <app-label [label]="'filtar por categoría:'"></app-label>
+    <app-input-select
+      [borderType]="'no-border'"
+      (selectionChange)="onFilterByCategoryNameChange($event)"
+      [options]="filterByCategoryNameOptions"
+    ></app-input-select>
+  </div>
+
+  <div *ngIf="isShoppinCart" class="table-tool-bar__field-brand">
+    <app-label [label]="'filtar por marca:'"></app-label>
+    <app-input-select
+      [borderType]="'no-border'"
+      (selectionChange)="onFilterByBrandNameChange($event)"
+      [options]="filterByBrandNameOptions"
+    ></app-input-select>
+  </div>
+
 </div>

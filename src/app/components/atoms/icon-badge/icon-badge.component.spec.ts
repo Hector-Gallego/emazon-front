@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { IconBadgeComponent } from './icon-badge.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 describe('CartBadgeComponent', () => {
   let component: IconBadgeComponent;
@@ -8,7 +9,8 @@ describe('CartBadgeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ IconBadgeComponent ]
+      declarations: [ IconBadgeComponent ],
+      imports: [SharedModule]
     })
     .compileComponents();
 

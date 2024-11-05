@@ -6,11 +6,16 @@
     justify-content: start;
     align-items: start;
 
-    &__show-by{
+  
+    &__field{
         display: flex;
         align-items: baseline;
     }
-    &__sort-by{
+    &__field-brand{
+        display: flex;
+        align-items: baseline;
+    }
+    &__field-category{
         display: flex;
         align-items: baseline;
     }
@@ -21,7 +26,14 @@
     .table-tool-bar{
         flex-direction: row;
         justify-content: space-between;
+        &__field-brand{
+            display: block;
+        }
+        &__field-category{
+            display: block;
+        }
     }
+    
 }
 
     

@@ -76,4 +76,8 @@ describe('HeaderComponent', () => {
     expect(routerMock.navigate).toHaveBeenCalledWith([`/${MainRoutes.AUTH}/${MainRoutes.LOGIN}`]);
   });
  
+  it('debería navegar a "/tienda/carrito" al llamar a navigateTo', () => {
+    component.navigateTo();
+    expect(routerMock.navigate).toHaveBeenCalledWith(['/tienda/carrito']);
+  });
 });

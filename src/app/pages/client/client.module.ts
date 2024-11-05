@@ -6,9 +6,10 @@ import { AtomsModule } from 'src/app/components/atoms/atoms.module';
 import { MoleculesModule } from 'src/app/components/molecules/molecules.module';
 import { OrganismModule } from 'src/app/components/organism/organism.module';
 import { ClientRoutingModule } from './client-routing.module';
+import { ShoppingCartDetailsPageComponent } from './shopping-cart-details-page/shopping-cart-details-page.component';
 
 @NgModule({
-  declarations: [ListArticlesComponent, ArticleDetailPageComponent],
+  declarations: [ListArticlesComponent, ArticleDetailPageComponent, ShoppingCartDetailsPageComponent],
   imports: [SharedModule, AtomsModule, MoleculesModule, OrganismModule, ClientRoutingModule],
   exports: [ListArticlesComponent, ArticleDetailPageComponent],
 })

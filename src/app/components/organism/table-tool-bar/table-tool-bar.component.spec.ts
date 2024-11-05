@@ -15,6 +15,8 @@ describe('TableToolBarComponent', () => {
     const tableToolBarServiceMock = {
       updateShowBy: jest.fn(),
       updateSortBy: jest.fn(),
+      updateFilterByCategoryName: jest.fn(), 
+      updateFilterByBrandName: jest.fn(), 
     };
     await TestBed.configureTestingModule({
       declarations: [ TableToolBarComponent ],
@@ -46,5 +48,19 @@ describe('TableToolBarComponent', () => {
     const sortByValue = 'nombre';
     component.onSortByChange(sortByValue);
     expect(tableToolBarService.updateSortBy).toHaveBeenCalledWith(sortByValue);
+  });
+
+  it('debería llamar a updateFilterByCategoryName del servicio cuando se llama a onFilterByCategoryNameChange', () => {
+    const categoryValue = 'Electrónica';
+
+    component.onFilterByCategoryNameChange(categoryValue);
+    expect(tableToolBarService.updateFilterByCategoryName).toHaveBeenCalledWith(categoryValue);
+  });
+
+  it('debería llamar a updateFilterByBrandName del servicio cuando se llama a onFilterByBrandNameChange', () => {
+    const brandValue = 'Nike';
+
+    component.onFilterByBrandNameChange(brandValue);
+    expect(tableToolBarService.updateFilterByBrandName).toHaveBeenCalledWith(brandValue);
   });
 });

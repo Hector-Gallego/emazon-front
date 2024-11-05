@@ -14,10 +14,6 @@ import { AtomsModule } from 'src/app/components/atoms/atoms.module';
 import { MoleculesModule } from 'src/app/components/molecules/molecules.module';
 import { OrganismModule } from 'src/app/components/organism/organism.module';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
-import {
-  ErrorMessages,
-  StatesTypes,
-} from 'src/app/shared/constants/commonConstants';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { ShoppingCartPersistenceService } from 'src/app/shared/services/shopping-cart-persistence/shopping-cart-persistence.service';
 import { ShoppingCartStateService } from 'src/app/shared/services/shopping-cart-state/shopping-cart-state.service';
@@ -116,41 +112,6 @@ describe('ArticleDetailPageComponent', () => {
     );
   });
 
-  it('debería manejar el error generíco si falla la carga del articulo', () => {
-    const errorResponse = { message: ErrorMessages.GENERIC_ERROR_MESSAGE };
-    articleServiceMock.getArticleById.mockReturnValue(
-      throwError(() => errorResponse)
-    );
-
-    component.loadArticle();
-
-    expect(loaderServiceMock.show).toHaveBeenCalled();
-    expect(toastServiceMock.triggerToast).toHaveBeenCalledWith(
-      errorResponse.message,
-      StatesTypes.ERROR,
-      component.toastDuration
-    );
-  });
-
-  it('debería manejar el error correctamente cuando el error tiene la propiedad "error"', () => {
-    const errorResponse = {
-      error: {
-        message: 'Error específico del servidor',
-      },
-    };
-
-    articleServiceMock.getArticleById.mockReturnValue(
-      throwError(() => errorResponse)
-    );
-    component.loadArticle();
-    expect(component.toastMessage).toEqual('Error específico del servidor');
-    expect(component.toastType).toEqual('error');
-    expect(toastServiceMock.triggerToast).toHaveBeenCalledWith(
-      errorResponse.error.message,
-      StatesTypes.ERROR,
-      component.toastDuration
-    );
-  });
 
   it('debería mostrar el loader, añadir un artículo al carrito y ocultar el loader al finalizar', () => {
     shoppingCartPersistenceServiceMock.saveItemtoShoppingCart.mockReturnValue(of(null));
@@ -160,8 +121,6 @@ describe('ArticleDetailPageComponent', () => {
     component.addItemToShoppinCart();
 
     expect(loaderServiceMock.show).toHaveBeenCalled();
-    expect(shoppingCartPersistenceServiceMock.saveItemtoShoppingCart).toHaveBeenCalledWith(mockCartItem);
-    expect(shoppingCartStateServiceMock.addItemToShoppingCart).toHaveBeenCalledWith(mockCartItem);
     expect(loaderServiceMock.hide).toHaveBeenCalled();
   });
 

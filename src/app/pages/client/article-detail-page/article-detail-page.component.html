@@ -36,23 +36,28 @@
 
     <div class="article-detail__add-cart">
       <div class="article-detail__quantity">
-        <app-quantity-counter-button
-        (quantityChange)="getQuantityToAdd($event)"
-          [stock]="article.quantity"
-        ></app-quantity-counter-button>
-        <span>+ {{ article.quantity }} disponibles</span>
-       
+        <div *ngIf="article.quantity <= 0">
+          <p class="article-detail__supply">
+            No tenemos unidades de este articulo disponible, fecha estimada de
+            llegada: {{estimatedArrivalDate}}
+          </p>
+        </div>
+        <ng-container *ngIf="article.quantity > 0">
+          <app-quantity-counter-button
+            (quantityChange)="getQuantityToAdd($event)"
+            [stock]="article.quantity"
+          ></app-quantity-counter-button>
+          <span>+ {{ article.quantity }} disponibles</span>
+        </ng-container>
       </div>
 
       <app-button
         (buttonClick)="addItemToShoppinCart()"
         [size]="buttonSyzeL"
         [label]="'añadir al carrito'"
+        [disabled]="article.quantity <= 0"
       ></app-button>
-     
-      
     </div>
-   
   </section>
   <app-loader></app-loader>
 </div>

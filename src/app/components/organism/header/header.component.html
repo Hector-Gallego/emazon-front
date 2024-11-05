@@ -4,7 +4,7 @@
   </div>
 
   <div class="header__button-section">
-    <div class="header__button">
+    <div (click)="navigateTo()" class="header__button">
       <app-icon-badge [quantity]="itemsCartQuantity"></app-icon-badge>
     </div>
     <button
@@ -19,7 +19,7 @@
 
   <nav class="header__nav" [ngClass]="{ 'header__nav--active': active }">
     <ul class="header__ul">
-      <div class="header__cart">
+      <div  (click)="navigateTo()" class="header__cart">
         <app-icon-badge [quantity]="itemsCartQuantity"></app-icon-badge>
       </div>
       <ng-container *ngFor="let item of menuItems">

@@ -15,14 +15,14 @@ describe('TableToolBarService', () => {
   });
 
   it('debería inicializar showBy$ con el valor por defecto', (done) => {
-    service.showBy$.subscribe(value => {
+    service.showBy$.subscribe((value) => {
       expect(value).toBe('10');
       done();
     });
   });
 
   it('debería inicializar sortBy$ con el valor por defecto', (done) => {
-    service.sortBy$.subscribe(value => {
+    service.sortBy$.subscribe((value) => {
       expect(value).toBe('name:asc');
       done();
     });
@@ -33,7 +33,7 @@ describe('TableToolBarService', () => {
 
     service.updateShowBy(newValue);
 
-    service.showBy$.subscribe(value => {
+    service.showBy$.subscribe((value) => {
       expect(value).toBe(newValue);
       done();
     });
@@ -44,9 +44,32 @@ describe('TableToolBarService', () => {
 
     service.updateSortBy(newValue);
 
-    service.sortBy$.subscribe(value => {
+    service.sortBy$.subscribe((value) => {
       expect(value).toBe(newValue);
       done();
     });
   });
+
+  it('debería actualizar filterByCategoryName correctamente cuando se llame a updateFilterByCategoryName', (done) => {
+    const categoryValue = 'Electrónica';
+
+    service.updateFilterByCategoryName(categoryValue);
+
+    service.categoryFilter$.subscribe((value) => {
+      expect(value).toBe(categoryValue);
+      done();
+    });
+  });
+
+  it('debería actualizar filterByBrandName correctamente cuando se llame a updateFilterByBrandName', (done) => {
+    const brandValue = 'Nike';
+
+    service.updateFilterByBrandName(brandValue);
+
+    service.brandFilter$.subscribe((value) => {
+      expect(value).toBe(brandValue);
+      done();
+    });
+  });
+  
 });
