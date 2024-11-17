@@ -12,6 +12,7 @@ import { SortMapper } from 'src/app/shared/mappers/sort-mapper/sort.mapper';
 import { BrandPersistenceService } from 'src/app/shared/services/brand-persistence/brand-persistence.service';
 import { CategoryPersistenceService } from 'src/app/shared/services/category-persistence/category-persistence.service';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
+import { ReportPersistenceService } from 'src/app/shared/services/report-persistence/report-persistence.service';
 import { ShoppingCartPersistenceService } from 'src/app/shared/services/shopping-cart-persistence/shopping-cart-persistence.service';
 import { ShoppingCartStateService } from 'src/app/shared/services/shopping-cart-state/shopping-cart-state.service';
 import { TableToolBarService } from 'src/app/shared/services/table-tool-bar/table-tool-bar.service';
@@ -23,7 +24,6 @@ import { ToastService } from 'src/app/shared/services/toast/toast.service';
   styleUrls: ['./shopping-cart-details-page.component.scss'],
 })
 export class ShoppingCartDetailsPageComponent implements OnInit {
-  
   constructor(
     private readonly loaderService: LoaderService,
     private readonly toastService: ToastService,
@@ -31,7 +31,8 @@ export class ShoppingCartDetailsPageComponent implements OnInit {
     private readonly shoppinCartPersistenceService: ShoppingCartPersistenceService,
     private readonly shoppingCartSatateService: ShoppingCartStateService,
     private readonly brandService: BrandPersistenceService,
-    private readonly categoryService: CategoryPersistenceService
+    private readonly categoryService: CategoryPersistenceService,
+    private readonly reportPersistenceService: ReportPersistenceService
   ) {}
   subscription = new Subscription();
 
@@ -65,7 +66,7 @@ export class ShoppingCartDetailsPageComponent implements OnInit {
   categoryFilterName: string = '';
   brandFilterName: string = '';
   isEmpty: boolean = false;
- 
+
   ngOnInit(): void {
     this.loadShoppingCart();
 
@@ -149,7 +150,6 @@ export class ShoppingCartDetailsPageComponent implements OnInit {
       .getShoppingCart(pageRequest)
       .pipe(finalize(() => this.loaderService.hide()))
       .subscribe((response) => {
-        
         this.articles = response.customPage.content;
         this.totalPurchase = response.totalPurchase;
         this.totalPages = response.customPage.totalPages;
@@ -177,6 +177,23 @@ export class ShoppingCartDetailsPageComponent implements OnInit {
           StatesTypes.SUCCESS,
           10000
         );
+      });
+  }
+
+  completedPurchase() {
+    this.loaderService.show();
+    const reportSubscription = this.reportPersistenceService
+      .saveReport()
+      .pipe(finalize(() => this.loaderService.hide()))
+      .subscribe((response) => {
+        console.log(response);
+        this.toastService.triggerToast(
+          'Compra realzada de manera exitosa',
+          StatesTypes.SUCCESS,
+          10000
+        );
+        this.loadShoppingCart();
+        this.shoppingCartSatateService.clearShoppingCart();
       });
   }
 }

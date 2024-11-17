@@ -1,0 +1,31 @@
+<div class="reports-container">
+    <div class="title">
+        <h4>Reportes de compras</h4>
+    </div>
+  <div *ngFor="let report of purchaseReport" class="report-card">
+    <div class="report-card__header">
+      <span>
+        Reporte No: {{ report.id }}
+      </span>
+      <span>
+        {{ report.customerEmail }}
+      </span>
+    </div>
+
+    <div class="report-card__body">
+      <div class="report-card__item" *ngFor="let item of report.itemCarts">
+        <span class="report-card__name">
+          {{ item.articleName }}
+        </span>
+        <span> cantidad: {{ item.articleQuantity }} </span>
+        <span> Precio: {{ item.articlePrice | currency}} </span>
+        <span> Subtotal: {{ item.articlePrice * item.articleQuantity| currency}} </span>
+      </div>
+    </div>
+    <div class="report-card__footer">
+      <span>Fecha de compra: {{ report.purchaseDate | date}}</span>
+      <span>Total: {{ report.totalAmount | currency }}</span>
+    </div>
+  </div>
+  <app-loader></app-loader>
+</div>

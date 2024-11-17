@@ -7,6 +7,7 @@ import { HasRoleGuard } from 'src/app/core/guards/hasRole/has-role.guard';
 import { Role } from 'src/app/shared/enums/role.enum';
 import { ClientRoutes } from 'src/app/shared/constants/routes.constants';
 import { ShoppingCartDetailsPageComponent } from './shopping-cart-details-page/shopping-cart-details-page.component';
+import { ListReportsPageComponent } from './list-reports-page/list-reports-page.component';
 
 
 const routes: Routes = [
@@ -29,6 +30,12 @@ const routes: Routes = [
       {
         path: ClientRoutes.SHOPPING_CART,
         component: ShoppingCartDetailsPageComponent,
+        canActivate: [HasRoleGuard],
+        data: {allowRoles: [Role.CLIENT]},
+      },
+      {
+        path: ClientRoutes.REPORTS,
+        component: ListReportsPageComponent,
         canActivate: [HasRoleGuard],
         data: {allowRoles: [Role.CLIENT]},
       },

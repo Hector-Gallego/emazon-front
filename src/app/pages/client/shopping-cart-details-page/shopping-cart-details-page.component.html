@@ -57,6 +57,7 @@
           [size]="buttonSizeLarge"
           [label]="'Completar compra'"
           [disabled]="totalPurchase <= 0"
+          (buttonClick)="completedPurchase()"
         ></app-button>
       </div>
     </div>

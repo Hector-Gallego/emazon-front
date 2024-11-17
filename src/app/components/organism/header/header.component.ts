@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import {
   faBars,
+  faFileInvoice,
+  faMoneyBill,
   faSignOut,
   faStore,
   IconDefinition,
@@ -34,6 +36,7 @@ export class HeaderComponent implements OnInit {
 
   faLogoutIcon: IconDefinition = faSignOut;
   faArticlesIcon: IconDefinition = faStore;
+  faReportsIcon: IconDefinition = faFileInvoice;
   menuIcon: IconDefinition = faBars;
   subscription = new Subscription();
   active: boolean = true;
@@ -49,6 +52,12 @@ export class HeaderComponent implements OnInit {
       label: 'Artículos',
       icon: this.faArticlesIcon,
       route: `/${MainRoutes.STORE}/${ClientRoutes.ARTICLES}`,
+      roles: [this.roleClient],
+    },
+    {
+      label: 'Reportes',
+      icon: this.faReportsIcon,
+      route: `/${MainRoutes.STORE}/${ClientRoutes.REPORTS}`,
       roles: [this.roleClient],
     },
     {

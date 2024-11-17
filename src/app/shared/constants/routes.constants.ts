@@ -11,6 +11,7 @@ export const AdminRoutes = {
   export const ClientRoutes = {
     ARTICLES: 'articulos',
     SHOPPING_CART : 'carrito',
+    REPORTS : 'reportes',
     ARTICLE_DETAIL: 'detalle-articulo/:id',
   } as const;
   

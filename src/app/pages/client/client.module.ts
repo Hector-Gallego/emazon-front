@@ -7,10 +7,22 @@ import { MoleculesModule } from 'src/app/components/molecules/molecules.module';
 import { OrganismModule } from 'src/app/components/organism/organism.module';
 import { ClientRoutingModule } from './client-routing.module';
 import { ShoppingCartDetailsPageComponent } from './shopping-cart-details-page/shopping-cart-details-page.component';
+import { ListReportsPageComponent } from './list-reports-page/list-reports-page.component';
 
 @NgModule({
-  declarations: [ListArticlesComponent, ArticleDetailPageComponent, ShoppingCartDetailsPageComponent],
-  imports: [SharedModule, AtomsModule, MoleculesModule, OrganismModule, ClientRoutingModule],
-  exports: [ListArticlesComponent, ArticleDetailPageComponent],
+  declarations: [
+    ListArticlesComponent,
+    ArticleDetailPageComponent,
+    ShoppingCartDetailsPageComponent,
+    ListReportsPageComponent,
+  ],
+  imports: [
+    SharedModule,
+    AtomsModule,
+    MoleculesModule,
+    OrganismModule,
+    ClientRoutingModule,
+  ],
+  exports: [ListArticlesComponent, ArticleDetailPageComponent, ListReportsPageComponent],
 })
 export class ClientModule {}
