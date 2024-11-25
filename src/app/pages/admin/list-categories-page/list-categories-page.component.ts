@@ -16,6 +16,7 @@ import { PaginationRequest } from 'src/app/shared/interfaces/pagination-request.
 import { Category } from 'src/app/shared/interfaces/category.interface';
 import { TableToolBarService } from 'src/app/shared/services/table-tool-bar/table-tool-bar.service';
 import { SortMapper } from 'src/app/shared/mappers/sort-mapper/sort.mapper';
+import { Role } from 'src/app/shared/enums/role.enum';
 
 @Component({
   selector: 'app-list-categories',
@@ -26,6 +27,7 @@ export class ListCategoriesPageComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
 
   categories: Category[] = [];
+  roleAdmin: Role = Role.ADMIN;
 
   toastMessage: string = '';
   toastType: StatesTypes = StatesTypes.SUCCESS;

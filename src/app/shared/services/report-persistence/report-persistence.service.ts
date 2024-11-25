@@ -14,7 +14,7 @@ export class ReportPersistenceService {
 
   saveReport(): Observable<unknown> { 
     return this.http.post(
-      environment.reportApiUrl + "/api/reports/saveReport",
+      environment.transactionsApiUrl + "/api/transactions/purchase",
       {}, 
       { context: checkToken() } 
     );

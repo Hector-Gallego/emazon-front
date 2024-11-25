@@ -25,8 +25,6 @@ export class ListReportsPageComponent implements OnInit {
     this.reportPersistneceService.getReports()
     .pipe(finalize(()=> this.loaderService.hide()))
     .subscribe((response) => {
-      console.log(response);
-
       this.purchaseReport = response;
     });
   }

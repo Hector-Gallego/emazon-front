@@ -46,7 +46,7 @@ export class AddCategoryPageComponent implements OnDestroy {
       contentType: InputContentType.TEXT,
       type: InputType.TEXTAREA,
       placeholder: 'Ingresa la descripción',
-      validators: [Validators.required, Validators.maxLength(60)],
+      validators: [Validators.required, Validators.maxLength(90)],
     },
   ];
 

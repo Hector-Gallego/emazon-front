@@ -21,19 +21,19 @@ const routes: Routes = [
         path: AdminRoutes.CREATE_CATEGORY,
         component: AddCategoryPageComponent,
         canActivate: [HasRoleGuard],
-        data: {allowRoles: [Role.ADMIN, Role.WAREHOUSE_ASSISTANT]},
+        data: {allowRoles: [Role.ADMIN]},
       },
       {
         path: AdminRoutes.CREATE_BRAND,
         component: AddBrandPageComponent,
         canActivate: [HasRoleGuard],
-        data: {allowRoles: [Role.ADMIN, Role.WAREHOUSE_ASSISTANT]},
+        data: {allowRoles: [Role.ADMIN]},
       },
       {
         path: AdminRoutes.CREATE_ARTICLE,
         component: AddArticlePageComponent,
         canActivate: [HasRoleGuard],
-        data: {allowRoles: [Role.ADMIN, Role.WAREHOUSE_ASSISTANT]},
+        data: {allowRoles: [Role.ADMIN]},
       },
       {
         path: AdminRoutes.BRANDS,

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { jwtDecode, JwtPayload } from 'jwt-decode';
 import { Role } from 'src/app/shared/enums/role.enum';
 
-
 import Cookies from 'js-cookie';
 
 interface CustomJwtPayload extends JwtPayload {
@@ -44,7 +43,7 @@ export class TokenService {
     }
     return false;
   }
-  
+
   getRoleUser(): Role {
     const token = this.getToken();
 
@@ -63,8 +62,20 @@ export class TokenService {
             return Role.NO_ROLE;
         }
       }
-      
     }
     return Role.NO_ROLE;
+  }
+
+  getEmailUser(): string {
+    const token = this.getToken();
+
+    if (token) {
+      const decodeToken = jwtDecode<CustomJwtPayload>(token);
+      if (decodeToken.sub) {
+        const userEmail = decodeToken.sub;
+        return userEmail;
+      }
+    }
+    return '';
   }
 }

@@ -1,10 +1,11 @@
 <header class="header">
   <div class="header__logo">
     <img src="../../../../assets/logo.svg" alt="" />
+    
   </div>
 
   <div class="header__button-section">
-    <div (click)="navigateTo()" class="header__button">
+    <div *appShowForRoles="[roleClient]" (click)="navigateTo()" class="header__button">
       <app-icon-badge [quantity]="itemsCartQuantity"></app-icon-badge>
     </div>
     <button
@@ -19,7 +20,8 @@
 
   <nav class="header__nav" [ngClass]="{ 'header__nav--active': active }">
     <ul class="header__ul">
-      <div  (click)="navigateTo()" class="header__cart">
+      
+      <div *appShowForRoles="[roleClient]"  (click)="navigateTo()" class="header__cart">
         <app-icon-badge [quantity]="itemsCartQuantity"></app-icon-badge>
       </div>
       <ng-container *ngFor="let item of menuItems">
@@ -41,6 +43,9 @@
           </a>
         </li>
       </ng-container>
+        <li class="header__email">
+          {{userEmail}}
+        </li> 
     </ul>
   </nav>
 </header>

@@ -10,6 +10,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { filter, finalize, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth-service/auth.service';
+import { TokenService } from 'src/app/core/services/token-service/token.service';
 import {
   ClientRoutes,
   MainRoutes,
@@ -31,7 +32,8 @@ export class HeaderComponent implements OnInit {
     private readonly router: Router,
     private readonly authService: AuthService,
     private readonly shoppingCartSatateService: ShoppingCartStateService,
-    private readonly shoppingCartPersistenceService: ShoppingCartPersistenceService
+    private readonly shoppingCartPersistenceService: ShoppingCartPersistenceService,
+    private readonly tokenService: TokenService
   ) {}
 
   faLogoutIcon: IconDefinition = faSignOut;
@@ -41,11 +43,12 @@ export class HeaderComponent implements OnInit {
   subscription = new Subscription();
   active: boolean = true;
   currentRoute: string = '';
-  roleCleint: Role = Role.CLIENT;
   itemsCartQuantity: number = 0;
   roleClient = Role.CLIENT;
   roleAux = Role.WAREHOUSE_ASSISTANT;
   roleAdmin = Role.ADMIN;
+  currentRole: Role = Role.NO_ROLE;
+  userEmail: string = '';
 
   menuItems = [
     {
@@ -80,33 +83,36 @@ export class HeaderComponent implements OnInit {
   @Input() isAdmin: boolean = false;
 
   ngOnInit(): void {
+    this.userEmail = this.tokenService.getEmailUser();
     this.currentRoute = this.router.url;
+    this.currentRole = this.tokenService.getRoleUser();
+
     const subs = this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event) => {
         const navigationEndEvent = event as NavigationEnd;
         this.currentRoute = navigationEndEvent.url;
       });
+    if (this.currentRole === this.roleClient) {
+      const subCartPersistence = this.shoppingCartPersistenceService
+        .getShoppingCart(this.pageRequest)
+        .subscribe((response) => {
+          const articleIds: number[] = response.customPage.content.map(
+            (item: ArticleResponse) => item.id
+          );
 
-    const subCartPersistence = this.shoppingCartPersistenceService
-      .getShoppingCart(this.pageRequest)
-      .subscribe((response) => {
-        const articleIds: number[] = response.customPage.content.map(
-          (item: ArticleResponse) => item.id
-        );
+          this.shoppingCartSatateService.setInitialItemsInCart(articleIds);
+        });
 
-        this.shoppingCartSatateService.setInitialItemsInCart(articleIds);
-      });
-
-    const subCartState = this.shoppingCartSatateService.itemsInCart$.subscribe(
-      (quantity) => {
-        this.itemsCartQuantity = quantity;
-      }
-    );
+      const subCartState =
+        this.shoppingCartSatateService.itemsInCart$.subscribe((quantity) => {
+          this.itemsCartQuantity = quantity;
+        });
+      this.subscription.add(subCartState);
+      this.subscription.add(subCartPersistence);
+    }
 
     this.subscription.add(subs);
-    this.subscription.add(subCartState);
-    this.subscription.add(subCartPersistence);
   }
 
   setActive(): void {

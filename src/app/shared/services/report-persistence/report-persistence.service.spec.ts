@@ -34,7 +34,7 @@ describe('ReportPersistenceService', () => {
     });
 
     const req = httpMock.expectOne(
-      `${environment.reportApiUrl}/api/reports/saveReport`
+      `${environment.transactionsApiUrl}/api/transactions/purchase`
     );
 
     expect(req.request.method).toBe('POST');

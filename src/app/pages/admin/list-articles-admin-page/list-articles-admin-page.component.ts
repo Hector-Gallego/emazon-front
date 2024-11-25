@@ -5,6 +5,7 @@ import { faPlus, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { Subscription, finalize } from 'rxjs';
 import { ButtonSize } from 'src/app/shared/enums/button-size.enum';
 import { ButtonType } from 'src/app/shared/enums/button-type.enum';
+import { Role } from 'src/app/shared/enums/role.enum';
 import { SortBy } from 'src/app/shared/enums/sort-by.enum';
 import { SortDirection } from 'src/app/shared/enums/sort-direction.enum';
 import {
@@ -56,6 +57,7 @@ export class ListArticlesAdminPageComponent implements OnInit {
   isPopupVisible: boolean = false;
   popupPosition = { top: '0px', left: '0px' };
 
+  roleAdmin: Role = Role.ADMIN;
   articles: ArticleResponse[] = [];
   supply!: SupplyRequest;
   articlesDataTable: ArticleDataTable[] = [];

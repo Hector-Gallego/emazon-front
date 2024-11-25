@@ -17,6 +17,7 @@ import { SortDirection } from 'src/app/shared/enums/sort-direction.enum';
 import { Brand } from 'src/app/shared/interfaces/brand.interface';
 import { TableToolBarService } from 'src/app/shared/services/table-tool-bar/table-tool-bar.service';
 import { SortMapper } from 'src/app/shared/mappers/sort-mapper/sort.mapper';
+import { Role } from 'src/app/shared/enums/role.enum';
 
 @Component({
   selector: 'app-list-brands-page',
@@ -25,6 +26,7 @@ import { SortMapper } from 'src/app/shared/mappers/sort-mapper/sort.mapper';
 })
 export class ListBrandsPageComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
+  roleAdmin: Role = Role.ADMIN;
 
   brands: Brand[] = [];
   toastMessage: string = '';

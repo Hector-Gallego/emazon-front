@@ -12,6 +12,8 @@ import { AdminRoutingModule } from "./admin-routing.module";
 import { AdminTemplateComponent } from "src/app/templates/admin-template/admin-template.component";
 import { AddWarehouseAssistantPageComponent } from './add-warehouse-assistant-page/add-warehouse-assistant-page.component';
 import { ListArticlesAdminPageComponent } from './list-articles-admin-page/list-articles-admin-page.component';
+import { ShowForRolesDirective } from "src/app/core/directives/show-for-roles/show-for-roles.directive";
+import { CoreModule } from "src/app/core/core.module";
 
 @NgModule({
     declarations: [
@@ -28,7 +30,8 @@ import { ListArticlesAdminPageComponent } from './list-articles-admin-page/list-
       AtomsModule,
       MoleculesModule,
       OrganismModule,
-      AdminRoutingModule
+      AdminRoutingModule,
+      CoreModule
     ],
     exports: [
       AddBrandPageComponent,

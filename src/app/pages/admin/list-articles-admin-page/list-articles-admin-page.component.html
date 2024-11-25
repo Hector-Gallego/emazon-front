@@ -2,6 +2,7 @@
   <section class="list-data-container__header">
     <h4>{{ tableTittleLabel }}</h4>
     <app-button
+      *appShowForRoles="[roleAdmin]"
       [label]="buttonLabelAddBrand"
       (buttonClick)="navigateToCreateArticle()"
     ></app-button>
